@@ -4,6 +4,7 @@
  *
  * (C) All rights reserved.
  *
+ * v 1.0
  */
 
 #include "stm32f405xx.h"
