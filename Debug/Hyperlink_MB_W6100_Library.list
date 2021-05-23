@@ -77,9 +77,9 @@ Disassembly of section .text:
  80001c4:	08000298 	.word	0x08000298
 
 080001c8 <main>:
- */
 
-#include "stm32f405xx.h"
+
+
 
 int main(void)
 {
