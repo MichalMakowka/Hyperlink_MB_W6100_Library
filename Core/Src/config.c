@@ -51,10 +51,46 @@ uint8_t SPI_W6100_RCR(uint16_t adr) {
 	SPI_Eth_SS(ON);			// NSS Slave Enable
 	SPI_Eth_RT(adr>>8);		// Send upper address half
 	SPI_Eth_RT(adr);		// Send lower address half
-	SPI_Eth_RT(0x00);		// Send Control Byte
+	SPI_Eth_RT(0x00);		// Send Control Byte	[CR, Read, Variable Length Data Mode]
 	dat = SPI_Eth_RT(0x00);	// Send garbage data to read the Common Register
 	SPI_Eth_SS(OFF);		// NSS Slave Disable
 	return dat;
+}
+
+void SPI_W6100_WCR(uint16_t adr, uint8_t val) {
+	// See Page 76 - W6100 datasheet
+	SPI_Eth_SS(ON);			// NSS Slave Enable
+	SPI_Eth_RT(adr>>8);		// Send upper address half
+	SPI_Eth_RT(adr);		// Send lower address half
+	SPI_Eth_RT(0x04);		// Send Control Byte	[CR, Write, Variable Length Data Mode]
+	SPI_Eth_RT(val);		// Send val to be written in the register
+	SPI_Eth_SS(OFF);
+}
+
+uint8_t SPI_W6100_RSOCK(uint16_t adr, uint8_t socket_nbr, uint8_t block) {
+	uint8_t dat;
+	uint8_t cb_temp = 0x00;
+	cb_temp |= (socket_nbr << 5);
+	cb_temp |= (block << 3);
+	SPI_Eth_SS(ON);			// NSS Slave Enable
+	SPI_Eth_RT(adr>>8);		// Send upper address half
+	SPI_Eth_RT(adr);		// Send lower address half
+	SPI_Eth_RT(cb_temp);	// Send Control Byte
+	dat = SPI_Eth_RT(0x00);		// Send garbage data to read the Common Register
+	SPI_Eth_SS(OFF);
+	return dat;
+}
+
+void SPI_W6100_WSOCK(uint16_t adr, uint8_t val, uint8_t socket_nbr, uint8_t block) {
+	uint8_t cb_temp = 0x04;
+	cb_temp |= (socket_nbr << 5);
+	cb_temp |= (block << 3);
+	SPI_Eth_SS(ON);			// NSS Slave Enable
+	SPI_Eth_RT(adr>>8);		// Send upper address half
+	SPI_Eth_RT(adr);		// Send lower address half
+	SPI_Eth_RT(cb_temp);	// Send Control Byte
+	SPI_Eth_RT(val);		// Send val to be written in the register
+	SPI_Eth_SS(OFF);
 }
 
 

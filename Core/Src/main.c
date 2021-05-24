@@ -23,17 +23,13 @@ int main(void)
   while (1)
   {
 
-
 	  rx_dat = SPI_W6100_RCR(0x0000);
 	  GPIOC->ODR ^= GPIO_ODR_OD8;
 	  for (i=0; i<1000000; i++);
-	  rx_dat = SPI_W6100_RCR(0x0001);
+	  rx_dat = SPI_W6100_RCR(0x3000);
 	  GPIOC->ODR ^= GPIO_ODR_OD8;
 	  for (i=0; i<1000000; i++);
-	  rx_dat = SPI_W6100_RCR(0x0003);
-	  GPIOC->ODR ^= GPIO_ODR_OD8;
-	  for (i=0; i<1000000; i++);
-	  rx_dat = SPI_W6100_RCR(0x0002);
+	  rx_dat = SPI_W6100_RSOCK(0x0024, 0, REG);		// Read the 0x0024 register value of Socket 0
 	  GPIOC->ODR ^= GPIO_ODR_OD8;
 	  for (i=0; i<1000000; i++);
 
