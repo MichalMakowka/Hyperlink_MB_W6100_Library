@@ -17,6 +17,10 @@ void SystemRegisterCFG(void) {
 	GPIOC->MODER |= GPIO_MODER_MODE8_0 | GPIO_MODER_MODE9_0 | GPIO_MODER_MODE11_0 | GPIO_MODER_MODE12_0;	// STM LEDs output
 	GPIOC->ODR |= GPIO_ODR_OD8 | GPIO_ODR_OD9 | GPIO_ODR_OD11 | GPIO_ODR_OD12;		// STM LEDs OFF
 
+	// W6100 External Reset config
+	GPIOC->MODER |= GPIO_MODER_MODE4_0;		// Output
+	GPIOC->ODR |= GPIO_ODR_OD4;				// Level high (reset disable)
+
 	// SPI GPIO Config
 	GPIOA->MODER |= GPIO_MODER_MODE4_0 | GPIO_MODER_MODE5_1 | GPIO_MODER_MODE6_1 | GPIO_MODER_MODE7_1;		// SPI1 AFIO Set (NSS Software)
 	GPIOA->ODR |= GPIO_ODR_OD4;		// Slave select HIGH (disable)
@@ -26,6 +30,9 @@ void SystemRegisterCFG(void) {
 	// SPI Config
 	SPI1->CR1 |= SPI_CR1_SPE | SPI_CR1_SSI | SPI_CR1_SSM | SPI_CR1_MSTR;
 
+
+	// SysTic Config
+	SysTick_Config(16000000);
 }
 
 void SPI_Eth_SS(uint8_t state) {
@@ -97,7 +104,9 @@ void SPI_W6100_WSOCK(uint16_t adr, uint8_t val, uint8_t socket_nbr, uint8_t bloc
 
 
 
-
+__attribute__((interrupt)) void SysTick_Handler(void){
+//	GPIOC->ODR ^= GPIO_ODR_OD8;
+}
 
 
 
