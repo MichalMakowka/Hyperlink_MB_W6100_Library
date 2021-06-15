@@ -6,7 +6,7 @@ Core/Src/main.o: ../Core/Src/main.c \
  ../Drivers/CMSIS/Include/cmsis_gcc.h \
  ../Drivers/CMSIS/Include/mpu_armv7.h \
  ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h \
- ../Core/Inc/config.h
+ ../Core/Inc/config.h ../Core/Inc/w6100.h
 
 ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f405xx.h:
 
@@ -23,3 +23,5 @@ Core/Src/main.o: ../Core/Src/main.c \
 ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h:
 
 ../Core/Inc/config.h:
+
+../Core/Inc/w6100.h:
