@@ -206,7 +206,7 @@ uint32_t W6100_OpenTCPSocket (uint8_t sck_nbr) {
 
 
 
-uint8_t W6100_ReceiveData(uint8_t sck_nbr, uint32_t dest_adr, uint8_t * tab) {
+uint8_t W6100_ReceiveData(uint8_t sck_nbr, uint32_t dest_adr, uint8_t * tab, uint8_t size) {
 	uint8_t i;
 	uint32_t get_size, gSn_RX_MAX, get_start_address, Sn_RX_RD_temp;
 
@@ -223,13 +223,14 @@ uint8_t W6100_ReceiveData(uint8_t sck_nbr, uint32_t dest_adr, uint8_t * tab) {
 			get_start_address |= SPI_W6100_RSOCK(Sn_RX_RD1, sck_nbr, REG);
 
 			// Move data to the array
+			memset(tab, '\0', size);
 			for (i=0; i<get_size; i++) {
 				tab[i] = SPI_W6100_RSOCK((get_start_address+i), sck_nbr, RX_BUF);
 			}
 
 			memcpy(&get_start_address, &dest_adr, get_size);
 
-			Sn_RX_RD_temp = ((SPI_W6100_RSOCK(Sn_RX_RD0, sck_nbr, REG) << 8));
+			Sn_RX_RD_temp = (SPI_W6100_RSOCK(Sn_RX_RD0, sck_nbr, REG) << 8);
 			Sn_RX_RD_temp |= SPI_W6100_RSOCK(Sn_RX_RD1, sck_nbr, REG);
 			Sn_RX_RD_temp += get_size;
 			SPI_W6100_WSOCK(Sn_RX_RD0, (Sn_RX_RD_temp>>8), sck_nbr, REG);
@@ -243,3 +244,59 @@ uint8_t W6100_ReceiveData(uint8_t sck_nbr, uint32_t dest_adr, uint8_t * tab) {
 	else 	return 0;	// Return 0 of no data was received
 
 }
+
+void W6100_TransmitData(uint8_t sck_nbr, uint32_t dest_adr, const uint8_t * tab, uint8_t size) {
+	uint8_t i;
+	uint8_t send_size = size;
+	uint32_t gSn_TX_MAX, get_start_address, Sn_TX_WR_temp, Sn_TX_FSR_temp;
+
+	gSn_TX_MAX = (SPI_W6100_RSOCK(Sn_TX_BSR, sck_nbr, REG) * 1024);						// Socket TX buffer size
+
+	if(send_size > gSn_TX_MAX) send_size = gSn_TX_MAX;
+
+	Sn_TX_FSR_temp = (SPI_W6100_RSOCK(Sn_TX_FSR0, sck_nbr, REG) << 8);
+	Sn_TX_FSR_temp |= SPI_W6100_RSOCK(Sn_TX_FSR1, sck_nbr, REG);
+
+	while(send_size > Sn_TX_FSR_temp) {													// wait until Socket Tx buffer is free
+		Sn_TX_FSR_temp = (SPI_W6100_RSOCK(Sn_TX_FSR0, sck_nbr, REG) << 8);
+		Sn_TX_FSR_temp |= SPI_W6100_RSOCK(Sn_TX_FSR1, sck_nbr, REG);
+	}
+
+	get_start_address = (SPI_W6100_RSOCK(Sn_TX_WR0, sck_nbr, REG) << 8);
+	get_start_address |= SPI_W6100_RSOCK(Sn_TX_WR1, sck_nbr, REG);
+
+	// Move data to the array
+	for (i=0; i<send_size; i++) {
+		SPI_W6100_WSOCK((get_start_address+i), tab[i], sck_nbr, TX_BUF);
+	}
+	memcpy(&get_start_address, &dest_adr, send_size);
+
+	Sn_TX_WR_temp = (SPI_W6100_RSOCK(Sn_TX_WR0, sck_nbr, REG) << 8);
+	Sn_TX_WR_temp |= SPI_W6100_RSOCK(Sn_TX_WR1, sck_nbr, REG);
+	Sn_TX_WR_temp += send_size;
+	SPI_W6100_WSOCK(Sn_TX_WR0, (Sn_TX_WR_temp>>8), sck_nbr, REG);
+	SPI_W6100_WSOCK(Sn_TX_WR0, (Sn_TX_WR_temp), sck_nbr, REG);
+
+	SPI_W6100_WSOCK(Sn_CR, 0x20, sck_nbr, REG);											// SEND command sent to TCP/TCP6 mode
+	while(SPI_W6100_RSOCK(Sn_CR, sck_nbr, REG) != 0x00);								// Wait for SEND command clear
+
+	while(((SPI_W6100_RSOCK(Sn_IR, sck_nbr, REG) & 0x10) == 0) && ((SPI_W6100_RSOCK(Sn_IR, sck_nbr, REG) & 0x08) == 0));
+
+	if((SPI_W6100_RSOCK(Sn_IR, sck_nbr, REG) & 0x10) == 0x10) SPI_W6100_WSOCK(Sn_IRCLR, 0x10, sck_nbr, REG);	// Clear SENDOK interrupt
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

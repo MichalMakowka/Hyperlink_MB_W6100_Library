@@ -340,7 +340,8 @@
 
 void W6100_INIT (void);
 uint32_t W6100_OpenTCPSocket (uint8_t sck_nbr);
-uint8_t W6100_ReceiveData(uint8_t sck_nbr, uint32_t dest_adr, uint8_t * tab);
+uint8_t W6100_ReceiveData(uint8_t sck_nbr, uint32_t dest_adr, uint8_t * tab, uint8_t size);
+void W6100_TransmitData(uint8_t sck_nbr, uint32_t dest_adr, const uint8_t * tab, uint8_t size);
 
 uint8_t SPI_Eth_RT(uint8_t data);
 void SPI_Eth_SS(uint8_t state);
