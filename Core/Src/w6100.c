@@ -74,7 +74,7 @@ void SPI_W6100_WSOCK(uint16_t adr, uint8_t val, uint8_t socket_nbr, uint8_t bloc
 	SPI_Eth_SS(OFF);
 }
 
-void W6100_INIT (void) {
+void W6100_INIT(void) {
 	/* *** W6100 Init *** */
 	SPI_W6100_WCR(NETLCKR, 0x3a);	// NETLCKR		Network settings unlock
 
@@ -172,6 +172,8 @@ void W6100_INIT (void) {
 }
 
 
+
+
 uint32_t W6100_OpenTCPSocket (uint8_t sck_nbr) {
 	uint32_t dest_adr;
 	/* *** Open Socket as TCP4 *** */
@@ -201,3 +203,43 @@ uint32_t W6100_OpenTCPSocket (uint8_t sck_nbr) {
 	return dest_adr;	// Return destination address
 }
 
+
+
+
+uint8_t W6100_ReceiveData(uint8_t sck_nbr, uint32_t dest_adr, uint8_t * tab) {
+	uint8_t i;
+	uint32_t get_size, gSn_RX_MAX, get_start_address, Sn_RX_RD_temp;
+
+	if ((SPI_W6100_RSOCK(Sn_IR, sck_nbr, REG) & 0b00000100) == 0x04) {					// Check if data received
+
+			// Clear data interrupt
+			SPI_W6100_WSOCK(Sn_IRCLR, 0x04, sck_nbr, REG);
+
+			// Read data from the buffer
+			get_size = (SPI_W6100_RSOCK(Sn_RX_RSR0, sck_nbr, REG) << 8);
+			get_size |= SPI_W6100_RSOCK(Sn_RX_RSR1, sck_nbr, REG);
+			gSn_RX_MAX = (SPI_W6100_RSOCK(Sn_RX_BSR, sck_nbr, REG) * 1024);
+			get_start_address = (SPI_W6100_RSOCK(Sn_RX_RD0, sck_nbr, REG) << 8);
+			get_start_address |= SPI_W6100_RSOCK(Sn_RX_RD1, sck_nbr, REG);
+
+			// Move data to the array
+			for (i=0; i<get_size; i++) {
+				tab[i] = SPI_W6100_RSOCK((get_start_address+i), sck_nbr, RX_BUF);
+			}
+
+			memcpy(&get_start_address, &dest_adr, get_size);
+
+			Sn_RX_RD_temp = ((SPI_W6100_RSOCK(Sn_RX_RD0, sck_nbr, REG) << 8));
+			Sn_RX_RD_temp |= SPI_W6100_RSOCK(Sn_RX_RD1, sck_nbr, REG);
+			Sn_RX_RD_temp += get_size;
+			SPI_W6100_WSOCK(Sn_RX_RD0, (Sn_RX_RD_temp>>8), sck_nbr, REG);
+			SPI_W6100_WSOCK(Sn_RX_RD1, (Sn_RX_RD_temp), sck_nbr, REG);
+			SPI_W6100_WSOCK(Sn_CR, 0x40, sck_nbr, REG);
+			while((SPI_W6100_RSOCK(Sn_CR, sck_nbr, REG)) != 0x00);
+
+			return 1;	// Return 1 if data was received
+	}
+
+	else 	return 0;	// Return 0 of no data was received
+
+}
