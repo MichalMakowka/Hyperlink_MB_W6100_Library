@@ -201,7 +201,7 @@ uint32_t W6100_OpenTCPSocket (uint8_t sck_nbr) {
 	/* HARDWARE RESPONSE ON THE SOCKET OPEN */
 	GPIOC->ODR &= ~GPIO_ODR_OD8;
 	GPIOC->ODR |= GPIO_ODR_OD9;
-	/* END OF HARWARE RESPONSE */							// Socket established
+	/* END OF HARDWARE RESPONSE */							// Socket established
 
 	SPI_W6100_WSOCK(Sn_IRCLR, 0x01, sck_nbr, REG);			// Interrupt clear
 

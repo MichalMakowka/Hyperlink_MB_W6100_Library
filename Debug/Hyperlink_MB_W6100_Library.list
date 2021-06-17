@@ -1206,7 +1206,7 @@ uint32_t W6100_OpenTCPSocket (uint8_t sck_nbr) {
  8000a16:	4a1f      	ldr	r2, [pc, #124]	; (8000a94 <W6100_OpenTCPSocket+0x114>)
  8000a18:	f443 7300 	orr.w	r3, r3, #512	; 0x200
  8000a1c:	6153      	str	r3, [r2, #20]
-	/* END OF HARWARE RESPONSE */							// Socket established
+	/* END OF HARDWARE RESPONSE */							// Socket established
 
 	SPI_W6100_WSOCK(Sn_IRCLR, 0x01, sck_nbr, REG);			// Interrupt clear
  8000a1e:	79fa      	ldrb	r2, [r7, #7]
