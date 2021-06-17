@@ -1,8 +1,16 @@
 /*
  * config.c
  *
- *  Created on: 24 May 2021
- *      Author: Michal Makowka
+ *	Hyperlink W6100 Ethernet Library
+ *
+ *  Created on: 15 Jun 2021
+ *  Author: Michal Makowka
+ *
+ *  v1.0
+ *
+ *  (C) All rights reserved.
+ *
+ *  https://mmttechnologies.com/
  */
 #include "config.h"
 

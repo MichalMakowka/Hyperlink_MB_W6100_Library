@@ -27,23 +27,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  11 .ARM.attributes 00000030  00000000  00000000  00010ee8  2**0
                   CONTENTS, READONLY
- 12 .debug_info   00002e8e  00000000  00000000  00010f18  2**0
+ 12 .debug_info   00002e93  00000000  00000000  00010f18  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_abbrev 00000741  00000000  00000000  00013da6  2**0
+ 13 .debug_abbrev 00000750  00000000  00000000  00013dab  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_aranges 00000110  00000000  00000000  000144e8  2**3
+ 14 .debug_aranges 00000110  00000000  00000000  00014500  2**3
                   CONTENTS, READONLY, DEBUGGING
- 15 .debug_ranges 000000c8  00000000  00000000  000145f8  2**3
+ 15 .debug_ranges 000000c8  00000000  00000000  00014610  2**3
                   CONTENTS, READONLY, DEBUGGING
- 16 .debug_macro  0001899e  00000000  00000000  000146c0  2**0
+ 16 .debug_macro  0001899e  00000000  00000000  000146d8  2**0
                   CONTENTS, READONLY, DEBUGGING
- 17 .debug_line   00001ab0  00000000  00000000  0002d05e  2**0
+ 17 .debug_line   00001ab0  00000000  00000000  0002d076  2**0
                   CONTENTS, READONLY, DEBUGGING
- 18 .debug_str    00083790  00000000  00000000  0002eb0e  2**0
+ 18 .debug_str    00083790  00000000  00000000  0002eb26  2**0
                   CONTENTS, READONLY, DEBUGGING
- 19 .comment      0000007b  00000000  00000000  000b229e  2**0
+ 19 .comment      0000007b  00000000  00000000  000b22b6  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  00000320  00000000  00000000  000b231c  2**2
+ 20 .debug_frame  00000320  00000000  00000000  000b2334  2**2
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -182,7 +182,7 @@ __STATIC_INLINE uint32_t SysTick_Config(uint32_t ticks)
  800025c:	e000e010 	.word	0xe000e010
 
 08000260 <SystemRegisterCFG>:
- *      Author: Michal Makowka
+ *  https://mmttechnologies.com/
  */
 #include "config.h"
 
@@ -1461,10 +1461,8 @@ uint8_t W6100_ReceiveData(uint8_t sck_nbr, uint32_t dest_adr, uint8_t * tab, uin
  8000c0e:	2301      	movs	r3, #1
  8000c10:	e000      	b.n	8000c14 <W6100_ReceiveData+0x17c>
 	}
-
 	else 	return 0;	// Return 0 of no data was received
  8000c12:	2300      	movs	r3, #0
-
 }
  8000c14:	4618      	mov	r0, r3
  8000c16:	372c      	adds	r7, #44	; 0x2c

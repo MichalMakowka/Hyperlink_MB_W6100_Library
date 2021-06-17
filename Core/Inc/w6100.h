@@ -2,7 +2,7 @@
  * w6100.h
  *
  *  Created on: 15 Jun 2021
- *      Author: user
+ *      Author: Michal Makowka
  */
 
 #ifndef INC_W6100_H_

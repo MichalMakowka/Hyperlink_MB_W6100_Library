@@ -1,10 +1,16 @@
 /*
- * This is W6100 Hyperlink Motherboard Ethernet library.
- * Designed by Michal Makowka
+ * main.c
  *
- * (C) All rights reserved.
+ *	Hyperlink W6100 Ethernet Library
  *
- * v 1.0
+ *  Created on: 15 Jun 2021
+ *  Author: Michal Makowka
+ *
+ *  v1.0
+ *
+ *  (C) All rights reserved.
+ *
+ *  https://mmttechnologies.com/
  */
 #include <stdio.h>
 #include <string.h>

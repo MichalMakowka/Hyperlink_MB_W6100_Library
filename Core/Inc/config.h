@@ -2,7 +2,7 @@
  * config.h
  *
  *  Created on: 24 May 2021
- *      Author: user
+ *      Author: Michal Makowka
  */
 
 #ifndef INC_CONFIG_H_

@@ -859,19 +859,19 @@ LOAD c:/st/stm32cubeide_1.5.1/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.exte
                 0x00000000000001f7       0x22 c:/st/stm32cubeide_1.5.1/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.5.0.202011040924/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtn.o
 OUTPUT(Hyperlink_MB_W6100_Library.elf elf32-littlearm)
 
-.debug_info     0x0000000000000000     0x2e8e
+.debug_info     0x0000000000000000     0x2e93
  .debug_info    0x0000000000000000     0x11b0 Core/Src/config.o
  .debug_info    0x00000000000011b0      0xa62 Core/Src/main.o
  .debug_info    0x0000000000001c12      0x4fb Core/Src/system_stm32f4xx.o
- .debug_info    0x000000000000210d      0xd5f Core/Src/w6100.o
- .debug_info    0x0000000000002e6c       0x22 Core/Startup/startup_stm32f405rgtx.o
+ .debug_info    0x000000000000210d      0xd64 Core/Src/w6100.o
+ .debug_info    0x0000000000002e71       0x22 Core/Startup/startup_stm32f405rgtx.o
 
-.debug_abbrev   0x0000000000000000      0x741
+.debug_abbrev   0x0000000000000000      0x750
  .debug_abbrev  0x0000000000000000      0x236 Core/Src/config.o
  .debug_abbrev  0x0000000000000236      0x1ba Core/Src/main.o
  .debug_abbrev  0x00000000000003f0      0x111 Core/Src/system_stm32f4xx.o
- .debug_abbrev  0x0000000000000501      0x22e Core/Src/w6100.o
- .debug_abbrev  0x000000000000072f       0x12 Core/Startup/startup_stm32f405rgtx.o
+ .debug_abbrev  0x0000000000000501      0x23d Core/Src/w6100.o
+ .debug_abbrev  0x000000000000073e       0x12 Core/Startup/startup_stm32f405rgtx.o
 
 .debug_aranges  0x0000000000000000      0x110
  .debug_aranges

@@ -1,8 +1,16 @@
 /*
  * w6100.c
  *
+ *	Hyperlink W6100 Ethernet Library
+ *
  *  Created on: 15 Jun 2021
- *      Author: Michal Makowka
+ *  Author: Michal Makowka
+ *
+ *  v1.0
+ *
+ *  (C) All rights reserved.
+ *
+ *  https://mmttechnologies.com/
  */
 #include "w6100.h"
 
@@ -240,9 +248,7 @@ uint8_t W6100_ReceiveData(uint8_t sck_nbr, uint32_t dest_adr, uint8_t * tab, uin
 
 			return 1;	// Return 1 if data was received
 	}
-
 	else 	return 0;	// Return 0 of no data was received
-
 }
 
 void W6100_TransmitData(uint8_t sck_nbr, uint32_t dest_adr, uint8_t * tab, uint8_t size) {
