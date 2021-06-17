@@ -47,7 +47,7 @@ uint8_t SPI_W6100_RCR(uint16_t adr) {
 }
 
 void SPI_W6100_WCR(uint16_t adr, uint8_t val) {
-	// See Page 76 - W6100 datasheet
+	/* See Page 76 - W6100 datasheet */
 	SPI_Eth_SS(ON);			// NSS Slave Enable
 	SPI_Eth_RT(adr>>8);		// Send upper address half
 	SPI_Eth_RT(adr);		// Send lower address half
@@ -196,10 +196,13 @@ uint32_t W6100_OpenTCPSocket (uint8_t sck_nbr) {
 	while ((SPI_W6100_RSOCK(Sn_CR, sck_nbr, REG)) != 0x00);	// Wait until LISTEN command is cleared
 
 	// CONNECT NOW
-
 	while ((SPI_W6100_RSOCK(Sn_SR, sck_nbr, REG)) != 0x17);	// Wait until SOCKET ESTABLISHED
+
+	/* HARDWARE RESPONSE ON THE SOCKET OPEN */
 	GPIOC->ODR &= ~GPIO_ODR_OD8;
-	GPIOC->ODR |= GPIO_ODR_OD9;								// Socket established
+	GPIOC->ODR |= GPIO_ODR_OD9;
+	/* END OF HARWARE RESPONSE */							// Socket established
+
 	SPI_W6100_WSOCK(Sn_IRCLR, 0x01, sck_nbr, REG);			// Interrupt clear
 
 	// Read destination address
@@ -217,6 +220,10 @@ uint32_t W6100_OpenTCPSocket (uint8_t sck_nbr) {
 uint8_t W6100_ReceiveData(uint8_t sck_nbr, uint32_t dest_adr, uint8_t * tab, uint8_t size) {
 	uint8_t i;
 	uint32_t get_size, gSn_RX_MAX, get_start_address, Sn_RX_RD_temp;
+
+	if ((SPI_W6100_RSOCK(Sn_SR, sck_nbr, REG)) == 0x1c) {								// Check if socket close request pending
+		W6100_PassiveCloseSocket(sck_nbr);
+	}
 
 	if ((SPI_W6100_RSOCK(Sn_IR, sck_nbr, REG) & 0b00000100) == 0x04) {					// Check if data received
 
@@ -270,9 +277,6 @@ void W6100_TransmitData(uint8_t sck_nbr, uint32_t dest_adr, uint8_t * tab, uint8
 	get_start_address |= SPI_W6100_RSOCK(Sn_TX_WR1, sck_nbr, REG);
 
 
-
-
-
 	Sn_TX_WR_temp = (SPI_W6100_RSOCK(Sn_TX_WR0, sck_nbr, REG) << 8);
 	Sn_TX_WR_temp |= SPI_W6100_RSOCK(Sn_TX_WR1, sck_nbr, REG);
 	Sn_TX_WR_temp += size;
@@ -297,6 +301,21 @@ void W6100_TransmitData(uint8_t sck_nbr, uint32_t dest_adr, uint8_t * tab, uint8
 
 
 
+void W6100_PassiveCloseSocket(uint8_t sck_nbr) {
+	SPI_W6100_WSOCK(Sn_CR, 0x08, sck_nbr, REG);						// Send FIN packet (DISCON command)
+	while((SPI_W6100_RSOCK(Sn_CR, sck_nbr, REG)) != 0x00);			// Wait for DISCON command clear
+	// Wait for ACK packet
+	while((((SPI_W6100_RSOCK(Sn_IR, sck_nbr, REG)) & 0b10) == 0) && (((SPI_W6100_RSOCK(Sn_IR, sck_nbr, REG)) & 0b1000) == 0));
+
+	if ((((SPI_W6100_RSOCK(Sn_IR, sck_nbr, REG)) & 0b10) == 0b10)) {
+		SPI_W6100_WSOCK(Sn_IRCLR, 0x02, sck_nbr, REG);				// Clear DISCON interrupt
+		while((SPI_W6100_RSOCK(Sn_SR, sck_nbr, REG)) != 0x00);		// Wait until socket is CLOSED
+	}
+	/* HARDWARE RESPONSE ON THE SOCKET CLOSE */
+	GPIOC->ODR |= GPIO_ODR_OD8;
+	GPIOC->ODR &= ~GPIO_ODR_OD9;
+	/* END OF HARDWARE ESPONSE */
+}
 
 
 
