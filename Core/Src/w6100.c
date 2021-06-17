@@ -245,7 +245,7 @@ uint8_t W6100_ReceiveData(uint8_t sck_nbr, uint32_t dest_adr, uint8_t * tab, uin
 
 }
 
-void W6100_TransmitData(uint8_t sck_nbr, uint32_t dest_adr, const uint8_t * tab, uint8_t size) {
+void W6100_TransmitData(uint8_t sck_nbr, uint32_t dest_adr, uint8_t * tab, uint8_t size) {
 	uint8_t i;
 	uint8_t send_size = size;
 	uint32_t gSn_TX_MAX, get_start_address, Sn_TX_WR_temp, Sn_TX_FSR_temp;
@@ -254,8 +254,6 @@ void W6100_TransmitData(uint8_t sck_nbr, uint32_t dest_adr, const uint8_t * tab,
 
 	if(send_size > gSn_TX_MAX) send_size = gSn_TX_MAX;
 
-	Sn_TX_FSR_temp = (SPI_W6100_RSOCK(Sn_TX_FSR0, sck_nbr, REG) << 8);
-	Sn_TX_FSR_temp |= SPI_W6100_RSOCK(Sn_TX_FSR1, sck_nbr, REG);
 
 	while(send_size > Sn_TX_FSR_temp) {													// wait until Socket Tx buffer is free
 		Sn_TX_FSR_temp = (SPI_W6100_RSOCK(Sn_TX_FSR0, sck_nbr, REG) << 8);
@@ -265,17 +263,22 @@ void W6100_TransmitData(uint8_t sck_nbr, uint32_t dest_adr, const uint8_t * tab,
 	get_start_address = (SPI_W6100_RSOCK(Sn_TX_WR0, sck_nbr, REG) << 8);
 	get_start_address |= SPI_W6100_RSOCK(Sn_TX_WR1, sck_nbr, REG);
 
-	// Move data to the array
-	for (i=0; i<send_size; i++) {
-		SPI_W6100_WSOCK((get_start_address+i), tab[i], sck_nbr, TX_BUF);
-	}
-	memcpy(&get_start_address, &dest_adr, send_size);
+
+
+
 
 	Sn_TX_WR_temp = (SPI_W6100_RSOCK(Sn_TX_WR0, sck_nbr, REG) << 8);
 	Sn_TX_WR_temp |= SPI_W6100_RSOCK(Sn_TX_WR1, sck_nbr, REG);
-	Sn_TX_WR_temp += send_size;
+	Sn_TX_WR_temp += size;
 	SPI_W6100_WSOCK(Sn_TX_WR0, (Sn_TX_WR_temp>>8), sck_nbr, REG);
-	SPI_W6100_WSOCK(Sn_TX_WR0, (Sn_TX_WR_temp), sck_nbr, REG);
+	SPI_W6100_WSOCK(Sn_TX_WR1, (Sn_TX_WR_temp), sck_nbr, REG);
+
+	// Move data to the array
+	for (i=0; i<size; i++) {
+		SPI_W6100_WSOCK((get_start_address+i), tab[i], sck_nbr, TX_BUF);
+	}
+
+	memcpy(&get_start_address, &dest_adr, send_size);
 
 	SPI_W6100_WSOCK(Sn_CR, 0x20, sck_nbr, REG);											// SEND command sent to TCP/TCP6 mode
 	while(SPI_W6100_RSOCK(Sn_CR, sck_nbr, REG) != 0x00);								// Wait for SEND command clear
