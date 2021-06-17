@@ -49,12 +49,10 @@ int main(void)
 
 		if (W6100_ReceiveData(0, destination_adr, rx_dat, sizeof(rx_dat))) {		// Check if data arrived
 			if (rx_dat[0] == 'o' && rx_dat[1] == 'n') {
-				memset(rx_dat, '\0', sizeof(rx_dat));
 				GPIOC->ODR &= ~GPIO_ODR_OD12;
 				W6100_TransmitData(0, destination_adr, on_message, sizeof(on_message));
 			}
 			else if (rx_dat[0] == 'o' && rx_dat[1] == 'f' && rx_dat[2] == 'f')	{
-				memset(rx_dat, '\0', sizeof(rx_dat));
 				GPIOC->ODR |= GPIO_ODR_OD12;
 				W6100_TransmitData(0, destination_adr, off_message, sizeof(off_message));
 			}
