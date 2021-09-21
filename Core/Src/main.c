@@ -17,7 +17,7 @@
 #include "stm32f405xx.h"
 #include "config.h"
 #include "w6100.h"
-
+#include "can.h"
 
 
 
@@ -50,6 +50,13 @@ int main(void)
 	}
 
 	destination_adr = W6100_OpenTCPSocket(0);			// Open TCP socket 0 and return its destination address
+
+
+
+
+	CanInit();
+
+
 
 	while (1) {
 

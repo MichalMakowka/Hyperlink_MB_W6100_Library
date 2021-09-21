@@ -47,7 +47,7 @@ void SystemRegisterCFG(void) {
 
 
 __attribute__((interrupt)) void SysTick_Handler(void){
-//	GPIOC->ODR ^= GPIO_ODR_OD8;
+//	GPIOC->ODR ^= GPIO_ODR_OD11;
 }
 
 
