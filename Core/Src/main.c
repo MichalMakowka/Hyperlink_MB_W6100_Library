@@ -52,7 +52,19 @@ int main(void)
 	destination_adr = W6100_OpenTCPSocket(0);			// Open TCP socket 0 and return its destination address
 
 
+	CAN_MESSAGE can_on_msg;
+	strcpy(can_on_msg.data, "Enabled\n");
+	can_on_msg.format = STANDARD_FORMAT;
+	can_on_msg.type = DATA_FRAME;
+	can_on_msg.len = 9;
+	can_on_msg.id = 0xab;
 
+	CAN_MESSAGE can_off_msg;
+	strcpy(can_off_msg.data, "Disabled\n");
+	can_off_msg.format = STANDARD_FORMAT;
+	can_off_msg.type = DATA_FRAME;
+	can_off_msg.len = 10;
+	can_off_msg.id = 0xab;
 
 	CanInit();
 
@@ -63,11 +75,18 @@ int main(void)
 		if (W6100_ReceiveData(0, destination_adr, rx_dat, sizeof(rx_dat))) {		// Check if data arrived
 			if (rx_dat[0] == 'o' && rx_dat[1] == 'n') {
 				GPIOC->ODR &= ~GPIO_ODR_OD12;
+				// Send msg to the client
 				W6100_TransmitData(0, destination_adr, on_message, sizeof(on_message));
+				// Send CAN frame
+				Can_Tx_Msg(&can_on_msg);
+
 			}
 			else if (rx_dat[0] == 'o' && rx_dat[1] == 'f' && rx_dat[2] == 'f')	{
 				GPIOC->ODR |= GPIO_ODR_OD12;
+				// Send msg to the client
 				W6100_TransmitData(0, destination_adr, off_message, sizeof(off_message));
+				// Send CAN frame
+				Can_Tx_Msg(&can_off_msg);
 			}
 		}
 

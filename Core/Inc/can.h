@@ -13,11 +13,31 @@
 #include "stm32f405xx.h"
 
 
+#define STANDARD_FORMAT  0
+#define EXTENDED_FORMAT  1
+
+#define DATA_FRAME       0
+#define REMOTE_FRAME     1
+
+#define CAN_ID_STD		 0
+#define CAN_ID_EXT		 0
+#define CAN_RTR_DATA	 0
+#define CAN_RTR_REMOTE	 0
+
+
+typedef struct {
+	uint id;			// Node identifier
+	char data[8];		// Data field
+	uint len;			// Length of data in bytes
+	uint format;		// Standard (0), Extended ID (1)
+	uint type;			// Data frame (0), Remote frame (1)
+} CAN_MESSAGE;
 
 
 
 
 
 void CanInit(void);
+void Can_Tx_Msg(CAN_MESSAGE * msg);
 
 #endif /* INC_CAN_H_ */
