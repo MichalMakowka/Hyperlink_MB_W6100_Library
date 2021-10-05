@@ -34,6 +34,7 @@ typedef struct {
 } CAN_MESSAGE;
 
 
+CAN_MESSAGE can_rx_message;
 
 
 

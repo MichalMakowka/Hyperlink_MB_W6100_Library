@@ -64,7 +64,9 @@ int main(void)
 	can_off_msg.format = STANDARD_FORMAT;
 	can_off_msg.type = DATA_FRAME;
 	can_off_msg.len = 10;
-	can_off_msg.id = 0xab;
+	can_off_msg.id = 0xcd;
+
+
 
 	CanInit();
 
@@ -77,7 +79,6 @@ int main(void)
 				GPIOC->ODR &= ~GPIO_ODR_OD12;
 				// Send msg to the client
 				W6100_TransmitData(0, destination_adr, on_message, sizeof(on_message));
-				// Send CAN frame
 				Can_Tx_Msg(&can_on_msg);
 
 			}
