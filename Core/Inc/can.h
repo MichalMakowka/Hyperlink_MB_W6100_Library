@@ -40,5 +40,6 @@ CAN_MESSAGE can_rx_message;
 
 void CanInit(void);
 void Can_Tx_Msg(CAN_MESSAGE * msg);
+void Can_Set_Filter(uint id, char format);
 
 #endif /* INC_CAN_H_ */

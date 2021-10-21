@@ -16,6 +16,23 @@
 
 
 void SystemRegisterCFG(void) {
+
+	// *** Configure System Clock (36MHz for each system BUS) ***
+	RCC->PLLCFGR |= RCC_PLLCFGR_PLLSRC_HSE;		// HSE as an input to the PLL loop
+	RCC->PLLCFGR &= ~RCC_PLLCFGR_PLLP_1;		// PLLP DIV = /2
+	RCC->PLLCFGR &= ~RCC_PLLCFGR_PLLP_0;
+	RCC->PLLCFGR |= (0b001001000 << 6);			// Multiplication factor PLLN = 72
+	RCC->PLLCFGR |= (0b000100);					// PLLM DIV = /4
+	RCC->CFGR |= RCC_CFGR_SW_PLL;				// System Clock MUX switched to PLL
+	RCC->CFGR |= (RCC_CFGR_HPRE_DIV2 << RCC_CFGR_HPRE_Pos);		// AHB DIV = /2
+	RCC->CR |= RCC_CR_HSEON;	// HSE ON
+	while (!(RCC->CR & RCC_CR_HSERDY)); // Wait for HSE ON
+	RCC->CR |= RCC_CR_PLLON;	// PLL ON
+	while ((RCC->CR & RCC_CR_PLLRDY)); // Check if PLL not locked
+	while ((RCC->CFGR & RCC_CFGR_SWS) != RCC_CFGR_SWS_PLL);	// Check for a correct source set
+	RCC->CR &= ~RCC_CR_HSION;	// 16MHz HSI OFF
+
+
 	// RCC Configuration
 	RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN | RCC_AHB1ENR_GPIOBEN | RCC_AHB1ENR_GPIOCEN;	// GPIO Clock
 	RCC->APB2ENR |= RCC_APB2ENR_SPI1EN;		// SPI1 clock

@@ -53,19 +53,21 @@ int main(void)
 
 
 	CAN_MESSAGE can_on_msg;
-	strcpy(can_on_msg.data, "Enabled\n");
+	strcpy(can_on_msg.data, "mb_00000");
 	can_on_msg.format = STANDARD_FORMAT;
 	can_on_msg.type = DATA_FRAME;
-	can_on_msg.len = 9;
-	can_on_msg.id = 0xab;
+	can_on_msg.len = sizeof(can_on_msg);
+	can_on_msg.id = 0x01;
 
 	CAN_MESSAGE can_off_msg;
-	strcpy(can_off_msg.data, "Disabled\n");
+	strcpy(can_off_msg.data, "mb_00001");
 	can_off_msg.format = STANDARD_FORMAT;
 	can_off_msg.type = DATA_FRAME;
-	can_off_msg.len = 10;
-	can_off_msg.id = 0xcd;
+	can_off_msg.len = sizeof(can_off_msg);
+	can_off_msg.id = 0x02;
 
+	Can_Set_Filter(0x03, STANDARD_FORMAT);
+	Can_Set_Filter(0x04, STANDARD_FORMAT);
 
 
 	CanInit();
