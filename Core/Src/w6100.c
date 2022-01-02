@@ -182,12 +182,12 @@ void W6100_INIT(void) {
 
 
 
-uint32_t W6100_OpenTCPSocket (uint8_t sck_nbr) {
+uint32_t W6100_OpenTCPSocket (uint8_t sck_nbr, uint16_t port) {
 	uint32_t dest_adr;
 	/* *** Open Socket as TCP4 *** */
 	SPI_W6100_WSOCK(Sn_MR, 0x01, sck_nbr, REG);				// Set TCP4 mode
-	SPI_W6100_WSOCK(Sn_PORTR0, 0x13, sck_nbr, REG);			// Set PORT 5000
-	SPI_W6100_WSOCK(Sn_PORTR1, 0x88, sck_nbr, REG);
+	SPI_W6100_WSOCK(Sn_PORTR0, (port >> 8), sck_nbr, REG);			// Set PORT number
+	SPI_W6100_WSOCK(Sn_PORTR1, (port & 0xff), sck_nbr, REG);
 	SPI_W6100_WSOCK(Sn_CR, 0x01, sck_nbr, REG);				// Set OPEN command
 	while ((SPI_W6100_RSOCK(Sn_CR, sck_nbr, REG)) != 0x00);	// Wait until OPEN command is cleared
 

@@ -5,6 +5,18 @@
  *      Author: Michal Makowka
  */
 
+/* *** CAN STM32 Library ***
+ *
+ * void CanInit(void) - CAN peripheral initialisation.
+ * void Can_Tx_Msg(CAN_MESSAGE * msg) - Transmit CAN message.
+ * void Can_Set_Filter(uint id, char format) - Set filter for a message ID.
+ *
+ * CAN_MESSAGE can_rx_message - this variable stores received message (updated automatically in the ISR function).
+ *
+ * *******************
+ */
+
+
 #ifndef INC_CAN_H_
 #define INC_CAN_H_
 

@@ -5,6 +5,15 @@
  *      Author: Michal Makowka
  */
 
+/* *** W6100 ETHERNET CONTROLLER Library ***
+ *
+ * void W6100_INIT (void) - Ethernet uC and W6100 chip initialisation.
+ * uint32_t W6100_OpenTCPSocket (uint8_t sck_nbr, uint16_t port) - Function used to open a TCP socket
+ * uint8_t W6100_ReceiveData(uint8_t sck_nbr, uint32_t dest_adr, uint8_t * tab, uint8_t size) - Function used to check for a new message
+ * void W6100_TransmitData(uint8_t sck_nbr, uint32_t dest_adr, uint8_t * tab, uint8_t size) - Function used to transmit data
+ *
+ * *****************************************
+ */
 #ifndef INC_W6100_H_
 #define INC_W6100_H_
 
@@ -340,7 +349,7 @@
 
 void W6100_INIT (void);
 
-uint32_t W6100_OpenTCPSocket (uint8_t sck_nbr);
+uint32_t W6100_OpenTCPSocket (uint8_t sck_nbr, uint16_t port);
 uint8_t W6100_ReceiveData(uint8_t sck_nbr, uint32_t dest_adr, uint8_t * tab, uint8_t size);
 void W6100_TransmitData(uint8_t sck_nbr, uint32_t dest_adr, uint8_t * tab, uint8_t size);
 

@@ -150,14 +150,13 @@ __attribute__((interrupt)) void CAN1_TX_IRQHandler (void)  {
 
 // Tx Interrupt Action
 
-
 }
 
 
 
 __attribute__((interrupt)) void CAN1_RX0_IRQHandler (void) {
 
-	if (CAN1->RF0R & CAN_RF0R_FMP0) {			      // message pending ?
+	if (CAN1->RF0R & CAN_RF0R_FMP0) {			      // message pending?
 		Can_Rx_Msg(&can_rx_message);                  // read the message
 	}
 

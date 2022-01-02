@@ -28,12 +28,13 @@ int main(void)
 
 	GPIOC->ODR &= ~GPIO_ODR_OD9;						// Server RED LED ON
 
-	char rx_dat[20];
+	// Ethernet TCP/IP auxiliary variables
+	char rx_dat[20];	// Ethernet socket buffer
+	uint32_t destination_adr;		// Socket destination address
+
+	// Server responses
 	uint8_t on_message[20] = {"System Enabled\n"};
 	uint8_t off_message[20] = {"System Disabled\n"};
-
-
-	uint32_t destination_adr;
 
 
 	W6100_INIT();										// Initialise W6100 with basic network information
@@ -49,7 +50,7 @@ int main(void)
 		rxTotalSize += 0x02;
 	}
 
-	destination_adr = W6100_OpenTCPSocket(0);			// Open TCP socket 0 and return its destination address
+	destination_adr = W6100_OpenTCPSocket(0, 5000);		// Open TCP socket 0 on port 5000 and return its destination address
 
 
 	CAN_MESSAGE can_on_msg;
@@ -70,9 +71,6 @@ int main(void)
 
 	Can_Set_Filter(0x03, STANDARD_FORMAT);
 	Can_Set_Filter(0x04, STANDARD_FORMAT);
-
-
-
 
 
 
