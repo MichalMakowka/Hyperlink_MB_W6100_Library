@@ -28,7 +28,7 @@ int main(void)
 
 	GPIOC->ODR &= ~GPIO_ODR_OD9;						// Server RED LED ON
 
-	uint8_t rx_dat[20];
+	char rx_dat[20];
 	uint8_t on_message[20] = {"System Enabled\n"};
 	uint8_t off_message[20] = {"System Disabled\n"};
 
@@ -79,15 +79,15 @@ int main(void)
 	while (1) {
 
 		// Check Ethernet
-		if (W6100_ReceiveData(0, destination_adr, rx_dat, sizeof(rx_dat))) {		// Check if data arrived
-			if (rx_dat[0] == 'o' && rx_dat[1] == 'n') {
+		if (W6100_ReceiveData(0, destination_adr, (uint8_t*)rx_dat, sizeof(rx_dat))) {		// Check if data arrived
+			if (!strcmp(rx_dat, "on\n")) {
 				GPIOC->ODR &= ~GPIO_ODR_OD12;
 				// Send msg to the client
 				W6100_TransmitData(0, destination_adr, on_message, sizeof(on_message));
 				Can_Tx_Msg(&can_on_msg);
 
 			}
-			else if (rx_dat[0] == 'o' && rx_dat[1] == 'f' && rx_dat[2] == 'f')	{
+			else if (!strcmp(rx_dat, "off\n"))	{
 				GPIOC->ODR |= GPIO_ODR_OD12;
 				// Send msg to the client
 				W6100_TransmitData(0, destination_adr, off_message, sizeof(off_message));
