@@ -53,29 +53,32 @@ int main(void)
 
 
 	CAN_MESSAGE can_on_msg;
-	strcpy(can_on_msg.data, "mb_00000");
+	strcpy(can_on_msg.data, "mb_0000");
 	can_on_msg.format = STANDARD_FORMAT;
 	can_on_msg.type = DATA_FRAME;
 	can_on_msg.len = sizeof(can_on_msg);
 	can_on_msg.id = 0x01;
 
 	CAN_MESSAGE can_off_msg;
-	strcpy(can_off_msg.data, "mb_00001");
+	strcpy(can_off_msg.data, "mb_0001");
 	can_off_msg.format = STANDARD_FORMAT;
 	can_off_msg.type = DATA_FRAME;
 	can_off_msg.len = sizeof(can_off_msg);
 	can_off_msg.id = 0x02;
 
+	CanInit();
+
 	Can_Set_Filter(0x03, STANDARD_FORMAT);
 	Can_Set_Filter(0x04, STANDARD_FORMAT);
 
 
-	CanInit();
+
 
 
 
 	while (1) {
 
+		// Check Ethernet
 		if (W6100_ReceiveData(0, destination_adr, rx_dat, sizeof(rx_dat))) {		// Check if data arrived
 			if (rx_dat[0] == 'o' && rx_dat[1] == 'n') {
 				GPIOC->ODR &= ~GPIO_ODR_OD12;
@@ -92,8 +95,6 @@ int main(void)
 				Can_Tx_Msg(&can_off_msg);
 			}
 		}
-
-
 
   }
 
