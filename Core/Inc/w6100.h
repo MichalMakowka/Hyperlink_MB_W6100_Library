@@ -12,6 +12,9 @@
  * uint8_t W6100_ReceiveData(uint8_t sck_nbr, uint32_t dest_adr, uint8_t * tab, uint8_t size) - Function used to check for a new message
  * void W6100_TransmitData(uint8_t sck_nbr, uint32_t dest_adr, uint8_t * tab, uint8_t size) - Function used to transmit data
  *
+ * void registerSocketCloseCallback(void (*callback)(uint8_t sck_nbr)) - Register user function with
+ * socket number parameter executed after socket close
+ *
  * *****************************************
  */
 #ifndef INC_W6100_H_
@@ -355,6 +358,14 @@ void W6100_TransmitData(uint8_t sck_nbr, uint32_t dest_adr, uint8_t * tab, uint8
 
 void W6100_PassiveCloseSocket(uint8_t sck_nbr);
 
+static void (*socketCloseCallback)(uint8_t sck_nbr);
+void registerSocketCloseCallback(void (*callback)(uint8_t sck_nbr));
+
+static void (*socketOpenCallback)(uint8_t sck_nbr);
+void registerSocketOpenCallback(void (*callback)(uint8_t sck_nbr));
+
+static void (*dataReceivedCallback)(void);
+void registerDataReceivedCallback(void (*callback)(void));
 
 uint8_t SPI_Eth_RT(uint8_t data);
 void SPI_Eth_SS(uint8_t state);

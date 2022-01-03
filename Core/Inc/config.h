@@ -13,6 +13,9 @@
 #include "stm32f405xx.h"
 
 
-void SystemRegisterCFG(void);
+
+void SystemRegisterCFG(void);				// Registers configuration
+void serverOffResponse(uint8_t sck_nbr);	// Callback function registered for a socket close response
+void serverStartResponse(uint8_t sck_nbr);	// Callback function registered for a socket open response
 
 #endif /* INC_CONFIG_H_ */

@@ -17,6 +17,7 @@
 
 
 
+
 void SPI_Eth_SS(uint8_t state) {
 	if (state) {
 		GPIOA->ODR &= ~GPIO_ODR_OD4;
@@ -35,7 +36,7 @@ uint8_t SPI_Eth_RT(uint8_t data) {
 }
 
 uint8_t SPI_W6100_RCR(uint16_t adr) {
-	// See Page 76 - W6100 datasheet
+	/* See Page 76 - W6100 datasheet */
 	uint8_t dat;
 	SPI_Eth_SS(ON);			// NSS Slave Enable
 	SPI_Eth_RT(adr>>8);		// Send upper address half
@@ -177,6 +178,12 @@ void W6100_INIT(void) {
 	SPI_W6100_WCR(GA6R15, 0x66);
 
 	SPI_W6100_WCR(NETLCKR, 0x00);	// NETLCKR		Network settings lock
+
+	// W6100 Packet Received Interrupt setup (for Socket 0)
+	// *** Modify this code to fire interrupts for other sockets if in use ***
+	SPI_W6100_WCR(SYCR1, 0x80);				// Interrupt enabled (by default after reset)
+	SPI_W6100_WCR(SIMR, 0x01);				// enable SIMR[S0_INT] – enable SOCKET 0 Interrupt
+	SPI_W6100_WSOCK(Sn_IMR, 0x04, 0, REG);	// Enable RECV Interrupt Mask Bit for Socket 0
 }
 
 
@@ -186,7 +193,7 @@ uint32_t W6100_OpenTCPSocket (uint8_t sck_nbr, uint16_t port) {
 	uint32_t dest_adr;
 	/* *** Open Socket as TCP4 *** */
 	SPI_W6100_WSOCK(Sn_MR, 0x01, sck_nbr, REG);				// Set TCP4 mode
-	SPI_W6100_WSOCK(Sn_PORTR0, (port >> 8), sck_nbr, REG);			// Set PORT number
+	SPI_W6100_WSOCK(Sn_PORTR0, (port >> 8), sck_nbr, REG);	// Set PORT number
 	SPI_W6100_WSOCK(Sn_PORTR1, (port & 0xff), sck_nbr, REG);
 	SPI_W6100_WSOCK(Sn_CR, 0x01, sck_nbr, REG);				// Set OPEN command
 	while ((SPI_W6100_RSOCK(Sn_CR, sck_nbr, REG)) != 0x00);	// Wait until OPEN command is cleared
@@ -199,8 +206,7 @@ uint32_t W6100_OpenTCPSocket (uint8_t sck_nbr, uint16_t port) {
 	while ((SPI_W6100_RSOCK(Sn_SR, sck_nbr, REG)) != 0x17);	// Wait until SOCKET ESTABLISHED
 
 	/* HARDWARE RESPONSE ON THE SOCKET OPEN */
-	GPIOC->ODR &= ~GPIO_ODR_OD8;
-	GPIOC->ODR |= GPIO_ODR_OD9;
+	if(socketOpenCallback) socketOpenCallback(sck_nbr);
 	/* END OF HARDWARE RESPONSE */							// Socket established
 
 	SPI_W6100_WSOCK(Sn_IRCLR, 0x01, sck_nbr, REG);			// Interrupt clear
@@ -227,8 +233,6 @@ uint8_t W6100_ReceiveData(uint8_t sck_nbr, uint32_t dest_adr, uint8_t * tab, uin
 
 	if ((SPI_W6100_RSOCK(Sn_IR, sck_nbr, REG) & 0b00000100) == 0x04) {					// Check if data received
 
-			// Clear data interrupt
-			SPI_W6100_WSOCK(Sn_IRCLR, 0x04, sck_nbr, REG);
 
 			// Read data from the buffer
 			get_size = (SPI_W6100_RSOCK(Sn_RX_RSR0, sck_nbr, REG) << 8);
@@ -299,6 +303,18 @@ void W6100_TransmitData(uint8_t sck_nbr, uint32_t dest_adr, uint8_t * tab, uint8
 
 }
 
+void registerDataReceivedCallback(void (*callback)(void)) {
+	dataReceivedCallback = callback;
+}
+
+
+void registerSocketOpenCallback(void (*callback)(uint8_t sck_nbr)) {
+	socketOpenCallback = callback;
+}
+
+void registerSocketCloseCallback(void (*callback)(uint8_t sck_nbr)) {
+	socketCloseCallback = callback;
+}
 
 
 void W6100_PassiveCloseSocket(uint8_t sck_nbr) {
@@ -311,14 +327,28 @@ void W6100_PassiveCloseSocket(uint8_t sck_nbr) {
 		SPI_W6100_WSOCK(Sn_IRCLR, 0x02, sck_nbr, REG);				// Clear DISCON interrupt
 		while((SPI_W6100_RSOCK(Sn_SR, sck_nbr, REG)) != 0x00);		// Wait until socket is CLOSED
 	}
-	/* HARDWARE RESPONSE ON THE SOCKET CLOSE */
-	GPIOC->ODR |= GPIO_ODR_OD8;
-	GPIOC->ODR &= ~GPIO_ODR_OD9;
-	/* END OF HARDWARE RESPONSE */
+
+	if(socketCloseCallback) socketCloseCallback(sck_nbr);			// Response for a socket close
 }
 
 
+// W6100 external interrupt handler (line PC5)
+__attribute__((interrupt)) void EXTI9_5_IRQHandler(void) {
+	if(EXTI->PR & EXTI_PR_PR5) {
+		EXTI->PR = EXTI_PR_PR5;		// Clear ISR flag
 
+		// W6100: Interrupt fired
+		// Check if RECEIVE ISR was fired
+		if(SPI_W6100_RCR(SIR) && 0x01){
+			// Check if SOCKET 1 data was received
+			if(SPI_W6100_RSOCK(Sn_IR, 0, REG) && 0x04) {
+				if(dataReceivedCallback) dataReceivedCallback();	// Callback function
+				SPI_W6100_WSOCK(Sn_IRCLR, 0x04, 0, REG);			// Clear data interrupt after reaction
+			}
+
+		}
+	}
+}
 
 
 

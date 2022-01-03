@@ -19,23 +19,28 @@
 #include "w6100.h"
 #include "can.h"
 
+void dataPacketReceived(void);				// Callback function executed when data packet is received
 
+// Ethernet TCP/IP auxiliary variables
+char rx_dat[20];	// Ethernet socket buffer
+uint32_t destination_adr;		// Socket destination address
+CAN_MESSAGE can_on_msg;
+CAN_MESSAGE can_off_msg;
+
+// Server responses
+uint8_t on_message[20] = {"System Enabled\n"};
+uint8_t off_message[20] = {"System Disabled\n"};
 
 int main(void)
 {
 
 	SystemRegisterCFG();
 
+	registerSocketCloseCallback(serverOffResponse);		// Register callback function for server close
+	registerSocketOpenCallback(serverStartResponse);	// Register callback function for server start (socket connected)
+	registerDataReceivedCallback(dataPacketReceived);	// Register callback function when data packets received
+
 	GPIOC->ODR &= ~GPIO_ODR_OD9;						// Server RED LED ON
-
-	// Ethernet TCP/IP auxiliary variables
-	char rx_dat[20];	// Ethernet socket buffer
-	uint32_t destination_adr;		// Socket destination address
-
-	// Server responses
-	uint8_t on_message[20] = {"System Enabled\n"};
-	uint8_t off_message[20] = {"System Disabled\n"};
-
 
 	W6100_INIT();										// Initialise W6100 with basic network information
 
@@ -53,14 +58,14 @@ int main(void)
 	destination_adr = W6100_OpenTCPSocket(0, 5000);		// Open TCP socket 0 on port 5000 and return its destination address
 
 
-	CAN_MESSAGE can_on_msg;
+
 	strcpy(can_on_msg.data, "mb_0000");
 	can_on_msg.format = STANDARD_FORMAT;
 	can_on_msg.type = DATA_FRAME;
 	can_on_msg.len = sizeof(can_on_msg);
 	can_on_msg.id = 0x01;
 
-	CAN_MESSAGE can_off_msg;
+
 	strcpy(can_off_msg.data, "mb_0001");
 	can_off_msg.format = STANDARD_FORMAT;
 	can_off_msg.type = DATA_FRAME;
@@ -76,23 +81,6 @@ int main(void)
 
 	while (1) {
 
-		// Check Ethernet
-		if (W6100_ReceiveData(0, destination_adr, (uint8_t*)rx_dat, sizeof(rx_dat))) {		// Check if data arrived
-			if (!strcmp(rx_dat, "on\n")) {
-				GPIOC->ODR &= ~GPIO_ODR_OD12;
-				// Send msg to the client
-				W6100_TransmitData(0, destination_adr, on_message, sizeof(on_message));
-				Can_Tx_Msg(&can_on_msg);
-
-			}
-			else if (!strcmp(rx_dat, "off\n"))	{
-				GPIOC->ODR |= GPIO_ODR_OD12;
-				// Send msg to the client
-				W6100_TransmitData(0, destination_adr, off_message, sizeof(off_message));
-				// Send CAN frame
-				Can_Tx_Msg(&can_off_msg);
-			}
-		}
 
   }
 
@@ -100,7 +88,27 @@ int main(void)
 
 
 
+void dataPacketReceived(void) {
+	/* Reaction on Data Received */
+	// Check Ethernet
+	if (W6100_ReceiveData(0, destination_adr, (uint8_t*)rx_dat, sizeof(rx_dat))) {		// Check if data arrived
+		if (!strcmp(rx_dat, "on\n")) {
+			GPIOC->ODR &= ~GPIO_ODR_OD12;
+			// Send msg to the client
+			W6100_TransmitData(0, destination_adr, on_message, sizeof(on_message));
+			Can_Tx_Msg(&can_on_msg);
 
+		}
+		else if (!strcmp(rx_dat, "off\n"))	{
+			GPIOC->ODR |= GPIO_ODR_OD12;
+			// Send msg to the client
+			W6100_TransmitData(0, destination_adr, off_message, sizeof(off_message));
+			// Send CAN frame
+			Can_Tx_Msg(&can_off_msg);
+		}
+	}
+
+}
 
 
 

@@ -15,6 +15,7 @@
 #include "config.h"
 
 
+
 void SystemRegisterCFG(void) {
 
 	// *** Configure System Clock (36MHz for each system BUS) ***
@@ -37,13 +38,22 @@ void SystemRegisterCFG(void) {
 	RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN | RCC_AHB1ENR_GPIOBEN | RCC_AHB1ENR_GPIOCEN;	// GPIO Clock
 	RCC->APB2ENR |= RCC_APB2ENR_SPI1EN;		// SPI1 clock
 
-	// Standard GPIO Config
+	// Standard GPIO Config (LEDs)
 	GPIOC->MODER |= GPIO_MODER_MODE8_0 | GPIO_MODER_MODE9_0 | GPIO_MODER_MODE11_0 | GPIO_MODER_MODE12_0;	// STM LEDs output
 	GPIOC->ODR |= GPIO_ODR_OD8 | GPIO_ODR_OD9 | GPIO_ODR_OD11 | GPIO_ODR_OD12;		// STM LEDs OFF
 
 	// W6100 External Reset config
 	GPIOC->MODER |= GPIO_MODER_MODE4_0;		// Output
 	GPIOC->ODR |= GPIO_ODR_OD4;				// Level high (reset disable)
+
+	// W6100 External Interrupt pin configuration
+	RCC->APB2ENR |= RCC_APB2ENR_SYSCFGEN;	// Enable clock for SYSCFG (Used for EXTI ISR)
+	__DSB();
+	SYSCFG->EXTICR[1] |= SYSCFG_EXTICR2_EXTI5_PC;	// PC5 pin selected
+	EXTI->IMR |= EXTI_IMR_IM5;						// Interrupt masked for line Px5
+	EXTI->FTSR |= EXTI_FTSR_TR5;					// Falling edge for line Px5
+	NVIC_EnableIRQ(EXTI9_5_IRQn);
+
 
 	// SPI GPIO Config
 	GPIOA->MODER |= GPIO_MODER_MODE4_0 | GPIO_MODER_MODE5_1 | GPIO_MODER_MODE6_1 | GPIO_MODER_MODE7_1;		// SPI1 AFIO Set (NSS Software)
@@ -54,18 +64,30 @@ void SystemRegisterCFG(void) {
 	// SPI Config
 	SPI1->CR1 |= SPI_CR1_SPE | SPI_CR1_SSI | SPI_CR1_SSM | SPI_CR1_MSTR;
 
+	// IO-Link Config
+	GPIOB->MODER |= GPIO_MODER_MODER14_0;		// EN_L+ pin: output
 
 	// SysTic Config
 	SysTick_Config(16000000);
 }
 
+void serverOffResponse(uint8_t sck_nbr) {
+	GPIOC->ODR |= GPIO_ODR_OD8;
+	GPIOC->ODR &= ~GPIO_ODR_OD9;
+}
 
+void serverStartResponse(uint8_t sck_nbr) {
+	GPIOC->ODR &= ~GPIO_ODR_OD8;
+	GPIOC->ODR |= GPIO_ODR_OD9;
+}
 
 
 
 __attribute__((interrupt)) void SysTick_Handler(void){
 //	GPIOC->ODR ^= GPIO_ODR_OD11;
 }
+
+
 
 
 
