@@ -6,7 +6,7 @@
  */
 #include "control_sys.h"
 
-enum canmsg {can_on_msg, can_off_msg};
+enum can_msg {can_on_msg, can_off_msg};
 
 void canVariables(CAN_MESSAGE * cmg) {
 
@@ -54,6 +54,10 @@ void dataPacketReceived(void) {
 		}
 	}
 
+}
+
+void canMessageReceived(CAN_MESSAGE msg) {
+	GPIOC->ODR ^= GPIO_ODR_OD11;
 }
 
 void serverOffResponse(uint8_t sck_nbr) {

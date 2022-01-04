@@ -46,7 +46,8 @@ typedef struct {
 } CAN_MESSAGE;
 
 
-CAN_MESSAGE can_rx_message;
+static void (*canMsgReceivedCallback)(CAN_MESSAGE msg);
+void registerCanMsgRxCallback(void (*callback)(CAN_MESSAGE msg));
 
 
 

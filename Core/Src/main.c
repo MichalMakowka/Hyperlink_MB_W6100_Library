@@ -24,12 +24,13 @@
 int main(void)
 {
 
-	SystemRegisterCFG();
-	canVariables(canMessages);
+	SystemRegisterCFG();			// Setup basic peripheral registers
+	canVariables(canMessages);		// Initialises CAN msg structures for the communication
 
 	registerSocketCloseCallback(serverOffResponse);		// Register callback function for server close
 	registerSocketOpenCallback(serverStartResponse);	// Register callback function for server start (socket connected)
 	registerDataReceivedCallback(dataPacketReceived);	// Register callback function when data packets received
+	registerCanMsgRxCallback(canMessageReceived);
 
 	GPIOC->ODR &= ~GPIO_ODR_OD9;						// Server RED LED ON
 
