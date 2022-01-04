@@ -6,8 +6,10 @@
  */
 #include "control_sys.h"
 
+// CAN variables: array enum references
 enum can_msg {can_on_msg, can_off_msg};
 
+// Define CAN variable structures below
 void canVariables(CAN_MESSAGE * cmg) {
 
 	strcpy(cmg[can_on_msg].data, "mb_0000");
@@ -24,7 +26,7 @@ void canVariables(CAN_MESSAGE * cmg) {
 
 }
 
-
+// IMPROVE THIS FUNCTION IN THE FUTURE BY PUTTING W6100_ReceiveData before the callback function in W6100.c //
 void dataPacketReceived(void) {
 	/* Reaction on Data Received */
 	// Check Ethernet

@@ -37,11 +37,11 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
  16 .debug_macro  00018f18  00000000  00000000  00017a30  2**0
                   CONTENTS, READONLY, DEBUGGING
- 17 .debug_line   00002a23  00000000  00000000  00030948  2**0
+ 17 .debug_line   00002a24  00000000  00000000  00030948  2**0
                   CONTENTS, READONLY, DEBUGGING
- 18 .debug_str    00083bac  00000000  00000000  0003336b  2**0
+ 18 .debug_str    00083bac  00000000  00000000  0003336c  2**0
                   CONTENTS, READONLY, DEBUGGING
- 19 .comment      0000007b  00000000  00000000  000b6f17  2**0
+ 19 .comment      0000007b  00000000  00000000  000b6f18  2**0
                   CONTENTS, READONLY
  20 .debug_frame  0000069c  00000000  00000000  000b6f94  2**2
                   CONTENTS, READONLY, DEBUGGING
@@ -1167,11 +1167,11 @@ __attribute__((interrupt)) void SysTick_Handler(void){
  80008ec:	20000034 	.word	0x20000034
 
 080008f0 <canVariables>:
- */
-#include "control_sys.h"
 
+// CAN variables: array enum references
 enum can_msg {can_on_msg, can_off_msg};
 
+// Define CAN variable structures below
 void canVariables(CAN_MESSAGE * cmg) {
  80008f0:	b480      	push	{r7}
  80008f2:	b083      	sub	sp, #12
@@ -1247,7 +1247,7 @@ void canVariables(CAN_MESSAGE * cmg) {
 
 08000968 <dataPacketReceived>:
 
-
+// IMPROVE THIS FUNCTION IN THE FUTURE BY PUTTING W6100_ReceiveData before the callback function in W6100.c //
 void dataPacketReceived(void) {
  8000968:	b580      	push	{r7, lr}
  800096a:	af00      	add	r7, sp, #0
@@ -3045,7 +3045,7 @@ __attribute__((interrupt)) void EXTI9_5_IRQHandler(void) {
  80016d4:	4b12      	ldr	r3, [pc, #72]	; (8001720 <EXTI9_5_IRQHandler+0x64>)
  80016d6:	2220      	movs	r2, #32
  80016d8:	615a      	str	r2, [r3, #20]
-		/* W6100: Interrupt fired */
+		/* W6100: Generic Interrupt fired */
 		// Check if RECEIVE ISR was fired
 		if(SPI_W6100_RCR(SIR) && 0x01){
  80016da:	f242 1001 	movw	r0, #8449	; 0x2101
@@ -3070,7 +3070,7 @@ __attribute__((interrupt)) void EXTI9_5_IRQHandler(void) {
  8001700:	4b08      	ldr	r3, [pc, #32]	; (8001724 <EXTI9_5_IRQHandler+0x68>)
  8001702:	681b      	ldr	r3, [r3, #0]
  8001704:	4798      	blx	r3
-				SPI_W6100_WSOCK(Sn_IRCLR, 0x04, 0, REG);			// Clear data interrupt after reaction
+				SPI_W6100_WSOCK(Sn_IRCLR, 0x04, 0, REG);			// Clear data interrupt (must be after callback!)
  8001706:	2301      	movs	r3, #1
  8001708:	2200      	movs	r2, #0
  800170a:	2104      	movs	r1, #4

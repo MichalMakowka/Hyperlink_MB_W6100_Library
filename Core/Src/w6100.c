@@ -337,13 +337,13 @@ void W6100_PassiveCloseSocket(uint8_t sck_nbr) {
 __attribute__((interrupt)) void EXTI9_5_IRQHandler(void) {
 	if(EXTI->PR & EXTI_PR_PR5) {
 		EXTI->PR = EXTI_PR_PR5;		// Clear ISR flag
-		/* W6100: Interrupt fired */
+		/* W6100: Generic Interrupt fired */
 		// Check if RECEIVE ISR was fired
 		if(SPI_W6100_RCR(SIR) && 0x01){
 			// Check if SOCKET 1 data was received
 			if(SPI_W6100_RSOCK(Sn_IR, 0, REG) && 0x04) {
 				if(dataReceivedCallback) dataReceivedCallback();	// Callback function
-				SPI_W6100_WSOCK(Sn_IRCLR, 0x04, 0, REG);			// Clear data interrupt after reaction
+				SPI_W6100_WSOCK(Sn_IRCLR, 0x04, 0, REG);			// Clear data interrupt (must be after callback!)
 			}
 
 		}
