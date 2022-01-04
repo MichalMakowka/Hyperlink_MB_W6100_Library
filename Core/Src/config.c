@@ -67,25 +67,34 @@ void SystemRegisterCFG(void) {
 	// IO-Link Config
 	GPIOB->MODER |= GPIO_MODER_MODER14_0;		// EN_L+ pin: output
 
-	// SysTic Config
-	SysTick_Config(16000000);
+	SysTick_Config(32000000 / 1000);
+	// Reset the SysTick counter value.
+	SysTick->VAL = 0UL;
+	// Set SysTick source and IRQ.
+	SysTick->CTRL = (SysTick_CTRL_CLKSOURCE_Msk | SysTick_CTRL_TICKINT_Msk);
+
+
 }
 
-void serverOffResponse(uint8_t sck_nbr) {
-	GPIOC->ODR |= GPIO_ODR_OD8;
-	GPIOC->ODR &= ~GPIO_ODR_OD9;
-}
 
-void serverStartResponse(uint8_t sck_nbr) {
-	GPIOC->ODR &= ~GPIO_ODR_OD8;
-	GPIOC->ODR |= GPIO_ODR_OD9;
-}
+void delay_ms(uint16_t ms) {
+	// Enable the SysTick timer
+	SysTick->CTRL |= SysTick_CTRL_ENABLE_Msk;
 
+	// Wait for a specified number of milliseconds
+	delay = 0;
+	while (delay < ms);
+
+	// Disable the SysTick timer
+	SysTick->CTRL &= ~SysTick_CTRL_ENABLE_Msk;
+}
 
 
 __attribute__((interrupt)) void SysTick_Handler(void){
-//	GPIOC->ODR ^= GPIO_ODR_OD11;
+	delay++;
 }
+
+
 
 
 

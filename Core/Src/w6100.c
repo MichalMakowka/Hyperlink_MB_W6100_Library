@@ -333,11 +333,11 @@ void W6100_PassiveCloseSocket(uint8_t sck_nbr) {
 
 
 // W6100 external interrupt handler (line PC5)
+// Fired when data is received by W6100 ETH
 __attribute__((interrupt)) void EXTI9_5_IRQHandler(void) {
 	if(EXTI->PR & EXTI_PR_PR5) {
 		EXTI->PR = EXTI_PR_PR5;		// Clear ISR flag
-
-		// W6100: Interrupt fired
+		/* W6100: Interrupt fired */
 		// Check if RECEIVE ISR was fired
 		if(SPI_W6100_RCR(SIR) && 0x01){
 			// Check if SOCKET 1 data was received

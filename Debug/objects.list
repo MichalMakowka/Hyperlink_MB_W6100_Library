@@ -1,5 +1,6 @@
 "Core/Src/can.o"
 "Core/Src/config.o"
+"Core/Src/control_sys.o"
 "Core/Src/main.o"
 "Core/Src/syscalls.o"
 "Core/Src/sysmem.o"
