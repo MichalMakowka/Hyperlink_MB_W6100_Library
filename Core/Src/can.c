@@ -146,6 +146,9 @@ void registerCanMsgRxCallback(void (*callback)(CAN_MESSAGE msg)) {
 	canMsgReceivedCallback = callback;
 }
 
+void registerCanMsgTxCallback(void (*callback)(void)) {
+	canMsgTransmitCallback = callback;
+}
 
 
 __attribute__((interrupt)) void CAN1_TX_IRQHandler (void)  {
@@ -153,9 +156,8 @@ __attribute__((interrupt)) void CAN1_TX_IRQHandler (void)  {
 	    CAN1->TSR |= CAN_TSR_RQCP0;                  // reset request complete mbx 0
 	    CAN1->IER &= ~CAN_IER_TMEIE;                 // disable  TME interrupt
 	}
-
-// Tx Interrupt Action
-
+	// Tx Interrupt Action
+	if(canMsgTransmitCallback) canMsgTransmitCallback();
 }
 
 
@@ -166,6 +168,7 @@ __attribute__((interrupt)) void CAN1_RX0_IRQHandler (void) {
 
 	if (CAN1->RF0R & CAN_RF0R_FMP0) {			      // message pending?
 		Can_Rx_Msg(&can_rx_message);                  // read the message
+		// Rx Interrupt Action
 		if (canMsgReceivedCallback) canMsgReceivedCallback(can_rx_message);
 	}
 

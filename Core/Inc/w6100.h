@@ -8,12 +8,18 @@
 /* *** W6100 ETHERNET CONTROLLER Library ***
  *
  * void W6100_INIT (void) - Ethernet uC and W6100 chip initialisation.
- * uint32_t W6100_OpenTCPSocket (uint8_t sck_nbr, uint16_t port) - Function used to open a TCP socket
- * uint8_t W6100_ReceiveData(uint8_t sck_nbr, uint32_t dest_adr, uint8_t * tab, uint8_t size) - Function used to check for a new message
- * void W6100_TransmitData(uint8_t sck_nbr, uint32_t dest_adr, uint8_t * tab, uint8_t size) - Function used to transmit data
+ * uint32_t W6100_OpenTCPSocket (uint8_t sck_nbr, uint16_t port) - Function used to open a TCP socket.
+ * uint8_t W6100_ReceiveData(uint8_t sck_nbr, uint32_t dest_adr, uint8_t * tab, uint8_t size) - Function used to check for a new message.
+ * void W6100_TransmitData(uint8_t sck_nbr, uint32_t dest_adr, uint8_t * tab, uint8_t size) - Function used to transmit data.
  *
  * void registerSocketCloseCallback(void (*callback)(uint8_t sck_nbr)) - Register user function with
- * socket number parameter executed after socket close
+ * socket number parameter executed after the socket is closed.
+ *
+ * void registerSocketOpenCallback(void (*callback)(uint8_t sck_nbr)) - Register user function with
+ * socket number parameter executed after the socket is opened.
+ *
+ * void registerDataReceivedCallback(void (*callback)(void)) - Register user function which is executed after W6100 informes about
+ * data in Rx buffer to be read (W6100_ReceiveData should be used inside this function).
  *
  * *****************************************
  */

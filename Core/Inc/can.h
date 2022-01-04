@@ -11,7 +11,10 @@
  * void Can_Tx_Msg(CAN_MESSAGE * msg) - Transmit CAN message.
  * void Can_Set_Filter(uint id, char format) - Set filter for a message ID.
  *
- * CAN_MESSAGE can_rx_message - this variable stores received message (updated automatically in the ISR function).
+ * void registerCanMsgRxCallback(void (*callback)(CAN_MESSAGE msg)) - Register user function which is executed after CAN message is received.
+ * Its structure is passed in the argument.
+ *
+ * void registerCanMsgTxCallback(void (*callback)(void)) - Register user function which is executed after CAN message is transmitted.
  *
  * *******************
  */
@@ -49,6 +52,8 @@ typedef struct {
 static void (*canMsgReceivedCallback)(CAN_MESSAGE msg);
 void registerCanMsgRxCallback(void (*callback)(CAN_MESSAGE msg));
 
+static void (*canMsgTransmitCallback)(void);
+void registerCanMsgTxCallback(void (*callback)(void));
 
 
 void CanInit(void);
