@@ -16,8 +16,6 @@
 
 
 
-
-
 void SPI_Eth_SS(uint8_t state) {
 	if (state) {
 		GPIOA->ODR &= ~GPIO_ODR_OD4;
@@ -303,7 +301,7 @@ void W6100_TransmitData(uint8_t sck_nbr, uint32_t dest_adr, uint8_t * tab, uint8
 
 }
 
-void registerDataReceivedCallback(void (*callback)(void)) {
+void registerDataReceivedCallback(void (*callback)(char * RxBuf)) {
 	dataReceivedCallback = callback;
 }
 
@@ -327,23 +325,31 @@ void W6100_PassiveCloseSocket(uint8_t sck_nbr) {
 		SPI_W6100_WSOCK(Sn_IRCLR, 0x02, sck_nbr, REG);				// Clear DISCON interrupt
 		while((SPI_W6100_RSOCK(Sn_SR, sck_nbr, REG)) != 0x00);		// Wait until socket is CLOSED
 	}
-
+	/* HARDWARE RESPONSE ON THE SOCKET CLOSE */
 	if(socketCloseCallback) socketCloseCallback(sck_nbr);			// Response for a socket close
+	/* END OF HARDWARE RESPONSE */
 }
 
 
 // W6100 external interrupt handler (line PC5)
 // Fired when data is received by W6100 ETH
 __attribute__((interrupt)) void EXTI9_5_IRQHandler(void) {
+
+	char rx_buf[40];
+
 	if(EXTI->PR & EXTI_PR_PR5) {
 		EXTI->PR = EXTI_PR_PR5;		// Clear ISR flag
 		/* W6100: Generic Interrupt fired */
-		// Check if RECEIVE ISR was fired
+		// Check if W6100 RECEIVE ISR was fired
 		if(SPI_W6100_RCR(SIR) && 0x01){
-			// Check if SOCKET 1 data was received
+			/* Check if SOCKET 0 data was received */
 			if(SPI_W6100_RSOCK(Sn_IR, 0, REG) && 0x04) {
-				if(dataReceivedCallback) dataReceivedCallback();	// Callback function
-				SPI_W6100_WSOCK(Sn_IRCLR, 0x04, 0, REG);			// Clear data interrupt (must be after callback!)
+				if (W6100_ReceiveData(0, socket_dest_adr[0], (uint8_t*)rx_buf, sizeof(rx_buf))) {		// Check if data arrived
+					/* HARDWARE RESPONSE ON DATA RECEIVED FROM SOCKET[0] */
+					if(dataReceivedCallback) dataReceivedCallback(rx_buf);	// Callback function
+					/* END OF HARDWARE RESPONSE */
+				}
+				SPI_W6100_WSOCK(Sn_IRCLR, 0x04, 0, REG);					// Clear data interrupt (must be after callback!)
 			}
 
 		}

@@ -36,18 +36,18 @@ int main(void)
 
 	W6100_INIT();										// Initialise W6100 with basic network information
 
-	/* Socket Configuration */
+	/* Socket 0 Configuration */
 	uint8_t txTotalSize = 0;
 	uint8_t rxTotalSize = 0;
 
 	for (uint8_t i=0; i<7; i++) {
-		SPI_W6100_WSOCK(Sn_TX_BSR, 0x04, i, REG);		// assign 4 Kbytes TX buffer per SOCKET
-		SPI_W6100_WSOCK(Sn_RX_BSR, 0x04, i, REG);		// assign 4 Kbytes RX buffer per SOCKET
-		txTotalSize += 0x04;
-		rxTotalSize += 0x04;
+		SPI_W6100_WSOCK(Sn_TX_BSR, 0x08, i, REG);		// assign 4 Kbytes TX buffer per SOCKET
+		SPI_W6100_WSOCK(Sn_RX_BSR, 0x08, i, REG);		// assign 4 Kbytes RX buffer per SOCKET
+		txTotalSize += 0x08;
+		rxTotalSize += 0x08;
 	}
 
-	destination_adr = W6100_OpenTCPSocket(0, 5000);		// Open TCP socket 0 on port 5000 and return its destination address
+	socket_dest_adr[0] = W6100_OpenTCPSocket(0, 5000);		// Open TCP socket 0 on port 5000 and return its destination address
 
 
 	CanInit();

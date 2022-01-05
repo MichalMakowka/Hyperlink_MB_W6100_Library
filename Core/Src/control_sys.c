@@ -26,35 +26,35 @@ void canVariables(CAN_MESSAGE * cmg) {
 
 }
 
-// IMPROVE THIS FUNCTION IN THE FUTURE BY PUTTING W6100_ReceiveData before the callback function in W6100.c //
-void dataPacketReceived(void) {
+
+void dataPacketReceived(char * RxBuf) {
 	/* Reaction on Data Received */
 	// Check Ethernet
-	if (W6100_ReceiveData(0, destination_adr, (uint8_t*)rx_dat, sizeof(rx_dat))) {		// Check if data arrived
-		if (!strcmp(rx_dat, "systems_on\n")) {
+
+		if (!strcmp(RxBuf, "systems_on\n")) {
 			GPIOC->ODR &= ~GPIO_ODR_OD12;
 			// Send msg to the client
-			W6100_TransmitData(0, destination_adr, (uint8_t*)"System Enabled\n", sizeof("System Enabled\n"));
+			W6100_TransmitData(0, socket_dest_adr[0], (uint8_t*)"Systems Enabled\n", sizeof("Systems Enabled\n"));
 			Can_Tx_Msg(&canMessages[can_on_msg]);
 
 		}
-		else if (!strcmp(rx_dat, "systems_off\n"))	{
+		else if (!strcmp(RxBuf, "systems_off\n"))	{
 			GPIOC->ODR |= GPIO_ODR_OD12;
 			// Send msg to the client
-			W6100_TransmitData(0, destination_adr, (uint8_t*)"System Disabled\n", sizeof("System Disabled\n"));
+			W6100_TransmitData(0, socket_dest_adr[0], (uint8_t*)"Systems Disabled\n", sizeof("Systems Disabled\n"));
 			// Send CAN frame
 			Can_Tx_Msg(&canMessages[can_off_msg]);
 		}
-		else if (!strcmp(rx_dat, "systems_st\n"))	{
+		else if (!strcmp(RxBuf, "systems_st\n"))	{
 			GPIOC->ODR ^= GPIO_ODR_OD12;
 			// Send msg to the client
-			W6100_TransmitData(0, destination_adr, (uint8_t*)"Checking status...\n", sizeof("Checking status...\n"));
+			W6100_TransmitData(0, socket_dest_adr[0], (uint8_t*)"Checking status...\n", sizeof("Checking status...\n"));
 		}
 		else {
 			// Send msg to the client
-			W6100_TransmitData(0, destination_adr, (uint8_t*)"Command unknown...\n", sizeof("Command unknown...\n"));
+			W6100_TransmitData(0, socket_dest_adr[0], (uint8_t*)"Command unknown...\n", sizeof("Command unknown...\n"));
 		}
-	}
+
 
 }
 

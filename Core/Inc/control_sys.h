@@ -20,13 +20,13 @@
 
 
 // Ethernet TCP/IP auxiliary variables
-char rx_dat[40];				// Ethernet socket buffer
-uint32_t destination_adr;		// Socket destination address
+//char rx_dat[40];				// Ethernet socket buffer
+
 
 CAN_MESSAGE canMessages[CAN_MSG_CNT];
 
 void canVariables(CAN_MESSAGE * cmg);
-void dataPacketReceived(void);				// Callback function executed when data packet is received
+void dataPacketReceived(char * RxBuf);	// Callback function executed when data packet is received
 void canMessageReceived(CAN_MESSAGE msg);	// Callback function executed when CAN message is received
 
 #endif /* INC_CONTROL_SYS_H_ */

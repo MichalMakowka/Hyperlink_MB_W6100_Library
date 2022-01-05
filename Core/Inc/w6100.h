@@ -354,6 +354,9 @@
 
 
 
+uint32_t socket_dest_adr[2];		// Socket[n] destination addresses
+
+
 
 
 void W6100_INIT (void);
@@ -370,8 +373,8 @@ void registerSocketCloseCallback(void (*callback)(uint8_t sck_nbr));
 static void (*socketOpenCallback)(uint8_t sck_nbr);
 void registerSocketOpenCallback(void (*callback)(uint8_t sck_nbr));
 
-static void (*dataReceivedCallback)(void);
-void registerDataReceivedCallback(void (*callback)(void));
+static void (*dataReceivedCallback)(char * RxBuf);
+void registerDataReceivedCallback(void (*callback)(char * RxBuf));
 
 uint8_t SPI_Eth_RT(uint8_t data);
 void SPI_Eth_SS(uint8_t state);

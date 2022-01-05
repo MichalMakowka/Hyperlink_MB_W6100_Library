@@ -5,45 +5,45 @@ Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
   0 .isr_vector   00000188  08000000  08000000  00010000  2**0
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  1 .text         0000167c  08000188  08000188  00010188  2**2
+  1 .text         0000168c  08000188  08000188  00010188  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .rodata       00000084  08001804  08001804  00011804  2**2
+  2 .rodata       00000088  08001814  08001814  00011814  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  3 .ARM.extab    00000000  08001888  08001888  00011890  2**0
+  3 .ARM.extab    00000000  0800189c  0800189c  000118a4  2**0
                   CONTENTS
-  4 .ARM          00000000  08001888  08001888  00011890  2**0
+  4 .ARM          00000000  0800189c  0800189c  000118a4  2**0
                   CONTENTS
-  5 .preinit_array 00000000  08001888  08001890  00011890  2**0
+  5 .preinit_array 00000000  0800189c  080018a4  000118a4  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  6 .init_array   00000004  08001888  08001888  00011888  2**2
+  6 .init_array   00000004  0800189c  0800189c  0001189c  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  7 .fini_array   00000004  0800188c  0800188c  0001188c  2**2
+  7 .fini_array   00000004  080018a0  080018a0  000118a0  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  8 .data         00000000  20000000  20000000  00011890  2**0
+  8 .data         00000000  20000000  20000000  000118a4  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  9 .bss          00000094  20000000  08001890  00020000  2**2
+  9 .bss          00000070  20000000  080018a4  00020000  2**2
                   ALLOC
- 10 ._user_heap_stack 00000604  20000094  08001890  00020094  2**0
+ 10 ._user_heap_stack 00000600  20000070  080018a4  00020070  2**0
                   ALLOC
- 11 .ARM.attributes 00000030  00000000  00000000  00011890  2**0
+ 11 .ARM.attributes 00000030  00000000  00000000  000118a4  2**0
                   CONTENTS, READONLY
- 12 .debug_info   00005148  00000000  00000000  000118c0  2**0
+ 12 .debug_info   000051b4  00000000  00000000  000118d4  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_abbrev 00000cb9  00000000  00000000  00016a08  2**0
+ 13 .debug_abbrev 00000cd6  00000000  00000000  00016a88  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_aranges 000001e8  00000000  00000000  000176c8  2**3
+ 14 .debug_aranges 000001e8  00000000  00000000  00017760  2**3
                   CONTENTS, READONLY, DEBUGGING
- 15 .debug_ranges 00000180  00000000  00000000  000178b0  2**3
+ 15 .debug_ranges 00000180  00000000  00000000  00017948  2**3
                   CONTENTS, READONLY, DEBUGGING
- 16 .debug_macro  00018f18  00000000  00000000  00017a30  2**0
+ 16 .debug_macro  00018f18  00000000  00000000  00017ac8  2**0
                   CONTENTS, READONLY, DEBUGGING
- 17 .debug_line   00002a24  00000000  00000000  00030948  2**0
+ 17 .debug_line   00002a24  00000000  00000000  000309e0  2**0
                   CONTENTS, READONLY, DEBUGGING
- 18 .debug_str    00083bac  00000000  00000000  0003336c  2**0
+ 18 .debug_str    00083ba9  00000000  00000000  00033404  2**0
                   CONTENTS, READONLY, DEBUGGING
- 19 .comment      0000007b  00000000  00000000  000b6f18  2**0
+ 19 .comment      0000007b  00000000  00000000  000b6fad  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  0000069c  00000000  00000000  000b6f94  2**2
+ 20 .debug_frame  000006a8  00000000  00000000  000b7028  2**2
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -62,7 +62,7 @@ Disassembly of section .text:
  800019e:	bd10      	pop	{r4, pc}
  80001a0:	20000000 	.word	0x20000000
  80001a4:	00000000 	.word	0x00000000
- 80001a8:	080017ec 	.word	0x080017ec
+ 80001a8:	080017fc 	.word	0x080017fc
 
 080001ac <frame_dummy>:
  80001ac:	b508      	push	{r3, lr}
@@ -74,7 +74,7 @@ Disassembly of section .text:
  80001ba:	bd08      	pop	{r3, pc}
  80001bc:	00000000 	.word	0x00000000
  80001c0:	20000004 	.word	0x20000004
- 80001c4:	080017ec 	.word	0x080017ec
+ 80001c4:	080017fc 	.word	0x080017fc
 
 080001c8 <strcmp>:
  80001c8:	f810 2b01 	ldrb.w	r2, [r0], #1
@@ -1242,2015 +1242,2031 @@ void canVariables(CAN_MESSAGE * cmg) {
  8000958:	f85d 7b04 	ldr.w	r7, [sp], #4
  800095c:	4770      	bx	lr
  800095e:	bf00      	nop
- 8000960:	08001804 	.word	0x08001804
- 8000964:	0800180c 	.word	0x0800180c
+ 8000960:	08001814 	.word	0x08001814
+ 8000964:	0800181c 	.word	0x0800181c
 
 08000968 <dataPacketReceived>:
 
-// IMPROVE THIS FUNCTION IN THE FUTURE BY PUTTING W6100_ReceiveData before the callback function in W6100.c //
-void dataPacketReceived(void) {
+
+void dataPacketReceived(char * RxBuf) {
  8000968:	b580      	push	{r7, lr}
- 800096a:	af00      	add	r7, sp, #0
+ 800096a:	b082      	sub	sp, #8
+ 800096c:	af00      	add	r7, sp, #0
+ 800096e:	6078      	str	r0, [r7, #4]
 	/* Reaction on Data Received */
 	// Check Ethernet
-	if (W6100_ReceiveData(0, destination_adr, (uint8_t*)rx_dat, sizeof(rx_dat))) {		// Check if data arrived
- 800096c:	4b2b      	ldr	r3, [pc, #172]	; (8000a1c <dataPacketReceived+0xb4>)
- 800096e:	6819      	ldr	r1, [r3, #0]
- 8000970:	2328      	movs	r3, #40	; 0x28
- 8000972:	4a2b      	ldr	r2, [pc, #172]	; (8000a20 <dataPacketReceived+0xb8>)
- 8000974:	2000      	movs	r0, #0
- 8000976:	f000 fc73 	bl	8001260 <W6100_ReceiveData>
- 800097a:	4603      	mov	r3, r0
- 800097c:	2b00      	cmp	r3, #0
- 800097e:	d04b      	beq.n	8000a18 <dataPacketReceived+0xb0>
-		if (!strcmp(rx_dat, "systems_on\n")) {
- 8000980:	4928      	ldr	r1, [pc, #160]	; (8000a24 <dataPacketReceived+0xbc>)
- 8000982:	4827      	ldr	r0, [pc, #156]	; (8000a20 <dataPacketReceived+0xb8>)
- 8000984:	f7ff fc20 	bl	80001c8 <strcmp>
- 8000988:	4603      	mov	r3, r0
- 800098a:	2b00      	cmp	r3, #0
- 800098c:	d110      	bne.n	80009b0 <dataPacketReceived+0x48>
+
+		if (!strcmp(RxBuf, "systems_on\n")) {
+ 8000970:	4927      	ldr	r1, [pc, #156]	; (8000a10 <dataPacketReceived+0xa8>)
+ 8000972:	6878      	ldr	r0, [r7, #4]
+ 8000974:	f7ff fc28 	bl	80001c8 <strcmp>
+ 8000978:	4603      	mov	r3, r0
+ 800097a:	2b00      	cmp	r3, #0
+ 800097c:	d110      	bne.n	80009a0 <dataPacketReceived+0x38>
 			GPIOC->ODR &= ~GPIO_ODR_OD12;
- 800098e:	4b26      	ldr	r3, [pc, #152]	; (8000a28 <dataPacketReceived+0xc0>)
- 8000990:	695b      	ldr	r3, [r3, #20]
- 8000992:	4a25      	ldr	r2, [pc, #148]	; (8000a28 <dataPacketReceived+0xc0>)
- 8000994:	f423 5380 	bic.w	r3, r3, #4096	; 0x1000
- 8000998:	6153      	str	r3, [r2, #20]
+ 800097e:	4b25      	ldr	r3, [pc, #148]	; (8000a14 <dataPacketReceived+0xac>)
+ 8000980:	695b      	ldr	r3, [r3, #20]
+ 8000982:	4a24      	ldr	r2, [pc, #144]	; (8000a14 <dataPacketReceived+0xac>)
+ 8000984:	f423 5380 	bic.w	r3, r3, #4096	; 0x1000
+ 8000988:	6153      	str	r3, [r2, #20]
 			// Send msg to the client
-			W6100_TransmitData(0, destination_adr, (uint8_t*)"System Enabled\n", sizeof("System Enabled\n"));
- 800099a:	4b20      	ldr	r3, [pc, #128]	; (8000a1c <dataPacketReceived+0xb4>)
- 800099c:	6819      	ldr	r1, [r3, #0]
- 800099e:	2310      	movs	r3, #16
- 80009a0:	4a22      	ldr	r2, [pc, #136]	; (8000a2c <dataPacketReceived+0xc4>)
- 80009a2:	2000      	movs	r0, #0
- 80009a4:	f000 fd25 	bl	80013f2 <W6100_TransmitData>
+			W6100_TransmitData(0, socket_dest_adr[0], (uint8_t*)"Systems Enabled\n", sizeof("Systems Enabled\n"));
+ 800098a:	4b23      	ldr	r3, [pc, #140]	; (8000a18 <dataPacketReceived+0xb0>)
+ 800098c:	6819      	ldr	r1, [r3, #0]
+ 800098e:	2311      	movs	r3, #17
+ 8000990:	4a22      	ldr	r2, [pc, #136]	; (8000a1c <dataPacketReceived+0xb4>)
+ 8000992:	2000      	movs	r0, #0
+ 8000994:	f000 fd25 	bl	80013e2 <W6100_TransmitData>
 			Can_Tx_Msg(&canMessages[can_on_msg]);
- 80009a8:	4821      	ldr	r0, [pc, #132]	; (8000a30 <dataPacketReceived+0xc8>)
- 80009aa:	f7ff fc7b 	bl	80002a4 <Can_Tx_Msg>
+ 8000998:	4821      	ldr	r0, [pc, #132]	; (8000a20 <dataPacketReceived+0xb8>)
+ 800099a:	f7ff fc83 	bl	80002a4 <Can_Tx_Msg>
 			// Send msg to the client
-			W6100_TransmitData(0, destination_adr, (uint8_t*)"Command unknown...\n", sizeof("Command unknown...\n"));
+			W6100_TransmitData(0, socket_dest_adr[0], (uint8_t*)"Command unknown...\n", sizeof("Command unknown...\n"));
 		}
-	}
+
 
 }
- 80009ae:	e033      	b.n	8000a18 <dataPacketReceived+0xb0>
-		else if (!strcmp(rx_dat, "systems_off\n"))	{
- 80009b0:	4920      	ldr	r1, [pc, #128]	; (8000a34 <dataPacketReceived+0xcc>)
- 80009b2:	481b      	ldr	r0, [pc, #108]	; (8000a20 <dataPacketReceived+0xb8>)
- 80009b4:	f7ff fc08 	bl	80001c8 <strcmp>
- 80009b8:	4603      	mov	r3, r0
- 80009ba:	2b00      	cmp	r3, #0
- 80009bc:	d110      	bne.n	80009e0 <dataPacketReceived+0x78>
+ 800099e:	e033      	b.n	8000a08 <dataPacketReceived+0xa0>
+		else if (!strcmp(RxBuf, "systems_off\n"))	{
+ 80009a0:	4920      	ldr	r1, [pc, #128]	; (8000a24 <dataPacketReceived+0xbc>)
+ 80009a2:	6878      	ldr	r0, [r7, #4]
+ 80009a4:	f7ff fc10 	bl	80001c8 <strcmp>
+ 80009a8:	4603      	mov	r3, r0
+ 80009aa:	2b00      	cmp	r3, #0
+ 80009ac:	d110      	bne.n	80009d0 <dataPacketReceived+0x68>
 			GPIOC->ODR |= GPIO_ODR_OD12;
- 80009be:	4b1a      	ldr	r3, [pc, #104]	; (8000a28 <dataPacketReceived+0xc0>)
- 80009c0:	695b      	ldr	r3, [r3, #20]
- 80009c2:	4a19      	ldr	r2, [pc, #100]	; (8000a28 <dataPacketReceived+0xc0>)
- 80009c4:	f443 5380 	orr.w	r3, r3, #4096	; 0x1000
- 80009c8:	6153      	str	r3, [r2, #20]
-			W6100_TransmitData(0, destination_adr, (uint8_t*)"System Disabled\n", sizeof("System Disabled\n"));
- 80009ca:	4b14      	ldr	r3, [pc, #80]	; (8000a1c <dataPacketReceived+0xb4>)
- 80009cc:	6819      	ldr	r1, [r3, #0]
- 80009ce:	2311      	movs	r3, #17
- 80009d0:	4a19      	ldr	r2, [pc, #100]	; (8000a38 <dataPacketReceived+0xd0>)
- 80009d2:	2000      	movs	r0, #0
- 80009d4:	f000 fd0d 	bl	80013f2 <W6100_TransmitData>
+ 80009ae:	4b19      	ldr	r3, [pc, #100]	; (8000a14 <dataPacketReceived+0xac>)
+ 80009b0:	695b      	ldr	r3, [r3, #20]
+ 80009b2:	4a18      	ldr	r2, [pc, #96]	; (8000a14 <dataPacketReceived+0xac>)
+ 80009b4:	f443 5380 	orr.w	r3, r3, #4096	; 0x1000
+ 80009b8:	6153      	str	r3, [r2, #20]
+			W6100_TransmitData(0, socket_dest_adr[0], (uint8_t*)"Systems Disabled\n", sizeof("Systems Disabled\n"));
+ 80009ba:	4b17      	ldr	r3, [pc, #92]	; (8000a18 <dataPacketReceived+0xb0>)
+ 80009bc:	6819      	ldr	r1, [r3, #0]
+ 80009be:	2312      	movs	r3, #18
+ 80009c0:	4a19      	ldr	r2, [pc, #100]	; (8000a28 <dataPacketReceived+0xc0>)
+ 80009c2:	2000      	movs	r0, #0
+ 80009c4:	f000 fd0d 	bl	80013e2 <W6100_TransmitData>
 			Can_Tx_Msg(&canMessages[can_off_msg]);
- 80009d8:	4818      	ldr	r0, [pc, #96]	; (8000a3c <dataPacketReceived+0xd4>)
- 80009da:	f7ff fc63 	bl	80002a4 <Can_Tx_Msg>
+ 80009c8:	4818      	ldr	r0, [pc, #96]	; (8000a2c <dataPacketReceived+0xc4>)
+ 80009ca:	f7ff fc6b 	bl	80002a4 <Can_Tx_Msg>
 }
- 80009de:	e01b      	b.n	8000a18 <dataPacketReceived+0xb0>
-		else if (!strcmp(rx_dat, "systems_st\n"))	{
- 80009e0:	4917      	ldr	r1, [pc, #92]	; (8000a40 <dataPacketReceived+0xd8>)
- 80009e2:	480f      	ldr	r0, [pc, #60]	; (8000a20 <dataPacketReceived+0xb8>)
- 80009e4:	f7ff fbf0 	bl	80001c8 <strcmp>
- 80009e8:	4603      	mov	r3, r0
- 80009ea:	2b00      	cmp	r3, #0
- 80009ec:	d10d      	bne.n	8000a0a <dataPacketReceived+0xa2>
+ 80009ce:	e01b      	b.n	8000a08 <dataPacketReceived+0xa0>
+		else if (!strcmp(RxBuf, "systems_st\n"))	{
+ 80009d0:	4917      	ldr	r1, [pc, #92]	; (8000a30 <dataPacketReceived+0xc8>)
+ 80009d2:	6878      	ldr	r0, [r7, #4]
+ 80009d4:	f7ff fbf8 	bl	80001c8 <strcmp>
+ 80009d8:	4603      	mov	r3, r0
+ 80009da:	2b00      	cmp	r3, #0
+ 80009dc:	d10d      	bne.n	80009fa <dataPacketReceived+0x92>
 			GPIOC->ODR ^= GPIO_ODR_OD12;
- 80009ee:	4b0e      	ldr	r3, [pc, #56]	; (8000a28 <dataPacketReceived+0xc0>)
- 80009f0:	695b      	ldr	r3, [r3, #20]
- 80009f2:	4a0d      	ldr	r2, [pc, #52]	; (8000a28 <dataPacketReceived+0xc0>)
- 80009f4:	f483 5380 	eor.w	r3, r3, #4096	; 0x1000
- 80009f8:	6153      	str	r3, [r2, #20]
-			W6100_TransmitData(0, destination_adr, (uint8_t*)"Checking status...\n", sizeof("Checking status...\n"));
- 80009fa:	4b08      	ldr	r3, [pc, #32]	; (8000a1c <dataPacketReceived+0xb4>)
+ 80009de:	4b0d      	ldr	r3, [pc, #52]	; (8000a14 <dataPacketReceived+0xac>)
+ 80009e0:	695b      	ldr	r3, [r3, #20]
+ 80009e2:	4a0c      	ldr	r2, [pc, #48]	; (8000a14 <dataPacketReceived+0xac>)
+ 80009e4:	f483 5380 	eor.w	r3, r3, #4096	; 0x1000
+ 80009e8:	6153      	str	r3, [r2, #20]
+			W6100_TransmitData(0, socket_dest_adr[0], (uint8_t*)"Checking status...\n", sizeof("Checking status...\n"));
+ 80009ea:	4b0b      	ldr	r3, [pc, #44]	; (8000a18 <dataPacketReceived+0xb0>)
+ 80009ec:	6819      	ldr	r1, [r3, #0]
+ 80009ee:	2314      	movs	r3, #20
+ 80009f0:	4a10      	ldr	r2, [pc, #64]	; (8000a34 <dataPacketReceived+0xcc>)
+ 80009f2:	2000      	movs	r0, #0
+ 80009f4:	f000 fcf5 	bl	80013e2 <W6100_TransmitData>
+}
+ 80009f8:	e006      	b.n	8000a08 <dataPacketReceived+0xa0>
+			W6100_TransmitData(0, socket_dest_adr[0], (uint8_t*)"Command unknown...\n", sizeof("Command unknown...\n"));
+ 80009fa:	4b07      	ldr	r3, [pc, #28]	; (8000a18 <dataPacketReceived+0xb0>)
  80009fc:	6819      	ldr	r1, [r3, #0]
  80009fe:	2314      	movs	r3, #20
- 8000a00:	4a10      	ldr	r2, [pc, #64]	; (8000a44 <dataPacketReceived+0xdc>)
+ 8000a00:	4a0d      	ldr	r2, [pc, #52]	; (8000a38 <dataPacketReceived+0xd0>)
  8000a02:	2000      	movs	r0, #0
- 8000a04:	f000 fcf5 	bl	80013f2 <W6100_TransmitData>
+ 8000a04:	f000 fced 	bl	80013e2 <W6100_TransmitData>
 }
- 8000a08:	e006      	b.n	8000a18 <dataPacketReceived+0xb0>
-			W6100_TransmitData(0, destination_adr, (uint8_t*)"Command unknown...\n", sizeof("Command unknown...\n"));
- 8000a0a:	4b04      	ldr	r3, [pc, #16]	; (8000a1c <dataPacketReceived+0xb4>)
- 8000a0c:	6819      	ldr	r1, [r3, #0]
- 8000a0e:	2314      	movs	r3, #20
- 8000a10:	4a0d      	ldr	r2, [pc, #52]	; (8000a48 <dataPacketReceived+0xe0>)
- 8000a12:	2000      	movs	r0, #0
- 8000a14:	f000 fced 	bl	80013f2 <W6100_TransmitData>
-}
- 8000a18:	bf00      	nop
- 8000a1a:	bd80      	pop	{r7, pc}
- 8000a1c:	20000090 	.word	0x20000090
- 8000a20:	20000068 	.word	0x20000068
- 8000a24:	08001814 	.word	0x08001814
- 8000a28:	40020800 	.word	0x40020800
- 8000a2c:	08001820 	.word	0x08001820
- 8000a30:	20000038 	.word	0x20000038
- 8000a34:	08001830 	.word	0x08001830
- 8000a38:	08001840 	.word	0x08001840
- 8000a3c:	20000050 	.word	0x20000050
- 8000a40:	08001854 	.word	0x08001854
- 8000a44:	08001860 	.word	0x08001860
- 8000a48:	08001874 	.word	0x08001874
+ 8000a08:	bf00      	nop
+ 8000a0a:	3708      	adds	r7, #8
+ 8000a0c:	46bd      	mov	sp, r7
+ 8000a0e:	bd80      	pop	{r7, pc}
+ 8000a10:	08001824 	.word	0x08001824
+ 8000a14:	40020800 	.word	0x40020800
+ 8000a18:	20000068 	.word	0x20000068
+ 8000a1c:	08001830 	.word	0x08001830
+ 8000a20:	20000038 	.word	0x20000038
+ 8000a24:	08001844 	.word	0x08001844
+ 8000a28:	08001854 	.word	0x08001854
+ 8000a2c:	20000050 	.word	0x20000050
+ 8000a30:	08001868 	.word	0x08001868
+ 8000a34:	08001874 	.word	0x08001874
+ 8000a38:	08001888 	.word	0x08001888
 
-08000a4c <canMessageReceived>:
+08000a3c <canMessageReceived>:
 
 void canMessageReceived(CAN_MESSAGE msg) {
- 8000a4c:	b084      	sub	sp, #16
- 8000a4e:	b490      	push	{r4, r7}
- 8000a50:	af00      	add	r7, sp, #0
- 8000a52:	f107 0408 	add.w	r4, r7, #8
- 8000a56:	e884 000f 	stmia.w	r4, {r0, r1, r2, r3}
+ 8000a3c:	b084      	sub	sp, #16
+ 8000a3e:	b490      	push	{r4, r7}
+ 8000a40:	af00      	add	r7, sp, #0
+ 8000a42:	f107 0408 	add.w	r4, r7, #8
+ 8000a46:	e884 000f 	stmia.w	r4, {r0, r1, r2, r3}
 	GPIOC->ODR ^= GPIO_ODR_OD11;
- 8000a5a:	4b05      	ldr	r3, [pc, #20]	; (8000a70 <canMessageReceived+0x24>)
- 8000a5c:	695b      	ldr	r3, [r3, #20]
- 8000a5e:	4a04      	ldr	r2, [pc, #16]	; (8000a70 <canMessageReceived+0x24>)
- 8000a60:	f483 6300 	eor.w	r3, r3, #2048	; 0x800
- 8000a64:	6153      	str	r3, [r2, #20]
+ 8000a4a:	4b05      	ldr	r3, [pc, #20]	; (8000a60 <canMessageReceived+0x24>)
+ 8000a4c:	695b      	ldr	r3, [r3, #20]
+ 8000a4e:	4a04      	ldr	r2, [pc, #16]	; (8000a60 <canMessageReceived+0x24>)
+ 8000a50:	f483 6300 	eor.w	r3, r3, #2048	; 0x800
+ 8000a54:	6153      	str	r3, [r2, #20]
 }
- 8000a66:	bf00      	nop
- 8000a68:	46bd      	mov	sp, r7
- 8000a6a:	bc90      	pop	{r4, r7}
- 8000a6c:	b004      	add	sp, #16
- 8000a6e:	4770      	bx	lr
- 8000a70:	40020800 	.word	0x40020800
+ 8000a56:	bf00      	nop
+ 8000a58:	46bd      	mov	sp, r7
+ 8000a5a:	bc90      	pop	{r4, r7}
+ 8000a5c:	b004      	add	sp, #16
+ 8000a5e:	4770      	bx	lr
+ 8000a60:	40020800 	.word	0x40020800
 
-08000a74 <serverOffResponse>:
+08000a64 <serverOffResponse>:
 
 void serverOffResponse(uint8_t sck_nbr) {
- 8000a74:	b480      	push	{r7}
- 8000a76:	b083      	sub	sp, #12
- 8000a78:	af00      	add	r7, sp, #0
- 8000a7a:	4603      	mov	r3, r0
- 8000a7c:	71fb      	strb	r3, [r7, #7]
+ 8000a64:	b480      	push	{r7}
+ 8000a66:	b083      	sub	sp, #12
+ 8000a68:	af00      	add	r7, sp, #0
+ 8000a6a:	4603      	mov	r3, r0
+ 8000a6c:	71fb      	strb	r3, [r7, #7]
 	GPIOC->ODR |= GPIO_ODR_OD8;
- 8000a7e:	4b09      	ldr	r3, [pc, #36]	; (8000aa4 <serverOffResponse+0x30>)
- 8000a80:	695b      	ldr	r3, [r3, #20]
- 8000a82:	4a08      	ldr	r2, [pc, #32]	; (8000aa4 <serverOffResponse+0x30>)
- 8000a84:	f443 7380 	orr.w	r3, r3, #256	; 0x100
- 8000a88:	6153      	str	r3, [r2, #20]
+ 8000a6e:	4b09      	ldr	r3, [pc, #36]	; (8000a94 <serverOffResponse+0x30>)
+ 8000a70:	695b      	ldr	r3, [r3, #20]
+ 8000a72:	4a08      	ldr	r2, [pc, #32]	; (8000a94 <serverOffResponse+0x30>)
+ 8000a74:	f443 7380 	orr.w	r3, r3, #256	; 0x100
+ 8000a78:	6153      	str	r3, [r2, #20]
 	GPIOC->ODR &= ~GPIO_ODR_OD9;
- 8000a8a:	4b06      	ldr	r3, [pc, #24]	; (8000aa4 <serverOffResponse+0x30>)
- 8000a8c:	695b      	ldr	r3, [r3, #20]
- 8000a8e:	4a05      	ldr	r2, [pc, #20]	; (8000aa4 <serverOffResponse+0x30>)
- 8000a90:	f423 7300 	bic.w	r3, r3, #512	; 0x200
- 8000a94:	6153      	str	r3, [r2, #20]
+ 8000a7a:	4b06      	ldr	r3, [pc, #24]	; (8000a94 <serverOffResponse+0x30>)
+ 8000a7c:	695b      	ldr	r3, [r3, #20]
+ 8000a7e:	4a05      	ldr	r2, [pc, #20]	; (8000a94 <serverOffResponse+0x30>)
+ 8000a80:	f423 7300 	bic.w	r3, r3, #512	; 0x200
+ 8000a84:	6153      	str	r3, [r2, #20]
 }
- 8000a96:	bf00      	nop
- 8000a98:	370c      	adds	r7, #12
- 8000a9a:	46bd      	mov	sp, r7
- 8000a9c:	f85d 7b04 	ldr.w	r7, [sp], #4
- 8000aa0:	4770      	bx	lr
- 8000aa2:	bf00      	nop
- 8000aa4:	40020800 	.word	0x40020800
+ 8000a86:	bf00      	nop
+ 8000a88:	370c      	adds	r7, #12
+ 8000a8a:	46bd      	mov	sp, r7
+ 8000a8c:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 8000a90:	4770      	bx	lr
+ 8000a92:	bf00      	nop
+ 8000a94:	40020800 	.word	0x40020800
 
-08000aa8 <serverStartResponse>:
+08000a98 <serverStartResponse>:
 
 void serverStartResponse(uint8_t sck_nbr) {
- 8000aa8:	b480      	push	{r7}
- 8000aaa:	b083      	sub	sp, #12
- 8000aac:	af00      	add	r7, sp, #0
- 8000aae:	4603      	mov	r3, r0
- 8000ab0:	71fb      	strb	r3, [r7, #7]
+ 8000a98:	b480      	push	{r7}
+ 8000a9a:	b083      	sub	sp, #12
+ 8000a9c:	af00      	add	r7, sp, #0
+ 8000a9e:	4603      	mov	r3, r0
+ 8000aa0:	71fb      	strb	r3, [r7, #7]
 	GPIOC->ODR &= ~GPIO_ODR_OD8;
- 8000ab2:	4b09      	ldr	r3, [pc, #36]	; (8000ad8 <serverStartResponse+0x30>)
- 8000ab4:	695b      	ldr	r3, [r3, #20]
- 8000ab6:	4a08      	ldr	r2, [pc, #32]	; (8000ad8 <serverStartResponse+0x30>)
- 8000ab8:	f423 7380 	bic.w	r3, r3, #256	; 0x100
- 8000abc:	6153      	str	r3, [r2, #20]
+ 8000aa2:	4b09      	ldr	r3, [pc, #36]	; (8000ac8 <serverStartResponse+0x30>)
+ 8000aa4:	695b      	ldr	r3, [r3, #20]
+ 8000aa6:	4a08      	ldr	r2, [pc, #32]	; (8000ac8 <serverStartResponse+0x30>)
+ 8000aa8:	f423 7380 	bic.w	r3, r3, #256	; 0x100
+ 8000aac:	6153      	str	r3, [r2, #20]
 	GPIOC->ODR |= GPIO_ODR_OD9;
- 8000abe:	4b06      	ldr	r3, [pc, #24]	; (8000ad8 <serverStartResponse+0x30>)
- 8000ac0:	695b      	ldr	r3, [r3, #20]
- 8000ac2:	4a05      	ldr	r2, [pc, #20]	; (8000ad8 <serverStartResponse+0x30>)
- 8000ac4:	f443 7300 	orr.w	r3, r3, #512	; 0x200
- 8000ac8:	6153      	str	r3, [r2, #20]
+ 8000aae:	4b06      	ldr	r3, [pc, #24]	; (8000ac8 <serverStartResponse+0x30>)
+ 8000ab0:	695b      	ldr	r3, [r3, #20]
+ 8000ab2:	4a05      	ldr	r2, [pc, #20]	; (8000ac8 <serverStartResponse+0x30>)
+ 8000ab4:	f443 7300 	orr.w	r3, r3, #512	; 0x200
+ 8000ab8:	6153      	str	r3, [r2, #20]
 }
- 8000aca:	bf00      	nop
- 8000acc:	370c      	adds	r7, #12
- 8000ace:	46bd      	mov	sp, r7
- 8000ad0:	f85d 7b04 	ldr.w	r7, [sp], #4
- 8000ad4:	4770      	bx	lr
- 8000ad6:	bf00      	nop
- 8000ad8:	40020800 	.word	0x40020800
+ 8000aba:	bf00      	nop
+ 8000abc:	370c      	adds	r7, #12
+ 8000abe:	46bd      	mov	sp, r7
+ 8000ac0:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 8000ac4:	4770      	bx	lr
+ 8000ac6:	bf00      	nop
+ 8000ac8:	40020800 	.word	0x40020800
 
-08000adc <main>:
+08000acc <main>:
 #include "can.h"
 #include "control_sys.h"
 
 
 int main(void)
 {
- 8000adc:	b580      	push	{r7, lr}
- 8000ade:	b082      	sub	sp, #8
- 8000ae0:	af00      	add	r7, sp, #0
+ 8000acc:	b580      	push	{r7, lr}
+ 8000ace:	b082      	sub	sp, #8
+ 8000ad0:	af00      	add	r7, sp, #0
 
 	SystemRegisterCFG();			// Setup basic peripheral registers
- 8000ae2:	f7ff fe1f 	bl	8000724 <SystemRegisterCFG>
+ 8000ad2:	f7ff fe27 	bl	8000724 <SystemRegisterCFG>
 	canVariables(canMessages);		// Initialises CAN msg structures for the communication
- 8000ae6:	4825      	ldr	r0, [pc, #148]	; (8000b7c <main+0xa0>)
- 8000ae8:	f7ff ff02 	bl	80008f0 <canVariables>
+ 8000ad6:	4825      	ldr	r0, [pc, #148]	; (8000b6c <main+0xa0>)
+ 8000ad8:	f7ff ff0a 	bl	80008f0 <canVariables>
 
 	registerSocketCloseCallback(serverOffResponse);		// Register callback function for server close
- 8000aec:	4824      	ldr	r0, [pc, #144]	; (8000b80 <main+0xa4>)
- 8000aee:	f000 fd7f 	bl	80015f0 <registerSocketCloseCallback>
+ 8000adc:	4824      	ldr	r0, [pc, #144]	; (8000b70 <main+0xa4>)
+ 8000ade:	f000 fd7f 	bl	80015e0 <registerSocketCloseCallback>
 	registerSocketOpenCallback(serverStartResponse);	// Register callback function for server start (socket connected)
- 8000af2:	4824      	ldr	r0, [pc, #144]	; (8000b84 <main+0xa8>)
- 8000af4:	f000 fd6c 	bl	80015d0 <registerSocketOpenCallback>
+ 8000ae2:	4824      	ldr	r0, [pc, #144]	; (8000b74 <main+0xa8>)
+ 8000ae4:	f000 fd6c 	bl	80015c0 <registerSocketOpenCallback>
 	registerDataReceivedCallback(dataPacketReceived);	// Register callback function when data packets received
- 8000af8:	4823      	ldr	r0, [pc, #140]	; (8000b88 <main+0xac>)
- 8000afa:	f000 fd59 	bl	80015b0 <registerDataReceivedCallback>
+ 8000ae8:	4823      	ldr	r0, [pc, #140]	; (8000b78 <main+0xac>)
+ 8000aea:	f000 fd59 	bl	80015a0 <registerDataReceivedCallback>
 	registerCanMsgRxCallback(canMessageReceived);
- 8000afe:	4823      	ldr	r0, [pc, #140]	; (8000b8c <main+0xb0>)
- 8000b00:	f7ff fd40 	bl	8000584 <registerCanMsgRxCallback>
+ 8000aee:	4823      	ldr	r0, [pc, #140]	; (8000b7c <main+0xb0>)
+ 8000af0:	f7ff fd48 	bl	8000584 <registerCanMsgRxCallback>
 
 	GPIOC->ODR &= ~GPIO_ODR_OD9;						// Server RED LED ON
- 8000b04:	4b22      	ldr	r3, [pc, #136]	; (8000b90 <main+0xb4>)
- 8000b06:	695b      	ldr	r3, [r3, #20]
- 8000b08:	4a21      	ldr	r2, [pc, #132]	; (8000b90 <main+0xb4>)
- 8000b0a:	f423 7300 	bic.w	r3, r3, #512	; 0x200
- 8000b0e:	6153      	str	r3, [r2, #20]
+ 8000af4:	4b22      	ldr	r3, [pc, #136]	; (8000b80 <main+0xb4>)
+ 8000af6:	695b      	ldr	r3, [r3, #20]
+ 8000af8:	4a21      	ldr	r2, [pc, #132]	; (8000b80 <main+0xb4>)
+ 8000afa:	f423 7300 	bic.w	r3, r3, #512	; 0x200
+ 8000afe:	6153      	str	r3, [r2, #20]
 
 	W6100_INIT();										// Initialise W6100 with basic network information
- 8000b10:	f000 f95d 	bl	8000dce <W6100_INIT>
+ 8000b00:	f000 f95d 	bl	8000dbe <W6100_INIT>
 
-	/* Socket Configuration */
+	/* Socket 0 Configuration */
 	uint8_t txTotalSize = 0;
- 8000b14:	2300      	movs	r3, #0
- 8000b16:	71fb      	strb	r3, [r7, #7]
+ 8000b04:	2300      	movs	r3, #0
+ 8000b06:	71fb      	strb	r3, [r7, #7]
 	uint8_t rxTotalSize = 0;
- 8000b18:	2300      	movs	r3, #0
- 8000b1a:	71bb      	strb	r3, [r7, #6]
+ 8000b08:	2300      	movs	r3, #0
+ 8000b0a:	71bb      	strb	r3, [r7, #6]
 
 	for (uint8_t i=0; i<7; i++) {
- 8000b1c:	2300      	movs	r3, #0
- 8000b1e:	717b      	strb	r3, [r7, #5]
- 8000b20:	e016      	b.n	8000b50 <main+0x74>
-		SPI_W6100_WSOCK(Sn_TX_BSR, 0x04, i, REG);		// assign 4 Kbytes TX buffer per SOCKET
- 8000b22:	797a      	ldrb	r2, [r7, #5]
- 8000b24:	2301      	movs	r3, #1
- 8000b26:	2104      	movs	r1, #4
- 8000b28:	f44f 7000 	mov.w	r0, #512	; 0x200
- 8000b2c:	f000 f910 	bl	8000d50 <SPI_W6100_WSOCK>
-		SPI_W6100_WSOCK(Sn_RX_BSR, 0x04, i, REG);		// assign 4 Kbytes RX buffer per SOCKET
- 8000b30:	797a      	ldrb	r2, [r7, #5]
- 8000b32:	2301      	movs	r3, #1
- 8000b34:	2104      	movs	r1, #4
- 8000b36:	f44f 7008 	mov.w	r0, #544	; 0x220
- 8000b3a:	f000 f909 	bl	8000d50 <SPI_W6100_WSOCK>
-		txTotalSize += 0x04;
- 8000b3e:	79fb      	ldrb	r3, [r7, #7]
- 8000b40:	3304      	adds	r3, #4
- 8000b42:	71fb      	strb	r3, [r7, #7]
-		rxTotalSize += 0x04;
- 8000b44:	79bb      	ldrb	r3, [r7, #6]
- 8000b46:	3304      	adds	r3, #4
- 8000b48:	71bb      	strb	r3, [r7, #6]
+ 8000b0c:	2300      	movs	r3, #0
+ 8000b0e:	717b      	strb	r3, [r7, #5]
+ 8000b10:	e016      	b.n	8000b40 <main+0x74>
+		SPI_W6100_WSOCK(Sn_TX_BSR, 0x08, i, REG);		// assign 4 Kbytes TX buffer per SOCKET
+ 8000b12:	797a      	ldrb	r2, [r7, #5]
+ 8000b14:	2301      	movs	r3, #1
+ 8000b16:	2108      	movs	r1, #8
+ 8000b18:	f44f 7000 	mov.w	r0, #512	; 0x200
+ 8000b1c:	f000 f910 	bl	8000d40 <SPI_W6100_WSOCK>
+		SPI_W6100_WSOCK(Sn_RX_BSR, 0x08, i, REG);		// assign 4 Kbytes RX buffer per SOCKET
+ 8000b20:	797a      	ldrb	r2, [r7, #5]
+ 8000b22:	2301      	movs	r3, #1
+ 8000b24:	2108      	movs	r1, #8
+ 8000b26:	f44f 7008 	mov.w	r0, #544	; 0x220
+ 8000b2a:	f000 f909 	bl	8000d40 <SPI_W6100_WSOCK>
+		txTotalSize += 0x08;
+ 8000b2e:	79fb      	ldrb	r3, [r7, #7]
+ 8000b30:	3308      	adds	r3, #8
+ 8000b32:	71fb      	strb	r3, [r7, #7]
+		rxTotalSize += 0x08;
+ 8000b34:	79bb      	ldrb	r3, [r7, #6]
+ 8000b36:	3308      	adds	r3, #8
+ 8000b38:	71bb      	strb	r3, [r7, #6]
 	for (uint8_t i=0; i<7; i++) {
- 8000b4a:	797b      	ldrb	r3, [r7, #5]
- 8000b4c:	3301      	adds	r3, #1
- 8000b4e:	717b      	strb	r3, [r7, #5]
- 8000b50:	797b      	ldrb	r3, [r7, #5]
- 8000b52:	2b06      	cmp	r3, #6
- 8000b54:	d9e5      	bls.n	8000b22 <main+0x46>
+ 8000b3a:	797b      	ldrb	r3, [r7, #5]
+ 8000b3c:	3301      	adds	r3, #1
+ 8000b3e:	717b      	strb	r3, [r7, #5]
+ 8000b40:	797b      	ldrb	r3, [r7, #5]
+ 8000b42:	2b06      	cmp	r3, #6
+ 8000b44:	d9e5      	bls.n	8000b12 <main+0x46>
 	}
 
-	destination_adr = W6100_OpenTCPSocket(0, 5000);		// Open TCP socket 0 on port 5000 and return its destination address
- 8000b56:	f241 3188 	movw	r1, #5000	; 0x1388
- 8000b5a:	2000      	movs	r0, #0
- 8000b5c:	f000 faf0 	bl	8001140 <W6100_OpenTCPSocket>
- 8000b60:	4602      	mov	r2, r0
- 8000b62:	4b0c      	ldr	r3, [pc, #48]	; (8000b94 <main+0xb8>)
- 8000b64:	601a      	str	r2, [r3, #0]
+	socket_dest_adr[0] = W6100_OpenTCPSocket(0, 5000);		// Open TCP socket 0 on port 5000 and return its destination address
+ 8000b46:	f241 3188 	movw	r1, #5000	; 0x1388
+ 8000b4a:	2000      	movs	r0, #0
+ 8000b4c:	f000 faf0 	bl	8001130 <W6100_OpenTCPSocket>
+ 8000b50:	4602      	mov	r2, r0
+ 8000b52:	4b0c      	ldr	r3, [pc, #48]	; (8000b84 <main+0xb8>)
+ 8000b54:	601a      	str	r2, [r3, #0]
 
 
 	CanInit();
- 8000b66:	f7ff fb57 	bl	8000218 <CanInit>
+ 8000b56:	f7ff fb5f 	bl	8000218 <CanInit>
 
 	Can_Set_Filter(0x03, STANDARD_FORMAT);
- 8000b6a:	2100      	movs	r1, #0
- 8000b6c:	2003      	movs	r0, #3
- 8000b6e:	f7ff fc7d 	bl	800046c <Can_Set_Filter>
+ 8000b5a:	2100      	movs	r1, #0
+ 8000b5c:	2003      	movs	r0, #3
+ 8000b5e:	f7ff fc85 	bl	800046c <Can_Set_Filter>
 	Can_Set_Filter(0x04, STANDARD_FORMAT);
- 8000b72:	2100      	movs	r1, #0
- 8000b74:	2004      	movs	r0, #4
- 8000b76:	f7ff fc79 	bl	800046c <Can_Set_Filter>
+ 8000b62:	2100      	movs	r1, #0
+ 8000b64:	2004      	movs	r0, #4
+ 8000b66:	f7ff fc81 	bl	800046c <Can_Set_Filter>
 
 
 	/* MAIN Loop */
 	while (1) {
- 8000b7a:	e7fe      	b.n	8000b7a <main+0x9e>
- 8000b7c:	20000038 	.word	0x20000038
- 8000b80:	08000a75 	.word	0x08000a75
- 8000b84:	08000aa9 	.word	0x08000aa9
- 8000b88:	08000969 	.word	0x08000969
- 8000b8c:	08000a4d 	.word	0x08000a4d
- 8000b90:	40020800 	.word	0x40020800
- 8000b94:	20000090 	.word	0x20000090
+ 8000b6a:	e7fe      	b.n	8000b6a <main+0x9e>
+ 8000b6c:	20000038 	.word	0x20000038
+ 8000b70:	08000a65 	.word	0x08000a65
+ 8000b74:	08000a99 	.word	0x08000a99
+ 8000b78:	08000969 	.word	0x08000969
+ 8000b7c:	08000a3d 	.word	0x08000a3d
+ 8000b80:	40020800 	.word	0x40020800
+ 8000b84:	20000068 	.word	0x20000068
 
-08000b98 <SystemInit>:
+08000b88 <SystemInit>:
   *         configuration.
   * @param  None
   * @retval None
   */
 void SystemInit(void)
 {
- 8000b98:	b480      	push	{r7}
- 8000b9a:	af00      	add	r7, sp, #0
+ 8000b88:	b480      	push	{r7}
+ 8000b8a:	af00      	add	r7, sp, #0
   /* FPU settings ------------------------------------------------------------*/
   #if (__FPU_PRESENT == 1) && (__FPU_USED == 1)
     SCB->CPACR |= ((3UL << 10*2)|(3UL << 11*2));  /* set CP10 and CP11 Full Access */
- 8000b9c:	4b08      	ldr	r3, [pc, #32]	; (8000bc0 <SystemInit+0x28>)
- 8000b9e:	f8d3 3088 	ldr.w	r3, [r3, #136]	; 0x88
- 8000ba2:	4a07      	ldr	r2, [pc, #28]	; (8000bc0 <SystemInit+0x28>)
- 8000ba4:	f443 0370 	orr.w	r3, r3, #15728640	; 0xf00000
- 8000ba8:	f8c2 3088 	str.w	r3, [r2, #136]	; 0x88
+ 8000b8c:	4b08      	ldr	r3, [pc, #32]	; (8000bb0 <SystemInit+0x28>)
+ 8000b8e:	f8d3 3088 	ldr.w	r3, [r3, #136]	; 0x88
+ 8000b92:	4a07      	ldr	r2, [pc, #28]	; (8000bb0 <SystemInit+0x28>)
+ 8000b94:	f443 0370 	orr.w	r3, r3, #15728640	; 0xf00000
+ 8000b98:	f8c2 3088 	str.w	r3, [r2, #136]	; 0x88
 
   /* Configure the Vector Table location add offset address ------------------*/
 #ifdef VECT_TAB_SRAM
   SCB->VTOR = SRAM_BASE | VECT_TAB_OFFSET; /* Vector Table Relocation in Internal SRAM */
 #else
   SCB->VTOR = FLASH_BASE | VECT_TAB_OFFSET; /* Vector Table Relocation in Internal FLASH */
- 8000bac:	4b04      	ldr	r3, [pc, #16]	; (8000bc0 <SystemInit+0x28>)
- 8000bae:	f04f 6200 	mov.w	r2, #134217728	; 0x8000000
- 8000bb2:	609a      	str	r2, [r3, #8]
+ 8000b9c:	4b04      	ldr	r3, [pc, #16]	; (8000bb0 <SystemInit+0x28>)
+ 8000b9e:	f04f 6200 	mov.w	r2, #134217728	; 0x8000000
+ 8000ba2:	609a      	str	r2, [r3, #8]
 #endif
 }
- 8000bb4:	bf00      	nop
- 8000bb6:	46bd      	mov	sp, r7
- 8000bb8:	f85d 7b04 	ldr.w	r7, [sp], #4
- 8000bbc:	4770      	bx	lr
- 8000bbe:	bf00      	nop
- 8000bc0:	e000ed00 	.word	0xe000ed00
+ 8000ba4:	bf00      	nop
+ 8000ba6:	46bd      	mov	sp, r7
+ 8000ba8:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 8000bac:	4770      	bx	lr
+ 8000bae:	bf00      	nop
+ 8000bb0:	e000ed00 	.word	0xe000ed00
 
-08000bc4 <SPI_Eth_SS>:
-
-
+08000bb4 <SPI_Eth_SS>:
+ */
+#include "w6100.h"
 
 
 
 void SPI_Eth_SS(uint8_t state) {
- 8000bc4:	b480      	push	{r7}
- 8000bc6:	b083      	sub	sp, #12
- 8000bc8:	af00      	add	r7, sp, #0
- 8000bca:	4603      	mov	r3, r0
- 8000bcc:	71fb      	strb	r3, [r7, #7]
+ 8000bb4:	b480      	push	{r7}
+ 8000bb6:	b083      	sub	sp, #12
+ 8000bb8:	af00      	add	r7, sp, #0
+ 8000bba:	4603      	mov	r3, r0
+ 8000bbc:	71fb      	strb	r3, [r7, #7]
 	if (state) {
- 8000bce:	79fb      	ldrb	r3, [r7, #7]
- 8000bd0:	2b00      	cmp	r3, #0
- 8000bd2:	d006      	beq.n	8000be2 <SPI_Eth_SS+0x1e>
+ 8000bbe:	79fb      	ldrb	r3, [r7, #7]
+ 8000bc0:	2b00      	cmp	r3, #0
+ 8000bc2:	d006      	beq.n	8000bd2 <SPI_Eth_SS+0x1e>
 		GPIOA->ODR &= ~GPIO_ODR_OD4;
- 8000bd4:	4b0a      	ldr	r3, [pc, #40]	; (8000c00 <SPI_Eth_SS+0x3c>)
- 8000bd6:	695b      	ldr	r3, [r3, #20]
- 8000bd8:	4a09      	ldr	r2, [pc, #36]	; (8000c00 <SPI_Eth_SS+0x3c>)
- 8000bda:	f023 0310 	bic.w	r3, r3, #16
- 8000bde:	6153      	str	r3, [r2, #20]
+ 8000bc4:	4b0a      	ldr	r3, [pc, #40]	; (8000bf0 <SPI_Eth_SS+0x3c>)
+ 8000bc6:	695b      	ldr	r3, [r3, #20]
+ 8000bc8:	4a09      	ldr	r2, [pc, #36]	; (8000bf0 <SPI_Eth_SS+0x3c>)
+ 8000bca:	f023 0310 	bic.w	r3, r3, #16
+ 8000bce:	6153      	str	r3, [r2, #20]
 	}
 	else if (!state) {
 		GPIOA->ODR |= GPIO_ODR_OD4;
 	}
 }
- 8000be0:	e008      	b.n	8000bf4 <SPI_Eth_SS+0x30>
+ 8000bd0:	e008      	b.n	8000be4 <SPI_Eth_SS+0x30>
 	else if (!state) {
- 8000be2:	79fb      	ldrb	r3, [r7, #7]
- 8000be4:	2b00      	cmp	r3, #0
- 8000be6:	d105      	bne.n	8000bf4 <SPI_Eth_SS+0x30>
+ 8000bd2:	79fb      	ldrb	r3, [r7, #7]
+ 8000bd4:	2b00      	cmp	r3, #0
+ 8000bd6:	d105      	bne.n	8000be4 <SPI_Eth_SS+0x30>
 		GPIOA->ODR |= GPIO_ODR_OD4;
- 8000be8:	4b05      	ldr	r3, [pc, #20]	; (8000c00 <SPI_Eth_SS+0x3c>)
- 8000bea:	695b      	ldr	r3, [r3, #20]
- 8000bec:	4a04      	ldr	r2, [pc, #16]	; (8000c00 <SPI_Eth_SS+0x3c>)
- 8000bee:	f043 0310 	orr.w	r3, r3, #16
- 8000bf2:	6153      	str	r3, [r2, #20]
+ 8000bd8:	4b05      	ldr	r3, [pc, #20]	; (8000bf0 <SPI_Eth_SS+0x3c>)
+ 8000bda:	695b      	ldr	r3, [r3, #20]
+ 8000bdc:	4a04      	ldr	r2, [pc, #16]	; (8000bf0 <SPI_Eth_SS+0x3c>)
+ 8000bde:	f043 0310 	orr.w	r3, r3, #16
+ 8000be2:	6153      	str	r3, [r2, #20]
 }
- 8000bf4:	bf00      	nop
- 8000bf6:	370c      	adds	r7, #12
- 8000bf8:	46bd      	mov	sp, r7
- 8000bfa:	f85d 7b04 	ldr.w	r7, [sp], #4
- 8000bfe:	4770      	bx	lr
- 8000c00:	40020000 	.word	0x40020000
+ 8000be4:	bf00      	nop
+ 8000be6:	370c      	adds	r7, #12
+ 8000be8:	46bd      	mov	sp, r7
+ 8000bea:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 8000bee:	4770      	bx	lr
+ 8000bf0:	40020000 	.word	0x40020000
 
-08000c04 <SPI_Eth_RT>:
+08000bf4 <SPI_Eth_RT>:
 
 uint8_t SPI_Eth_RT(uint8_t data) {
- 8000c04:	b480      	push	{r7}
- 8000c06:	b083      	sub	sp, #12
- 8000c08:	af00      	add	r7, sp, #0
- 8000c0a:	4603      	mov	r3, r0
- 8000c0c:	71fb      	strb	r3, [r7, #7]
+ 8000bf4:	b480      	push	{r7}
+ 8000bf6:	b083      	sub	sp, #12
+ 8000bf8:	af00      	add	r7, sp, #0
+ 8000bfa:	4603      	mov	r3, r0
+ 8000bfc:	71fb      	strb	r3, [r7, #7]
 	while(!(SPI1->SR & SPI_SR_TXE));	// Wait for Tx buffer empty
- 8000c0e:	bf00      	nop
- 8000c10:	4b0c      	ldr	r3, [pc, #48]	; (8000c44 <SPI_Eth_RT+0x40>)
- 8000c12:	689b      	ldr	r3, [r3, #8]
- 8000c14:	f003 0302 	and.w	r3, r3, #2
- 8000c18:	2b00      	cmp	r3, #0
- 8000c1a:	d0f9      	beq.n	8000c10 <SPI_Eth_RT+0xc>
+ 8000bfe:	bf00      	nop
+ 8000c00:	4b0c      	ldr	r3, [pc, #48]	; (8000c34 <SPI_Eth_RT+0x40>)
+ 8000c02:	689b      	ldr	r3, [r3, #8]
+ 8000c04:	f003 0302 	and.w	r3, r3, #2
+ 8000c08:	2b00      	cmp	r3, #0
+ 8000c0a:	d0f9      	beq.n	8000c00 <SPI_Eth_RT+0xc>
 	SPI1->DR = data;
- 8000c1c:	4a09      	ldr	r2, [pc, #36]	; (8000c44 <SPI_Eth_RT+0x40>)
- 8000c1e:	79fb      	ldrb	r3, [r7, #7]
- 8000c20:	60d3      	str	r3, [r2, #12]
+ 8000c0c:	4a09      	ldr	r2, [pc, #36]	; (8000c34 <SPI_Eth_RT+0x40>)
+ 8000c0e:	79fb      	ldrb	r3, [r7, #7]
+ 8000c10:	60d3      	str	r3, [r2, #12]
 	while(!(SPI1->SR & SPI_SR_RXNE));	// Wait for Rx buffer not empty
- 8000c22:	bf00      	nop
- 8000c24:	4b07      	ldr	r3, [pc, #28]	; (8000c44 <SPI_Eth_RT+0x40>)
- 8000c26:	689b      	ldr	r3, [r3, #8]
- 8000c28:	f003 0301 	and.w	r3, r3, #1
- 8000c2c:	2b00      	cmp	r3, #0
- 8000c2e:	d0f9      	beq.n	8000c24 <SPI_Eth_RT+0x20>
+ 8000c12:	bf00      	nop
+ 8000c14:	4b07      	ldr	r3, [pc, #28]	; (8000c34 <SPI_Eth_RT+0x40>)
+ 8000c16:	689b      	ldr	r3, [r3, #8]
+ 8000c18:	f003 0301 	and.w	r3, r3, #1
+ 8000c1c:	2b00      	cmp	r3, #0
+ 8000c1e:	d0f9      	beq.n	8000c14 <SPI_Eth_RT+0x20>
 	data = SPI1->DR;
- 8000c30:	4b04      	ldr	r3, [pc, #16]	; (8000c44 <SPI_Eth_RT+0x40>)
- 8000c32:	68db      	ldr	r3, [r3, #12]
- 8000c34:	71fb      	strb	r3, [r7, #7]
+ 8000c20:	4b04      	ldr	r3, [pc, #16]	; (8000c34 <SPI_Eth_RT+0x40>)
+ 8000c22:	68db      	ldr	r3, [r3, #12]
+ 8000c24:	71fb      	strb	r3, [r7, #7]
 	return data;
- 8000c36:	79fb      	ldrb	r3, [r7, #7]
+ 8000c26:	79fb      	ldrb	r3, [r7, #7]
 }
- 8000c38:	4618      	mov	r0, r3
- 8000c3a:	370c      	adds	r7, #12
- 8000c3c:	46bd      	mov	sp, r7
- 8000c3e:	f85d 7b04 	ldr.w	r7, [sp], #4
- 8000c42:	4770      	bx	lr
- 8000c44:	40013000 	.word	0x40013000
+ 8000c28:	4618      	mov	r0, r3
+ 8000c2a:	370c      	adds	r7, #12
+ 8000c2c:	46bd      	mov	sp, r7
+ 8000c2e:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 8000c32:	4770      	bx	lr
+ 8000c34:	40013000 	.word	0x40013000
 
-08000c48 <SPI_W6100_RCR>:
+08000c38 <SPI_W6100_RCR>:
 
 uint8_t SPI_W6100_RCR(uint16_t adr) {
- 8000c48:	b580      	push	{r7, lr}
- 8000c4a:	b084      	sub	sp, #16
- 8000c4c:	af00      	add	r7, sp, #0
- 8000c4e:	4603      	mov	r3, r0
- 8000c50:	80fb      	strh	r3, [r7, #6]
+ 8000c38:	b580      	push	{r7, lr}
+ 8000c3a:	b084      	sub	sp, #16
+ 8000c3c:	af00      	add	r7, sp, #0
+ 8000c3e:	4603      	mov	r3, r0
+ 8000c40:	80fb      	strh	r3, [r7, #6]
 	/* See Page 76 - W6100 datasheet */
 	uint8_t dat;
 	SPI_Eth_SS(ON);			// NSS Slave Enable
- 8000c52:	2001      	movs	r0, #1
- 8000c54:	f7ff ffb6 	bl	8000bc4 <SPI_Eth_SS>
+ 8000c42:	2001      	movs	r0, #1
+ 8000c44:	f7ff ffb6 	bl	8000bb4 <SPI_Eth_SS>
 	SPI_Eth_RT(adr>>8);		// Send upper address half
- 8000c58:	88fb      	ldrh	r3, [r7, #6]
- 8000c5a:	0a1b      	lsrs	r3, r3, #8
- 8000c5c:	b29b      	uxth	r3, r3
- 8000c5e:	b2db      	uxtb	r3, r3
- 8000c60:	4618      	mov	r0, r3
- 8000c62:	f7ff ffcf 	bl	8000c04 <SPI_Eth_RT>
+ 8000c48:	88fb      	ldrh	r3, [r7, #6]
+ 8000c4a:	0a1b      	lsrs	r3, r3, #8
+ 8000c4c:	b29b      	uxth	r3, r3
+ 8000c4e:	b2db      	uxtb	r3, r3
+ 8000c50:	4618      	mov	r0, r3
+ 8000c52:	f7ff ffcf 	bl	8000bf4 <SPI_Eth_RT>
 	SPI_Eth_RT(adr);		// Send lower address half
- 8000c66:	88fb      	ldrh	r3, [r7, #6]
- 8000c68:	b2db      	uxtb	r3, r3
- 8000c6a:	4618      	mov	r0, r3
- 8000c6c:	f7ff ffca 	bl	8000c04 <SPI_Eth_RT>
+ 8000c56:	88fb      	ldrh	r3, [r7, #6]
+ 8000c58:	b2db      	uxtb	r3, r3
+ 8000c5a:	4618      	mov	r0, r3
+ 8000c5c:	f7ff ffca 	bl	8000bf4 <SPI_Eth_RT>
 	SPI_Eth_RT(0x00);		// Send Control Byte	[CR, Read, Variable Length Data Mode]
- 8000c70:	2000      	movs	r0, #0
- 8000c72:	f7ff ffc7 	bl	8000c04 <SPI_Eth_RT>
+ 8000c60:	2000      	movs	r0, #0
+ 8000c62:	f7ff ffc7 	bl	8000bf4 <SPI_Eth_RT>
 	dat = SPI_Eth_RT(0x00);	// Send garbage data to read the Common Register
- 8000c76:	2000      	movs	r0, #0
- 8000c78:	f7ff ffc4 	bl	8000c04 <SPI_Eth_RT>
- 8000c7c:	4603      	mov	r3, r0
- 8000c7e:	73fb      	strb	r3, [r7, #15]
+ 8000c66:	2000      	movs	r0, #0
+ 8000c68:	f7ff ffc4 	bl	8000bf4 <SPI_Eth_RT>
+ 8000c6c:	4603      	mov	r3, r0
+ 8000c6e:	73fb      	strb	r3, [r7, #15]
 	SPI_Eth_SS(OFF);		// NSS Slave Disable
- 8000c80:	2000      	movs	r0, #0
- 8000c82:	f7ff ff9f 	bl	8000bc4 <SPI_Eth_SS>
+ 8000c70:	2000      	movs	r0, #0
+ 8000c72:	f7ff ff9f 	bl	8000bb4 <SPI_Eth_SS>
 	return dat;
- 8000c86:	7bfb      	ldrb	r3, [r7, #15]
+ 8000c76:	7bfb      	ldrb	r3, [r7, #15]
 }
- 8000c88:	4618      	mov	r0, r3
- 8000c8a:	3710      	adds	r7, #16
- 8000c8c:	46bd      	mov	sp, r7
- 8000c8e:	bd80      	pop	{r7, pc}
+ 8000c78:	4618      	mov	r0, r3
+ 8000c7a:	3710      	adds	r7, #16
+ 8000c7c:	46bd      	mov	sp, r7
+ 8000c7e:	bd80      	pop	{r7, pc}
 
-08000c90 <SPI_W6100_WCR>:
+08000c80 <SPI_W6100_WCR>:
 
 void SPI_W6100_WCR(uint16_t adr, uint8_t val) {
- 8000c90:	b580      	push	{r7, lr}
- 8000c92:	b082      	sub	sp, #8
- 8000c94:	af00      	add	r7, sp, #0
- 8000c96:	4603      	mov	r3, r0
- 8000c98:	460a      	mov	r2, r1
- 8000c9a:	80fb      	strh	r3, [r7, #6]
- 8000c9c:	4613      	mov	r3, r2
- 8000c9e:	717b      	strb	r3, [r7, #5]
+ 8000c80:	b580      	push	{r7, lr}
+ 8000c82:	b082      	sub	sp, #8
+ 8000c84:	af00      	add	r7, sp, #0
+ 8000c86:	4603      	mov	r3, r0
+ 8000c88:	460a      	mov	r2, r1
+ 8000c8a:	80fb      	strh	r3, [r7, #6]
+ 8000c8c:	4613      	mov	r3, r2
+ 8000c8e:	717b      	strb	r3, [r7, #5]
 	/* See Page 76 - W6100 datasheet */
 	SPI_Eth_SS(ON);			// NSS Slave Enable
- 8000ca0:	2001      	movs	r0, #1
- 8000ca2:	f7ff ff8f 	bl	8000bc4 <SPI_Eth_SS>
+ 8000c90:	2001      	movs	r0, #1
+ 8000c92:	f7ff ff8f 	bl	8000bb4 <SPI_Eth_SS>
 	SPI_Eth_RT(adr>>8);		// Send upper address half
- 8000ca6:	88fb      	ldrh	r3, [r7, #6]
- 8000ca8:	0a1b      	lsrs	r3, r3, #8
- 8000caa:	b29b      	uxth	r3, r3
- 8000cac:	b2db      	uxtb	r3, r3
- 8000cae:	4618      	mov	r0, r3
- 8000cb0:	f7ff ffa8 	bl	8000c04 <SPI_Eth_RT>
+ 8000c96:	88fb      	ldrh	r3, [r7, #6]
+ 8000c98:	0a1b      	lsrs	r3, r3, #8
+ 8000c9a:	b29b      	uxth	r3, r3
+ 8000c9c:	b2db      	uxtb	r3, r3
+ 8000c9e:	4618      	mov	r0, r3
+ 8000ca0:	f7ff ffa8 	bl	8000bf4 <SPI_Eth_RT>
 	SPI_Eth_RT(adr);		// Send lower address half
- 8000cb4:	88fb      	ldrh	r3, [r7, #6]
- 8000cb6:	b2db      	uxtb	r3, r3
- 8000cb8:	4618      	mov	r0, r3
- 8000cba:	f7ff ffa3 	bl	8000c04 <SPI_Eth_RT>
+ 8000ca4:	88fb      	ldrh	r3, [r7, #6]
+ 8000ca6:	b2db      	uxtb	r3, r3
+ 8000ca8:	4618      	mov	r0, r3
+ 8000caa:	f7ff ffa3 	bl	8000bf4 <SPI_Eth_RT>
 	SPI_Eth_RT(0x04);		// Send Control Byte	[CR, Write, Variable Length Data Mode]
- 8000cbe:	2004      	movs	r0, #4
- 8000cc0:	f7ff ffa0 	bl	8000c04 <SPI_Eth_RT>
+ 8000cae:	2004      	movs	r0, #4
+ 8000cb0:	f7ff ffa0 	bl	8000bf4 <SPI_Eth_RT>
 	SPI_Eth_RT(val);		// Send val to be written in the register
- 8000cc4:	797b      	ldrb	r3, [r7, #5]
- 8000cc6:	4618      	mov	r0, r3
- 8000cc8:	f7ff ff9c 	bl	8000c04 <SPI_Eth_RT>
+ 8000cb4:	797b      	ldrb	r3, [r7, #5]
+ 8000cb6:	4618      	mov	r0, r3
+ 8000cb8:	f7ff ff9c 	bl	8000bf4 <SPI_Eth_RT>
 	SPI_Eth_SS(OFF);
- 8000ccc:	2000      	movs	r0, #0
- 8000cce:	f7ff ff79 	bl	8000bc4 <SPI_Eth_SS>
+ 8000cbc:	2000      	movs	r0, #0
+ 8000cbe:	f7ff ff79 	bl	8000bb4 <SPI_Eth_SS>
 }
- 8000cd2:	bf00      	nop
- 8000cd4:	3708      	adds	r7, #8
- 8000cd6:	46bd      	mov	sp, r7
- 8000cd8:	bd80      	pop	{r7, pc}
+ 8000cc2:	bf00      	nop
+ 8000cc4:	3708      	adds	r7, #8
+ 8000cc6:	46bd      	mov	sp, r7
+ 8000cc8:	bd80      	pop	{r7, pc}
 
-08000cda <SPI_W6100_RSOCK>:
+08000cca <SPI_W6100_RSOCK>:
 
 uint8_t SPI_W6100_RSOCK(uint16_t adr, uint8_t socket_nbr, uint8_t block) {
- 8000cda:	b580      	push	{r7, lr}
- 8000cdc:	b084      	sub	sp, #16
- 8000cde:	af00      	add	r7, sp, #0
- 8000ce0:	4603      	mov	r3, r0
- 8000ce2:	80fb      	strh	r3, [r7, #6]
- 8000ce4:	460b      	mov	r3, r1
- 8000ce6:	717b      	strb	r3, [r7, #5]
- 8000ce8:	4613      	mov	r3, r2
- 8000cea:	713b      	strb	r3, [r7, #4]
+ 8000cca:	b580      	push	{r7, lr}
+ 8000ccc:	b084      	sub	sp, #16
+ 8000cce:	af00      	add	r7, sp, #0
+ 8000cd0:	4603      	mov	r3, r0
+ 8000cd2:	80fb      	strh	r3, [r7, #6]
+ 8000cd4:	460b      	mov	r3, r1
+ 8000cd6:	717b      	strb	r3, [r7, #5]
+ 8000cd8:	4613      	mov	r3, r2
+ 8000cda:	713b      	strb	r3, [r7, #4]
 	uint8_t dat;
 	uint8_t cb_temp = 0x00;
- 8000cec:	2300      	movs	r3, #0
- 8000cee:	73fb      	strb	r3, [r7, #15]
+ 8000cdc:	2300      	movs	r3, #0
+ 8000cde:	73fb      	strb	r3, [r7, #15]
 	cb_temp |= (socket_nbr << 5);
- 8000cf0:	797b      	ldrb	r3, [r7, #5]
- 8000cf2:	015b      	lsls	r3, r3, #5
+ 8000ce0:	797b      	ldrb	r3, [r7, #5]
+ 8000ce2:	015b      	lsls	r3, r3, #5
+ 8000ce4:	b25a      	sxtb	r2, r3
+ 8000ce6:	f997 300f 	ldrsb.w	r3, [r7, #15]
+ 8000cea:	4313      	orrs	r3, r2
+ 8000cec:	b25b      	sxtb	r3, r3
+ 8000cee:	73fb      	strb	r3, [r7, #15]
+	cb_temp |= (block << 3);
+ 8000cf0:	793b      	ldrb	r3, [r7, #4]
+ 8000cf2:	00db      	lsls	r3, r3, #3
  8000cf4:	b25a      	sxtb	r2, r3
  8000cf6:	f997 300f 	ldrsb.w	r3, [r7, #15]
  8000cfa:	4313      	orrs	r3, r2
  8000cfc:	b25b      	sxtb	r3, r3
  8000cfe:	73fb      	strb	r3, [r7, #15]
-	cb_temp |= (block << 3);
- 8000d00:	793b      	ldrb	r3, [r7, #4]
- 8000d02:	00db      	lsls	r3, r3, #3
- 8000d04:	b25a      	sxtb	r2, r3
- 8000d06:	f997 300f 	ldrsb.w	r3, [r7, #15]
- 8000d0a:	4313      	orrs	r3, r2
- 8000d0c:	b25b      	sxtb	r3, r3
- 8000d0e:	73fb      	strb	r3, [r7, #15]
 	SPI_Eth_SS(ON);			// NSS Slave Enable
- 8000d10:	2001      	movs	r0, #1
- 8000d12:	f7ff ff57 	bl	8000bc4 <SPI_Eth_SS>
+ 8000d00:	2001      	movs	r0, #1
+ 8000d02:	f7ff ff57 	bl	8000bb4 <SPI_Eth_SS>
 	SPI_Eth_RT(adr>>8);		// Send upper address half
- 8000d16:	88fb      	ldrh	r3, [r7, #6]
- 8000d18:	0a1b      	lsrs	r3, r3, #8
- 8000d1a:	b29b      	uxth	r3, r3
- 8000d1c:	b2db      	uxtb	r3, r3
- 8000d1e:	4618      	mov	r0, r3
- 8000d20:	f7ff ff70 	bl	8000c04 <SPI_Eth_RT>
+ 8000d06:	88fb      	ldrh	r3, [r7, #6]
+ 8000d08:	0a1b      	lsrs	r3, r3, #8
+ 8000d0a:	b29b      	uxth	r3, r3
+ 8000d0c:	b2db      	uxtb	r3, r3
+ 8000d0e:	4618      	mov	r0, r3
+ 8000d10:	f7ff ff70 	bl	8000bf4 <SPI_Eth_RT>
 	SPI_Eth_RT(adr);		// Send lower address half
- 8000d24:	88fb      	ldrh	r3, [r7, #6]
- 8000d26:	b2db      	uxtb	r3, r3
- 8000d28:	4618      	mov	r0, r3
- 8000d2a:	f7ff ff6b 	bl	8000c04 <SPI_Eth_RT>
+ 8000d14:	88fb      	ldrh	r3, [r7, #6]
+ 8000d16:	b2db      	uxtb	r3, r3
+ 8000d18:	4618      	mov	r0, r3
+ 8000d1a:	f7ff ff6b 	bl	8000bf4 <SPI_Eth_RT>
 	SPI_Eth_RT(cb_temp);	// Send Control Byte
- 8000d2e:	7bfb      	ldrb	r3, [r7, #15]
- 8000d30:	4618      	mov	r0, r3
- 8000d32:	f7ff ff67 	bl	8000c04 <SPI_Eth_RT>
+ 8000d1e:	7bfb      	ldrb	r3, [r7, #15]
+ 8000d20:	4618      	mov	r0, r3
+ 8000d22:	f7ff ff67 	bl	8000bf4 <SPI_Eth_RT>
 	dat = SPI_Eth_RT(0x00);		// Send garbage data to read the Common Register
- 8000d36:	2000      	movs	r0, #0
- 8000d38:	f7ff ff64 	bl	8000c04 <SPI_Eth_RT>
- 8000d3c:	4603      	mov	r3, r0
- 8000d3e:	73bb      	strb	r3, [r7, #14]
+ 8000d26:	2000      	movs	r0, #0
+ 8000d28:	f7ff ff64 	bl	8000bf4 <SPI_Eth_RT>
+ 8000d2c:	4603      	mov	r3, r0
+ 8000d2e:	73bb      	strb	r3, [r7, #14]
 	SPI_Eth_SS(OFF);
- 8000d40:	2000      	movs	r0, #0
- 8000d42:	f7ff ff3f 	bl	8000bc4 <SPI_Eth_SS>
+ 8000d30:	2000      	movs	r0, #0
+ 8000d32:	f7ff ff3f 	bl	8000bb4 <SPI_Eth_SS>
 	return dat;
- 8000d46:	7bbb      	ldrb	r3, [r7, #14]
+ 8000d36:	7bbb      	ldrb	r3, [r7, #14]
 }
- 8000d48:	4618      	mov	r0, r3
- 8000d4a:	3710      	adds	r7, #16
- 8000d4c:	46bd      	mov	sp, r7
- 8000d4e:	bd80      	pop	{r7, pc}
+ 8000d38:	4618      	mov	r0, r3
+ 8000d3a:	3710      	adds	r7, #16
+ 8000d3c:	46bd      	mov	sp, r7
+ 8000d3e:	bd80      	pop	{r7, pc}
 
-08000d50 <SPI_W6100_WSOCK>:
+08000d40 <SPI_W6100_WSOCK>:
 
 void SPI_W6100_WSOCK(uint16_t adr, uint8_t val, uint8_t socket_nbr, uint8_t block) {
- 8000d50:	b590      	push	{r4, r7, lr}
- 8000d52:	b085      	sub	sp, #20
- 8000d54:	af00      	add	r7, sp, #0
- 8000d56:	4604      	mov	r4, r0
- 8000d58:	4608      	mov	r0, r1
- 8000d5a:	4611      	mov	r1, r2
- 8000d5c:	461a      	mov	r2, r3
- 8000d5e:	4623      	mov	r3, r4
- 8000d60:	80fb      	strh	r3, [r7, #6]
- 8000d62:	4603      	mov	r3, r0
- 8000d64:	717b      	strb	r3, [r7, #5]
- 8000d66:	460b      	mov	r3, r1
- 8000d68:	713b      	strb	r3, [r7, #4]
- 8000d6a:	4613      	mov	r3, r2
- 8000d6c:	70fb      	strb	r3, [r7, #3]
+ 8000d40:	b590      	push	{r4, r7, lr}
+ 8000d42:	b085      	sub	sp, #20
+ 8000d44:	af00      	add	r7, sp, #0
+ 8000d46:	4604      	mov	r4, r0
+ 8000d48:	4608      	mov	r0, r1
+ 8000d4a:	4611      	mov	r1, r2
+ 8000d4c:	461a      	mov	r2, r3
+ 8000d4e:	4623      	mov	r3, r4
+ 8000d50:	80fb      	strh	r3, [r7, #6]
+ 8000d52:	4603      	mov	r3, r0
+ 8000d54:	717b      	strb	r3, [r7, #5]
+ 8000d56:	460b      	mov	r3, r1
+ 8000d58:	713b      	strb	r3, [r7, #4]
+ 8000d5a:	4613      	mov	r3, r2
+ 8000d5c:	70fb      	strb	r3, [r7, #3]
 	uint8_t cb_temp = 0x04;
- 8000d6e:	2304      	movs	r3, #4
- 8000d70:	73fb      	strb	r3, [r7, #15]
+ 8000d5e:	2304      	movs	r3, #4
+ 8000d60:	73fb      	strb	r3, [r7, #15]
 	cb_temp |= (socket_nbr << 5);
- 8000d72:	793b      	ldrb	r3, [r7, #4]
- 8000d74:	015b      	lsls	r3, r3, #5
+ 8000d62:	793b      	ldrb	r3, [r7, #4]
+ 8000d64:	015b      	lsls	r3, r3, #5
+ 8000d66:	b25a      	sxtb	r2, r3
+ 8000d68:	f997 300f 	ldrsb.w	r3, [r7, #15]
+ 8000d6c:	4313      	orrs	r3, r2
+ 8000d6e:	b25b      	sxtb	r3, r3
+ 8000d70:	73fb      	strb	r3, [r7, #15]
+	cb_temp |= (block << 3);
+ 8000d72:	78fb      	ldrb	r3, [r7, #3]
+ 8000d74:	00db      	lsls	r3, r3, #3
  8000d76:	b25a      	sxtb	r2, r3
  8000d78:	f997 300f 	ldrsb.w	r3, [r7, #15]
  8000d7c:	4313      	orrs	r3, r2
  8000d7e:	b25b      	sxtb	r3, r3
  8000d80:	73fb      	strb	r3, [r7, #15]
-	cb_temp |= (block << 3);
- 8000d82:	78fb      	ldrb	r3, [r7, #3]
- 8000d84:	00db      	lsls	r3, r3, #3
- 8000d86:	b25a      	sxtb	r2, r3
- 8000d88:	f997 300f 	ldrsb.w	r3, [r7, #15]
- 8000d8c:	4313      	orrs	r3, r2
- 8000d8e:	b25b      	sxtb	r3, r3
- 8000d90:	73fb      	strb	r3, [r7, #15]
 	SPI_Eth_SS(ON);			// NSS Slave Enable
- 8000d92:	2001      	movs	r0, #1
- 8000d94:	f7ff ff16 	bl	8000bc4 <SPI_Eth_SS>
+ 8000d82:	2001      	movs	r0, #1
+ 8000d84:	f7ff ff16 	bl	8000bb4 <SPI_Eth_SS>
 	SPI_Eth_RT(adr>>8);		// Send upper address half
- 8000d98:	88fb      	ldrh	r3, [r7, #6]
- 8000d9a:	0a1b      	lsrs	r3, r3, #8
- 8000d9c:	b29b      	uxth	r3, r3
- 8000d9e:	b2db      	uxtb	r3, r3
- 8000da0:	4618      	mov	r0, r3
- 8000da2:	f7ff ff2f 	bl	8000c04 <SPI_Eth_RT>
+ 8000d88:	88fb      	ldrh	r3, [r7, #6]
+ 8000d8a:	0a1b      	lsrs	r3, r3, #8
+ 8000d8c:	b29b      	uxth	r3, r3
+ 8000d8e:	b2db      	uxtb	r3, r3
+ 8000d90:	4618      	mov	r0, r3
+ 8000d92:	f7ff ff2f 	bl	8000bf4 <SPI_Eth_RT>
 	SPI_Eth_RT(adr);		// Send lower address half
- 8000da6:	88fb      	ldrh	r3, [r7, #6]
- 8000da8:	b2db      	uxtb	r3, r3
- 8000daa:	4618      	mov	r0, r3
- 8000dac:	f7ff ff2a 	bl	8000c04 <SPI_Eth_RT>
+ 8000d96:	88fb      	ldrh	r3, [r7, #6]
+ 8000d98:	b2db      	uxtb	r3, r3
+ 8000d9a:	4618      	mov	r0, r3
+ 8000d9c:	f7ff ff2a 	bl	8000bf4 <SPI_Eth_RT>
 	SPI_Eth_RT(cb_temp);	// Send Control Byte
- 8000db0:	7bfb      	ldrb	r3, [r7, #15]
- 8000db2:	4618      	mov	r0, r3
- 8000db4:	f7ff ff26 	bl	8000c04 <SPI_Eth_RT>
+ 8000da0:	7bfb      	ldrb	r3, [r7, #15]
+ 8000da2:	4618      	mov	r0, r3
+ 8000da4:	f7ff ff26 	bl	8000bf4 <SPI_Eth_RT>
 	SPI_Eth_RT(val);		// Send val to be written in the register
- 8000db8:	797b      	ldrb	r3, [r7, #5]
- 8000dba:	4618      	mov	r0, r3
- 8000dbc:	f7ff ff22 	bl	8000c04 <SPI_Eth_RT>
+ 8000da8:	797b      	ldrb	r3, [r7, #5]
+ 8000daa:	4618      	mov	r0, r3
+ 8000dac:	f7ff ff22 	bl	8000bf4 <SPI_Eth_RT>
 	SPI_Eth_SS(OFF);
- 8000dc0:	2000      	movs	r0, #0
- 8000dc2:	f7ff feff 	bl	8000bc4 <SPI_Eth_SS>
+ 8000db0:	2000      	movs	r0, #0
+ 8000db2:	f7ff feff 	bl	8000bb4 <SPI_Eth_SS>
 }
- 8000dc6:	bf00      	nop
- 8000dc8:	3714      	adds	r7, #20
- 8000dca:	46bd      	mov	sp, r7
- 8000dcc:	bd90      	pop	{r4, r7, pc}
+ 8000db6:	bf00      	nop
+ 8000db8:	3714      	adds	r7, #20
+ 8000dba:	46bd      	mov	sp, r7
+ 8000dbc:	bd90      	pop	{r4, r7, pc}
 
-08000dce <W6100_INIT>:
+08000dbe <W6100_INIT>:
 
 void W6100_INIT(void) {
- 8000dce:	b580      	push	{r7, lr}
- 8000dd0:	af00      	add	r7, sp, #0
+ 8000dbe:	b580      	push	{r7, lr}
+ 8000dc0:	af00      	add	r7, sp, #0
 	/* *** W6100 Init *** */
 	SPI_W6100_WCR(NETLCKR, 0x3a);	// NETLCKR		Network settings unlock
- 8000dd2:	213a      	movs	r1, #58	; 0x3a
- 8000dd4:	f244 10f5 	movw	r0, #16885	; 0x41f5
- 8000dd8:	f7ff ff5a 	bl	8000c90 <SPI_W6100_WCR>
+ 8000dc2:	213a      	movs	r1, #58	; 0x3a
+ 8000dc4:	f244 10f5 	movw	r0, #16885	; 0x41f5
+ 8000dc8:	f7ff ff5a 	bl	8000c80 <SPI_W6100_WCR>
 
 	SPI_W6100_WCR(SHAR0, MAC0);	// SHAR[5:0]	Set hardware MAC address
- 8000ddc:	2111      	movs	r1, #17
- 8000dde:	f244 1020 	movw	r0, #16672	; 0x4120
- 8000de2:	f7ff ff55 	bl	8000c90 <SPI_W6100_WCR>
+ 8000dcc:	2111      	movs	r1, #17
+ 8000dce:	f244 1020 	movw	r0, #16672	; 0x4120
+ 8000dd2:	f7ff ff55 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(SHAR1, MAC1);
- 8000de6:	2122      	movs	r1, #34	; 0x22
- 8000de8:	f244 1021 	movw	r0, #16673	; 0x4121
- 8000dec:	f7ff ff50 	bl	8000c90 <SPI_W6100_WCR>
+ 8000dd6:	2122      	movs	r1, #34	; 0x22
+ 8000dd8:	f244 1021 	movw	r0, #16673	; 0x4121
+ 8000ddc:	f7ff ff50 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(SHAR2, MAC2);
- 8000df0:	2133      	movs	r1, #51	; 0x33
- 8000df2:	f244 1022 	movw	r0, #16674	; 0x4122
- 8000df6:	f7ff ff4b 	bl	8000c90 <SPI_W6100_WCR>
+ 8000de0:	2133      	movs	r1, #51	; 0x33
+ 8000de2:	f244 1022 	movw	r0, #16674	; 0x4122
+ 8000de6:	f7ff ff4b 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(SHAR3, MAC3);
- 8000dfa:	21aa      	movs	r1, #170	; 0xaa
- 8000dfc:	f244 1023 	movw	r0, #16675	; 0x4123
- 8000e00:	f7ff ff46 	bl	8000c90 <SPI_W6100_WCR>
+ 8000dea:	21aa      	movs	r1, #170	; 0xaa
+ 8000dec:	f244 1023 	movw	r0, #16675	; 0x4123
+ 8000df0:	f7ff ff46 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(SHAR4, MAC4);
- 8000e04:	21bb      	movs	r1, #187	; 0xbb
- 8000e06:	f244 1024 	movw	r0, #16676	; 0x4124
- 8000e0a:	f7ff ff41 	bl	8000c90 <SPI_W6100_WCR>
+ 8000df4:	21bb      	movs	r1, #187	; 0xbb
+ 8000df6:	f244 1024 	movw	r0, #16676	; 0x4124
+ 8000dfa:	f7ff ff41 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(SHAR5, MAC5);
- 8000e0e:	21cc      	movs	r1, #204	; 0xcc
- 8000e10:	f244 1025 	movw	r0, #16677	; 0x4125
- 8000e14:	f7ff ff3c 	bl	8000c90 <SPI_W6100_WCR>
+ 8000dfe:	21cc      	movs	r1, #204	; 0xcc
+ 8000e00:	f244 1025 	movw	r0, #16677	; 0x4125
+ 8000e04:	f7ff ff3c 	bl	8000c80 <SPI_W6100_WCR>
 
 	SPI_W6100_WCR(GAR0, GIP0);	// GAR[0:3]		Gateway IP address 192.168.0.1
- 8000e18:	21c0      	movs	r1, #192	; 0xc0
- 8000e1a:	f244 1030 	movw	r0, #16688	; 0x4130
- 8000e1e:	f7ff ff37 	bl	8000c90 <SPI_W6100_WCR>
+ 8000e08:	21c0      	movs	r1, #192	; 0xc0
+ 8000e0a:	f244 1030 	movw	r0, #16688	; 0x4130
+ 8000e0e:	f7ff ff37 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(GAR1, GIP1);
- 8000e22:	21a8      	movs	r1, #168	; 0xa8
- 8000e24:	f244 1031 	movw	r0, #16689	; 0x4131
- 8000e28:	f7ff ff32 	bl	8000c90 <SPI_W6100_WCR>
+ 8000e12:	21a8      	movs	r1, #168	; 0xa8
+ 8000e14:	f244 1031 	movw	r0, #16689	; 0x4131
+ 8000e18:	f7ff ff32 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(GAR2, GIP2);
- 8000e2c:	2100      	movs	r1, #0
- 8000e2e:	f244 1032 	movw	r0, #16690	; 0x4132
- 8000e32:	f7ff ff2d 	bl	8000c90 <SPI_W6100_WCR>
+ 8000e1c:	2100      	movs	r1, #0
+ 8000e1e:	f244 1032 	movw	r0, #16690	; 0x4132
+ 8000e22:	f7ff ff2d 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(GAR3, GIP3);
- 8000e36:	2101      	movs	r1, #1
- 8000e38:	f244 1033 	movw	r0, #16691	; 0x4133
- 8000e3c:	f7ff ff28 	bl	8000c90 <SPI_W6100_WCR>
+ 8000e26:	2101      	movs	r1, #1
+ 8000e28:	f244 1033 	movw	r0, #16691	; 0x4133
+ 8000e2c:	f7ff ff28 	bl	8000c80 <SPI_W6100_WCR>
 
 	SPI_W6100_WCR(SUBR0, SBM0);	// SUBR[0:3]	Subnet mask address 255:255:255:0
- 8000e40:	21ff      	movs	r1, #255	; 0xff
- 8000e42:	f244 1034 	movw	r0, #16692	; 0x4134
- 8000e46:	f7ff ff23 	bl	8000c90 <SPI_W6100_WCR>
+ 8000e30:	21ff      	movs	r1, #255	; 0xff
+ 8000e32:	f244 1034 	movw	r0, #16692	; 0x4134
+ 8000e36:	f7ff ff23 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(SUBR1, SBM1);
- 8000e4a:	21ff      	movs	r1, #255	; 0xff
- 8000e4c:	f244 1035 	movw	r0, #16693	; 0x4135
- 8000e50:	f7ff ff1e 	bl	8000c90 <SPI_W6100_WCR>
+ 8000e3a:	21ff      	movs	r1, #255	; 0xff
+ 8000e3c:	f244 1035 	movw	r0, #16693	; 0x4135
+ 8000e40:	f7ff ff1e 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(SUBR2, SBM2);
- 8000e54:	21ff      	movs	r1, #255	; 0xff
- 8000e56:	f244 1036 	movw	r0, #16694	; 0x4136
- 8000e5a:	f7ff ff19 	bl	8000c90 <SPI_W6100_WCR>
+ 8000e44:	21ff      	movs	r1, #255	; 0xff
+ 8000e46:	f244 1036 	movw	r0, #16694	; 0x4136
+ 8000e4a:	f7ff ff19 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(SUBR3, SBM3);
- 8000e5e:	2100      	movs	r1, #0
- 8000e60:	f244 1037 	movw	r0, #16695	; 0x4137
- 8000e64:	f7ff ff14 	bl	8000c90 <SPI_W6100_WCR>
+ 8000e4e:	2100      	movs	r1, #0
+ 8000e50:	f244 1037 	movw	r0, #16695	; 0x4137
+ 8000e54:	f7ff ff14 	bl	8000c80 <SPI_W6100_WCR>
 
 	SPI_W6100_WCR(SIPR0, IPV0);	// SIPR[0:3]	IPv4 Source IP Address 192.168.0.27
- 8000e68:	21c0      	movs	r1, #192	; 0xc0
- 8000e6a:	f244 1038 	movw	r0, #16696	; 0x4138
- 8000e6e:	f7ff ff0f 	bl	8000c90 <SPI_W6100_WCR>
+ 8000e58:	21c0      	movs	r1, #192	; 0xc0
+ 8000e5a:	f244 1038 	movw	r0, #16696	; 0x4138
+ 8000e5e:	f7ff ff0f 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(SIPR1, IPV1);
- 8000e72:	21a8      	movs	r1, #168	; 0xa8
- 8000e74:	f244 1039 	movw	r0, #16697	; 0x4139
- 8000e78:	f7ff ff0a 	bl	8000c90 <SPI_W6100_WCR>
+ 8000e62:	21a8      	movs	r1, #168	; 0xa8
+ 8000e64:	f244 1039 	movw	r0, #16697	; 0x4139
+ 8000e68:	f7ff ff0a 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(SIPR2, IPV2);
- 8000e7c:	2100      	movs	r1, #0
- 8000e7e:	f244 103a 	movw	r0, #16698	; 0x413a
- 8000e82:	f7ff ff05 	bl	8000c90 <SPI_W6100_WCR>
+ 8000e6c:	2100      	movs	r1, #0
+ 8000e6e:	f244 103a 	movw	r0, #16698	; 0x413a
+ 8000e72:	f7ff ff05 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(SIPR3, IPV3);
- 8000e86:	211b      	movs	r1, #27
- 8000e88:	f244 103b 	movw	r0, #16699	; 0x413b
- 8000e8c:	f7ff ff00 	bl	8000c90 <SPI_W6100_WCR>
+ 8000e76:	211b      	movs	r1, #27
+ 8000e78:	f244 103b 	movw	r0, #16699	; 0x413b
+ 8000e7c:	f7ff ff00 	bl	8000c80 <SPI_W6100_WCR>
 
 	SPI_W6100_WCR(LLAR0, 0xfe);	// Link Local Address, FE80::1322:33FF:FEAA:BBCC
- 8000e90:	21fe      	movs	r1, #254	; 0xfe
- 8000e92:	f244 1040 	movw	r0, #16704	; 0x4140
- 8000e96:	f7ff fefb 	bl	8000c90 <SPI_W6100_WCR>
+ 8000e80:	21fe      	movs	r1, #254	; 0xfe
+ 8000e82:	f244 1040 	movw	r0, #16704	; 0x4140
+ 8000e86:	f7ff fefb 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(LLAR1, 0x80);
- 8000e9a:	2180      	movs	r1, #128	; 0x80
- 8000e9c:	f244 1041 	movw	r0, #16705	; 0x4141
- 8000ea0:	f7ff fef6 	bl	8000c90 <SPI_W6100_WCR>
+ 8000e8a:	2180      	movs	r1, #128	; 0x80
+ 8000e8c:	f244 1041 	movw	r0, #16705	; 0x4141
+ 8000e90:	f7ff fef6 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(LLAR2, 0x00);
- 8000ea4:	2100      	movs	r1, #0
- 8000ea6:	f244 1042 	movw	r0, #16706	; 0x4142
- 8000eaa:	f7ff fef1 	bl	8000c90 <SPI_W6100_WCR>
+ 8000e94:	2100      	movs	r1, #0
+ 8000e96:	f244 1042 	movw	r0, #16706	; 0x4142
+ 8000e9a:	f7ff fef1 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(LLAR3, 0x01);
- 8000eae:	2101      	movs	r1, #1
- 8000eb0:	f244 1043 	movw	r0, #16707	; 0x4143
- 8000eb4:	f7ff feec 	bl	8000c90 <SPI_W6100_WCR>
+ 8000e9e:	2101      	movs	r1, #1
+ 8000ea0:	f244 1043 	movw	r0, #16707	; 0x4143
+ 8000ea4:	f7ff feec 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(LLAR4, 0x00);
- 8000eb8:	2100      	movs	r1, #0
- 8000eba:	f244 1044 	movw	r0, #16708	; 0x4144
- 8000ebe:	f7ff fee7 	bl	8000c90 <SPI_W6100_WCR>
+ 8000ea8:	2100      	movs	r1, #0
+ 8000eaa:	f244 1044 	movw	r0, #16708	; 0x4144
+ 8000eae:	f7ff fee7 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(LLAR5, 0x00);
- 8000ec2:	2100      	movs	r1, #0
- 8000ec4:	f244 1045 	movw	r0, #16709	; 0x4145
- 8000ec8:	f7ff fee2 	bl	8000c90 <SPI_W6100_WCR>
+ 8000eb2:	2100      	movs	r1, #0
+ 8000eb4:	f244 1045 	movw	r0, #16709	; 0x4145
+ 8000eb8:	f7ff fee2 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(LLAR6, 0x00);
- 8000ecc:	2100      	movs	r1, #0
- 8000ece:	f244 1046 	movw	r0, #16710	; 0x4146
- 8000ed2:	f7ff fedd 	bl	8000c90 <SPI_W6100_WCR>
+ 8000ebc:	2100      	movs	r1, #0
+ 8000ebe:	f244 1046 	movw	r0, #16710	; 0x4146
+ 8000ec2:	f7ff fedd 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(LLAR7, 0x00);
- 8000ed6:	2100      	movs	r1, #0
- 8000ed8:	f244 1047 	movw	r0, #16711	; 0x4147
- 8000edc:	f7ff fed8 	bl	8000c90 <SPI_W6100_WCR>
+ 8000ec6:	2100      	movs	r1, #0
+ 8000ec8:	f244 1047 	movw	r0, #16711	; 0x4147
+ 8000ecc:	f7ff fed8 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(LLAR8, 0x13);
- 8000ee0:	2113      	movs	r1, #19
- 8000ee2:	f244 1048 	movw	r0, #16712	; 0x4148
- 8000ee6:	f7ff fed3 	bl	8000c90 <SPI_W6100_WCR>
+ 8000ed0:	2113      	movs	r1, #19
+ 8000ed2:	f244 1048 	movw	r0, #16712	; 0x4148
+ 8000ed6:	f7ff fed3 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(LLAR9, 0x22);
- 8000eea:	2122      	movs	r1, #34	; 0x22
- 8000eec:	f244 1049 	movw	r0, #16713	; 0x4149
- 8000ef0:	f7ff fece 	bl	8000c90 <SPI_W6100_WCR>
+ 8000eda:	2122      	movs	r1, #34	; 0x22
+ 8000edc:	f244 1049 	movw	r0, #16713	; 0x4149
+ 8000ee0:	f7ff fece 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(LLAR10, 0x33);
- 8000ef4:	2133      	movs	r1, #51	; 0x33
- 8000ef6:	f244 104a 	movw	r0, #16714	; 0x414a
- 8000efa:	f7ff fec9 	bl	8000c90 <SPI_W6100_WCR>
+ 8000ee4:	2133      	movs	r1, #51	; 0x33
+ 8000ee6:	f244 104a 	movw	r0, #16714	; 0x414a
+ 8000eea:	f7ff fec9 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(LLAR11, 0xff);
- 8000efe:	21ff      	movs	r1, #255	; 0xff
- 8000f00:	f244 104b 	movw	r0, #16715	; 0x414b
- 8000f04:	f7ff fec4 	bl	8000c90 <SPI_W6100_WCR>
+ 8000eee:	21ff      	movs	r1, #255	; 0xff
+ 8000ef0:	f244 104b 	movw	r0, #16715	; 0x414b
+ 8000ef4:	f7ff fec4 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(LLAR12, 0xfe);
- 8000f08:	21fe      	movs	r1, #254	; 0xfe
- 8000f0a:	f244 104c 	movw	r0, #16716	; 0x414c
- 8000f0e:	f7ff febf 	bl	8000c90 <SPI_W6100_WCR>
+ 8000ef8:	21fe      	movs	r1, #254	; 0xfe
+ 8000efa:	f244 104c 	movw	r0, #16716	; 0x414c
+ 8000efe:	f7ff febf 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(LLAR13, 0xaa);
- 8000f12:	21aa      	movs	r1, #170	; 0xaa
- 8000f14:	f244 104d 	movw	r0, #16717	; 0x414d
- 8000f18:	f7ff feba 	bl	8000c90 <SPI_W6100_WCR>
+ 8000f02:	21aa      	movs	r1, #170	; 0xaa
+ 8000f04:	f244 104d 	movw	r0, #16717	; 0x414d
+ 8000f08:	f7ff feba 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(LLAR14, 0xbb);
- 8000f1c:	21bb      	movs	r1, #187	; 0xbb
- 8000f1e:	f244 104e 	movw	r0, #16718	; 0x414e
- 8000f22:	f7ff feb5 	bl	8000c90 <SPI_W6100_WCR>
+ 8000f0c:	21bb      	movs	r1, #187	; 0xbb
+ 8000f0e:	f244 104e 	movw	r0, #16718	; 0x414e
+ 8000f12:	f7ff feb5 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(LLAR15, 0xcc);
- 8000f26:	21cc      	movs	r1, #204	; 0xcc
- 8000f28:	f244 104f 	movw	r0, #16719	; 0x414f
- 8000f2c:	f7ff feb0 	bl	8000c90 <SPI_W6100_WCR>
+ 8000f16:	21cc      	movs	r1, #204	; 0xcc
+ 8000f18:	f244 104f 	movw	r0, #16719	; 0x414f
+ 8000f1c:	f7ff feb0 	bl	8000c80 <SPI_W6100_WCR>
 
 	SPI_W6100_WCR(GUAR0, 0x20);	// Global Unicast Address, 2001:0DB8:E001::1222:33FF:FEAA:BBCC
- 8000f30:	2120      	movs	r1, #32
- 8000f32:	f244 1050 	movw	r0, #16720	; 0x4150
- 8000f36:	f7ff feab 	bl	8000c90 <SPI_W6100_WCR>
+ 8000f20:	2120      	movs	r1, #32
+ 8000f22:	f244 1050 	movw	r0, #16720	; 0x4150
+ 8000f26:	f7ff feab 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(GUAR1, 0x01);
- 8000f3a:	2101      	movs	r1, #1
- 8000f3c:	f244 1051 	movw	r0, #16721	; 0x4151
- 8000f40:	f7ff fea6 	bl	8000c90 <SPI_W6100_WCR>
+ 8000f2a:	2101      	movs	r1, #1
+ 8000f2c:	f244 1051 	movw	r0, #16721	; 0x4151
+ 8000f30:	f7ff fea6 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(GUAR2, 0x0d);
- 8000f44:	210d      	movs	r1, #13
- 8000f46:	f244 1052 	movw	r0, #16722	; 0x4152
- 8000f4a:	f7ff fea1 	bl	8000c90 <SPI_W6100_WCR>
+ 8000f34:	210d      	movs	r1, #13
+ 8000f36:	f244 1052 	movw	r0, #16722	; 0x4152
+ 8000f3a:	f7ff fea1 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(GUAR3, 0xb8);
- 8000f4e:	21b8      	movs	r1, #184	; 0xb8
- 8000f50:	f244 1053 	movw	r0, #16723	; 0x4153
- 8000f54:	f7ff fe9c 	bl	8000c90 <SPI_W6100_WCR>
+ 8000f3e:	21b8      	movs	r1, #184	; 0xb8
+ 8000f40:	f244 1053 	movw	r0, #16723	; 0x4153
+ 8000f44:	f7ff fe9c 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(GUAR4, 0xe0);
- 8000f58:	21e0      	movs	r1, #224	; 0xe0
- 8000f5a:	f244 1054 	movw	r0, #16724	; 0x4154
- 8000f5e:	f7ff fe97 	bl	8000c90 <SPI_W6100_WCR>
+ 8000f48:	21e0      	movs	r1, #224	; 0xe0
+ 8000f4a:	f244 1054 	movw	r0, #16724	; 0x4154
+ 8000f4e:	f7ff fe97 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(GUAR5, 0x01);
- 8000f62:	2101      	movs	r1, #1
- 8000f64:	f244 1055 	movw	r0, #16725	; 0x4155
- 8000f68:	f7ff fe92 	bl	8000c90 <SPI_W6100_WCR>
+ 8000f52:	2101      	movs	r1, #1
+ 8000f54:	f244 1055 	movw	r0, #16725	; 0x4155
+ 8000f58:	f7ff fe92 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(GUAR6, 0x00);
- 8000f6c:	2100      	movs	r1, #0
- 8000f6e:	f244 1056 	movw	r0, #16726	; 0x4156
- 8000f72:	f7ff fe8d 	bl	8000c90 <SPI_W6100_WCR>
+ 8000f5c:	2100      	movs	r1, #0
+ 8000f5e:	f244 1056 	movw	r0, #16726	; 0x4156
+ 8000f62:	f7ff fe8d 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(GUAR7, 0x00);
- 8000f76:	2100      	movs	r1, #0
- 8000f78:	f244 1057 	movw	r0, #16727	; 0x4157
- 8000f7c:	f7ff fe88 	bl	8000c90 <SPI_W6100_WCR>
+ 8000f66:	2100      	movs	r1, #0
+ 8000f68:	f244 1057 	movw	r0, #16727	; 0x4157
+ 8000f6c:	f7ff fe88 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(GUAR8, 0x13);
- 8000f80:	2113      	movs	r1, #19
- 8000f82:	f244 1058 	movw	r0, #16728	; 0x4158
- 8000f86:	f7ff fe83 	bl	8000c90 <SPI_W6100_WCR>
+ 8000f70:	2113      	movs	r1, #19
+ 8000f72:	f244 1058 	movw	r0, #16728	; 0x4158
+ 8000f76:	f7ff fe83 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(GUAR9, 0x22);
- 8000f8a:	2122      	movs	r1, #34	; 0x22
- 8000f8c:	f244 1059 	movw	r0, #16729	; 0x4159
- 8000f90:	f7ff fe7e 	bl	8000c90 <SPI_W6100_WCR>
+ 8000f7a:	2122      	movs	r1, #34	; 0x22
+ 8000f7c:	f244 1059 	movw	r0, #16729	; 0x4159
+ 8000f80:	f7ff fe7e 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(GUAR10, 0x33);
- 8000f94:	2133      	movs	r1, #51	; 0x33
- 8000f96:	f244 105a 	movw	r0, #16730	; 0x415a
- 8000f9a:	f7ff fe79 	bl	8000c90 <SPI_W6100_WCR>
+ 8000f84:	2133      	movs	r1, #51	; 0x33
+ 8000f86:	f244 105a 	movw	r0, #16730	; 0x415a
+ 8000f8a:	f7ff fe79 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(GUAR11, 0xff);
- 8000f9e:	21ff      	movs	r1, #255	; 0xff
- 8000fa0:	f244 105b 	movw	r0, #16731	; 0x415b
- 8000fa4:	f7ff fe74 	bl	8000c90 <SPI_W6100_WCR>
+ 8000f8e:	21ff      	movs	r1, #255	; 0xff
+ 8000f90:	f244 105b 	movw	r0, #16731	; 0x415b
+ 8000f94:	f7ff fe74 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(GUAR12, 0xfe);
- 8000fa8:	21fe      	movs	r1, #254	; 0xfe
- 8000faa:	f244 105c 	movw	r0, #16732	; 0x415c
- 8000fae:	f7ff fe6f 	bl	8000c90 <SPI_W6100_WCR>
+ 8000f98:	21fe      	movs	r1, #254	; 0xfe
+ 8000f9a:	f244 105c 	movw	r0, #16732	; 0x415c
+ 8000f9e:	f7ff fe6f 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(GUAR13, 0xaa);
- 8000fb2:	21aa      	movs	r1, #170	; 0xaa
- 8000fb4:	f244 105d 	movw	r0, #16733	; 0x415d
- 8000fb8:	f7ff fe6a 	bl	8000c90 <SPI_W6100_WCR>
+ 8000fa2:	21aa      	movs	r1, #170	; 0xaa
+ 8000fa4:	f244 105d 	movw	r0, #16733	; 0x415d
+ 8000fa8:	f7ff fe6a 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(GUAR14, 0xbb);
- 8000fbc:	21bb      	movs	r1, #187	; 0xbb
- 8000fbe:	f244 105e 	movw	r0, #16734	; 0x415e
- 8000fc2:	f7ff fe65 	bl	8000c90 <SPI_W6100_WCR>
+ 8000fac:	21bb      	movs	r1, #187	; 0xbb
+ 8000fae:	f244 105e 	movw	r0, #16734	; 0x415e
+ 8000fb2:	f7ff fe65 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(GUAR15, 0xcc);
- 8000fc6:	21cc      	movs	r1, #204	; 0xcc
- 8000fc8:	f244 105f 	movw	r0, #16735	; 0x415f
- 8000fcc:	f7ff fe60 	bl	8000c90 <SPI_W6100_WCR>
+ 8000fb6:	21cc      	movs	r1, #204	; 0xcc
+ 8000fb8:	f244 105f 	movw	r0, #16735	; 0x415f
+ 8000fbc:	f7ff fe60 	bl	8000c80 <SPI_W6100_WCR>
 
 	SPI_W6100_WCR(SUB6R0, 0xff);	// IPv6 Subnet Prefix, FFFF:FFFF::
- 8000fd0:	21ff      	movs	r1, #255	; 0xff
- 8000fd2:	f244 1060 	movw	r0, #16736	; 0x4160
- 8000fd6:	f7ff fe5b 	bl	8000c90 <SPI_W6100_WCR>
+ 8000fc0:	21ff      	movs	r1, #255	; 0xff
+ 8000fc2:	f244 1060 	movw	r0, #16736	; 0x4160
+ 8000fc6:	f7ff fe5b 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(SUB6R1, 0xff);
- 8000fda:	21ff      	movs	r1, #255	; 0xff
- 8000fdc:	f244 1061 	movw	r0, #16737	; 0x4161
- 8000fe0:	f7ff fe56 	bl	8000c90 <SPI_W6100_WCR>
+ 8000fca:	21ff      	movs	r1, #255	; 0xff
+ 8000fcc:	f244 1061 	movw	r0, #16737	; 0x4161
+ 8000fd0:	f7ff fe56 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(SUB6R2, 0xff);
- 8000fe4:	21ff      	movs	r1, #255	; 0xff
- 8000fe6:	f244 1062 	movw	r0, #16738	; 0x4162
- 8000fea:	f7ff fe51 	bl	8000c90 <SPI_W6100_WCR>
+ 8000fd4:	21ff      	movs	r1, #255	; 0xff
+ 8000fd6:	f244 1062 	movw	r0, #16738	; 0x4162
+ 8000fda:	f7ff fe51 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(SUB6R3, 0xff);
- 8000fee:	21ff      	movs	r1, #255	; 0xff
- 8000ff0:	f244 1063 	movw	r0, #16739	; 0x4163
- 8000ff4:	f7ff fe4c 	bl	8000c90 <SPI_W6100_WCR>
+ 8000fde:	21ff      	movs	r1, #255	; 0xff
+ 8000fe0:	f244 1063 	movw	r0, #16739	; 0x4163
+ 8000fe4:	f7ff fe4c 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(SUB6R4, 0xff);
- 8000ff8:	21ff      	movs	r1, #255	; 0xff
- 8000ffa:	f244 1064 	movw	r0, #16740	; 0x4164
- 8000ffe:	f7ff fe47 	bl	8000c90 <SPI_W6100_WCR>
+ 8000fe8:	21ff      	movs	r1, #255	; 0xff
+ 8000fea:	f244 1064 	movw	r0, #16740	; 0x4164
+ 8000fee:	f7ff fe47 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(SUB6R5, 0xff);
- 8001002:	21ff      	movs	r1, #255	; 0xff
- 8001004:	f244 1065 	movw	r0, #16741	; 0x4165
- 8001008:	f7ff fe42 	bl	8000c90 <SPI_W6100_WCR>
+ 8000ff2:	21ff      	movs	r1, #255	; 0xff
+ 8000ff4:	f244 1065 	movw	r0, #16741	; 0x4165
+ 8000ff8:	f7ff fe42 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(SUB6R6, 0xff);
- 800100c:	21ff      	movs	r1, #255	; 0xff
- 800100e:	f244 1066 	movw	r0, #16742	; 0x4166
- 8001012:	f7ff fe3d 	bl	8000c90 <SPI_W6100_WCR>
+ 8000ffc:	21ff      	movs	r1, #255	; 0xff
+ 8000ffe:	f244 1066 	movw	r0, #16742	; 0x4166
+ 8001002:	f7ff fe3d 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(SUB6R7, 0xff);
- 8001016:	21ff      	movs	r1, #255	; 0xff
- 8001018:	f244 1067 	movw	r0, #16743	; 0x4167
- 800101c:	f7ff fe38 	bl	8000c90 <SPI_W6100_WCR>
+ 8001006:	21ff      	movs	r1, #255	; 0xff
+ 8001008:	f244 1067 	movw	r0, #16743	; 0x4167
+ 800100c:	f7ff fe38 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(SUB6R8, 0x00);
- 8001020:	2100      	movs	r1, #0
- 8001022:	f244 1068 	movw	r0, #16744	; 0x4168
- 8001026:	f7ff fe33 	bl	8000c90 <SPI_W6100_WCR>
+ 8001010:	2100      	movs	r1, #0
+ 8001012:	f244 1068 	movw	r0, #16744	; 0x4168
+ 8001016:	f7ff fe33 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(SUB6R9, 0x00);
- 800102a:	2100      	movs	r1, #0
- 800102c:	f244 1069 	movw	r0, #16745	; 0x4169
- 8001030:	f7ff fe2e 	bl	8000c90 <SPI_W6100_WCR>
+ 800101a:	2100      	movs	r1, #0
+ 800101c:	f244 1069 	movw	r0, #16745	; 0x4169
+ 8001020:	f7ff fe2e 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(SUB6R10, 0x00);
- 8001034:	2100      	movs	r1, #0
- 8001036:	f244 106a 	movw	r0, #16746	; 0x416a
- 800103a:	f7ff fe29 	bl	8000c90 <SPI_W6100_WCR>
+ 8001024:	2100      	movs	r1, #0
+ 8001026:	f244 106a 	movw	r0, #16746	; 0x416a
+ 800102a:	f7ff fe29 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(SUB6R11, 0x00);
- 800103e:	2100      	movs	r1, #0
- 8001040:	f244 106b 	movw	r0, #16747	; 0x416b
- 8001044:	f7ff fe24 	bl	8000c90 <SPI_W6100_WCR>
+ 800102e:	2100      	movs	r1, #0
+ 8001030:	f244 106b 	movw	r0, #16747	; 0x416b
+ 8001034:	f7ff fe24 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(SUB6R12, 0x00);
- 8001048:	2100      	movs	r1, #0
- 800104a:	f244 106c 	movw	r0, #16748	; 0x416c
- 800104e:	f7ff fe1f 	bl	8000c90 <SPI_W6100_WCR>
+ 8001038:	2100      	movs	r1, #0
+ 800103a:	f244 106c 	movw	r0, #16748	; 0x416c
+ 800103e:	f7ff fe1f 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(SUB6R13, 0x00);
- 8001052:	2100      	movs	r1, #0
- 8001054:	f244 106d 	movw	r0, #16749	; 0x416d
- 8001058:	f7ff fe1a 	bl	8000c90 <SPI_W6100_WCR>
+ 8001042:	2100      	movs	r1, #0
+ 8001044:	f244 106d 	movw	r0, #16749	; 0x416d
+ 8001048:	f7ff fe1a 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(SUB6R14, 0x00);
- 800105c:	2100      	movs	r1, #0
- 800105e:	f244 106e 	movw	r0, #16750	; 0x416e
- 8001062:	f7ff fe15 	bl	8000c90 <SPI_W6100_WCR>
+ 800104c:	2100      	movs	r1, #0
+ 800104e:	f244 106e 	movw	r0, #16750	; 0x416e
+ 8001052:	f7ff fe15 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(SUB6R15, 0x00);
- 8001066:	2100      	movs	r1, #0
- 8001068:	f244 106f 	movw	r0, #16751	; 0x416f
- 800106c:	f7ff fe10 	bl	8000c90 <SPI_W6100_WCR>
+ 8001056:	2100      	movs	r1, #0
+ 8001058:	f244 106f 	movw	r0, #16751	; 0x416f
+ 800105c:	f7ff fe10 	bl	8000c80 <SPI_W6100_WCR>
 
 	SPI_W6100_WCR(GA6R0, 0xfe);	// IPv6 Gateway Address, FFFF:FFFF::
- 8001070:	21fe      	movs	r1, #254	; 0xfe
- 8001072:	f244 1070 	movw	r0, #16752	; 0x4170
- 8001076:	f7ff fe0b 	bl	8000c90 <SPI_W6100_WCR>
+ 8001060:	21fe      	movs	r1, #254	; 0xfe
+ 8001062:	f244 1070 	movw	r0, #16752	; 0x4170
+ 8001066:	f7ff fe0b 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(GA6R1, 0x80);
- 800107a:	2180      	movs	r1, #128	; 0x80
- 800107c:	f244 1071 	movw	r0, #16753	; 0x4171
- 8001080:	f7ff fe06 	bl	8000c90 <SPI_W6100_WCR>
+ 800106a:	2180      	movs	r1, #128	; 0x80
+ 800106c:	f244 1071 	movw	r0, #16753	; 0x4171
+ 8001070:	f7ff fe06 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(GA6R2, 0x00);
- 8001084:	2100      	movs	r1, #0
- 8001086:	f244 1072 	movw	r0, #16754	; 0x4172
- 800108a:	f7ff fe01 	bl	8000c90 <SPI_W6100_WCR>
+ 8001074:	2100      	movs	r1, #0
+ 8001076:	f244 1072 	movw	r0, #16754	; 0x4172
+ 800107a:	f7ff fe01 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(GA6R3, 0x00);
- 800108e:	2100      	movs	r1, #0
- 8001090:	f244 1073 	movw	r0, #16755	; 0x4173
- 8001094:	f7ff fdfc 	bl	8000c90 <SPI_W6100_WCR>
+ 800107e:	2100      	movs	r1, #0
+ 8001080:	f244 1073 	movw	r0, #16755	; 0x4173
+ 8001084:	f7ff fdfc 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(GA6R4, 0x00);
- 8001098:	2100      	movs	r1, #0
- 800109a:	f244 1074 	movw	r0, #16756	; 0x4174
- 800109e:	f7ff fdf7 	bl	8000c90 <SPI_W6100_WCR>
+ 8001088:	2100      	movs	r1, #0
+ 800108a:	f244 1074 	movw	r0, #16756	; 0x4174
+ 800108e:	f7ff fdf7 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(GA6R5, 0x00);
- 80010a2:	2100      	movs	r1, #0
- 80010a4:	f244 1075 	movw	r0, #16757	; 0x4175
- 80010a8:	f7ff fdf2 	bl	8000c90 <SPI_W6100_WCR>
+ 8001092:	2100      	movs	r1, #0
+ 8001094:	f244 1075 	movw	r0, #16757	; 0x4175
+ 8001098:	f7ff fdf2 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(GA6R6, 0x00);
- 80010ac:	2100      	movs	r1, #0
- 80010ae:	f244 1076 	movw	r0, #16758	; 0x4176
- 80010b2:	f7ff fded 	bl	8000c90 <SPI_W6100_WCR>
+ 800109c:	2100      	movs	r1, #0
+ 800109e:	f244 1076 	movw	r0, #16758	; 0x4176
+ 80010a2:	f7ff fded 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(GA6R7, 0x00);
- 80010b6:	2100      	movs	r1, #0
- 80010b8:	f244 1077 	movw	r0, #16759	; 0x4177
- 80010bc:	f7ff fde8 	bl	8000c90 <SPI_W6100_WCR>
+ 80010a6:	2100      	movs	r1, #0
+ 80010a8:	f244 1077 	movw	r0, #16759	; 0x4177
+ 80010ac:	f7ff fde8 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(GA6R8, 0x13);
- 80010c0:	2113      	movs	r1, #19
- 80010c2:	f244 1078 	movw	r0, #16760	; 0x4178
- 80010c6:	f7ff fde3 	bl	8000c90 <SPI_W6100_WCR>
+ 80010b0:	2113      	movs	r1, #19
+ 80010b2:	f244 1078 	movw	r0, #16760	; 0x4178
+ 80010b6:	f7ff fde3 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(GA6R9, 0x22);
- 80010ca:	2122      	movs	r1, #34	; 0x22
- 80010cc:	f244 1079 	movw	r0, #16761	; 0x4179
- 80010d0:	f7ff fdde 	bl	8000c90 <SPI_W6100_WCR>
+ 80010ba:	2122      	movs	r1, #34	; 0x22
+ 80010bc:	f244 1079 	movw	r0, #16761	; 0x4179
+ 80010c0:	f7ff fdde 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(GA6R10, 0x33);
- 80010d4:	2133      	movs	r1, #51	; 0x33
- 80010d6:	f244 107a 	movw	r0, #16762	; 0x417a
- 80010da:	f7ff fdd9 	bl	8000c90 <SPI_W6100_WCR>
+ 80010c4:	2133      	movs	r1, #51	; 0x33
+ 80010c6:	f244 107a 	movw	r0, #16762	; 0x417a
+ 80010ca:	f7ff fdd9 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(GA6R11, 0xff);
- 80010de:	21ff      	movs	r1, #255	; 0xff
- 80010e0:	f244 107b 	movw	r0, #16763	; 0x417b
- 80010e4:	f7ff fdd4 	bl	8000c90 <SPI_W6100_WCR>
+ 80010ce:	21ff      	movs	r1, #255	; 0xff
+ 80010d0:	f244 107b 	movw	r0, #16763	; 0x417b
+ 80010d4:	f7ff fdd4 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(GA6R12, 0xfe);
- 80010e8:	21fe      	movs	r1, #254	; 0xfe
- 80010ea:	f244 107c 	movw	r0, #16764	; 0x417c
- 80010ee:	f7ff fdcf 	bl	8000c90 <SPI_W6100_WCR>
+ 80010d8:	21fe      	movs	r1, #254	; 0xfe
+ 80010da:	f244 107c 	movw	r0, #16764	; 0x417c
+ 80010de:	f7ff fdcf 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(GA6R13, 0x44);
- 80010f2:	2144      	movs	r1, #68	; 0x44
- 80010f4:	f244 107d 	movw	r0, #16765	; 0x417d
- 80010f8:	f7ff fdca 	bl	8000c90 <SPI_W6100_WCR>
+ 80010e2:	2144      	movs	r1, #68	; 0x44
+ 80010e4:	f244 107d 	movw	r0, #16765	; 0x417d
+ 80010e8:	f7ff fdca 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(GA6R14, 0x55);
- 80010fc:	2155      	movs	r1, #85	; 0x55
- 80010fe:	f244 107e 	movw	r0, #16766	; 0x417e
- 8001102:	f7ff fdc5 	bl	8000c90 <SPI_W6100_WCR>
+ 80010ec:	2155      	movs	r1, #85	; 0x55
+ 80010ee:	f244 107e 	movw	r0, #16766	; 0x417e
+ 80010f2:	f7ff fdc5 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(GA6R15, 0x66);
- 8001106:	2166      	movs	r1, #102	; 0x66
- 8001108:	f244 107f 	movw	r0, #16767	; 0x417f
- 800110c:	f7ff fdc0 	bl	8000c90 <SPI_W6100_WCR>
+ 80010f6:	2166      	movs	r1, #102	; 0x66
+ 80010f8:	f244 107f 	movw	r0, #16767	; 0x417f
+ 80010fc:	f7ff fdc0 	bl	8000c80 <SPI_W6100_WCR>
 
 	SPI_W6100_WCR(NETLCKR, 0x00);	// NETLCKR		Network settings lock
- 8001110:	2100      	movs	r1, #0
- 8001112:	f244 10f5 	movw	r0, #16885	; 0x41f5
- 8001116:	f7ff fdbb 	bl	8000c90 <SPI_W6100_WCR>
+ 8001100:	2100      	movs	r1, #0
+ 8001102:	f244 10f5 	movw	r0, #16885	; 0x41f5
+ 8001106:	f7ff fdbb 	bl	8000c80 <SPI_W6100_WCR>
 
 	// W6100 Packet Received Interrupt setup (for Socket 0)
 	// *** Modify this code to fire interrupts for other sockets if in use ***
 	SPI_W6100_WCR(SYCR1, 0x80);				// Interrupt enabled (by default after reset)
- 800111a:	2180      	movs	r1, #128	; 0x80
- 800111c:	f242 0005 	movw	r0, #8197	; 0x2005
- 8001120:	f7ff fdb6 	bl	8000c90 <SPI_W6100_WCR>
+ 800110a:	2180      	movs	r1, #128	; 0x80
+ 800110c:	f242 0005 	movw	r0, #8197	; 0x2005
+ 8001110:	f7ff fdb6 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WCR(SIMR, 0x01);				// enable SIMR[S0_INT] – enable SOCKET 0 Interrupt
- 8001124:	2101      	movs	r1, #1
- 8001126:	f242 1014 	movw	r0, #8468	; 0x2114
- 800112a:	f7ff fdb1 	bl	8000c90 <SPI_W6100_WCR>
+ 8001114:	2101      	movs	r1, #1
+ 8001116:	f242 1014 	movw	r0, #8468	; 0x2114
+ 800111a:	f7ff fdb1 	bl	8000c80 <SPI_W6100_WCR>
 	SPI_W6100_WSOCK(Sn_IMR, 0x04, 0, REG);	// Enable RECV Interrupt Mask Bit for Socket 0
- 800112e:	2301      	movs	r3, #1
- 8001130:	2200      	movs	r2, #0
- 8001132:	2104      	movs	r1, #4
- 8001134:	2024      	movs	r0, #36	; 0x24
- 8001136:	f7ff fe0b 	bl	8000d50 <SPI_W6100_WSOCK>
+ 800111e:	2301      	movs	r3, #1
+ 8001120:	2200      	movs	r2, #0
+ 8001122:	2104      	movs	r1, #4
+ 8001124:	2024      	movs	r0, #36	; 0x24
+ 8001126:	f7ff fe0b 	bl	8000d40 <SPI_W6100_WSOCK>
 }
- 800113a:	bf00      	nop
- 800113c:	bd80      	pop	{r7, pc}
+ 800112a:	bf00      	nop
+ 800112c:	bd80      	pop	{r7, pc}
 	...
 
-08001140 <W6100_OpenTCPSocket>:
+08001130 <W6100_OpenTCPSocket>:
 
 
 
 
 uint32_t W6100_OpenTCPSocket (uint8_t sck_nbr, uint16_t port) {
- 8001140:	b580      	push	{r7, lr}
- 8001142:	b084      	sub	sp, #16
- 8001144:	af00      	add	r7, sp, #0
- 8001146:	4603      	mov	r3, r0
- 8001148:	460a      	mov	r2, r1
- 800114a:	71fb      	strb	r3, [r7, #7]
- 800114c:	4613      	mov	r3, r2
- 800114e:	80bb      	strh	r3, [r7, #4]
+ 8001130:	b580      	push	{r7, lr}
+ 8001132:	b084      	sub	sp, #16
+ 8001134:	af00      	add	r7, sp, #0
+ 8001136:	4603      	mov	r3, r0
+ 8001138:	460a      	mov	r2, r1
+ 800113a:	71fb      	strb	r3, [r7, #7]
+ 800113c:	4613      	mov	r3, r2
+ 800113e:	80bb      	strh	r3, [r7, #4]
 	uint32_t dest_adr;
 	/* *** Open Socket as TCP4 *** */
 	SPI_W6100_WSOCK(Sn_MR, 0x01, sck_nbr, REG);				// Set TCP4 mode
- 8001150:	79fa      	ldrb	r2, [r7, #7]
- 8001152:	2301      	movs	r3, #1
- 8001154:	2101      	movs	r1, #1
- 8001156:	2000      	movs	r0, #0
- 8001158:	f7ff fdfa 	bl	8000d50 <SPI_W6100_WSOCK>
+ 8001140:	79fa      	ldrb	r2, [r7, #7]
+ 8001142:	2301      	movs	r3, #1
+ 8001144:	2101      	movs	r1, #1
+ 8001146:	2000      	movs	r0, #0
+ 8001148:	f7ff fdfa 	bl	8000d40 <SPI_W6100_WSOCK>
 	SPI_W6100_WSOCK(Sn_PORTR0, (port >> 8), sck_nbr, REG);	// Set PORT number
- 800115c:	88bb      	ldrh	r3, [r7, #4]
- 800115e:	0a1b      	lsrs	r3, r3, #8
- 8001160:	b29b      	uxth	r3, r3
+ 800114c:	88bb      	ldrh	r3, [r7, #4]
+ 800114e:	0a1b      	lsrs	r3, r3, #8
+ 8001150:	b29b      	uxth	r3, r3
+ 8001152:	b2d9      	uxtb	r1, r3
+ 8001154:	79fa      	ldrb	r2, [r7, #7]
+ 8001156:	2301      	movs	r3, #1
+ 8001158:	f44f 708a 	mov.w	r0, #276	; 0x114
+ 800115c:	f7ff fdf0 	bl	8000d40 <SPI_W6100_WSOCK>
+	SPI_W6100_WSOCK(Sn_PORTR1, (port & 0xff), sck_nbr, REG);
+ 8001160:	88bb      	ldrh	r3, [r7, #4]
  8001162:	b2d9      	uxtb	r1, r3
  8001164:	79fa      	ldrb	r2, [r7, #7]
  8001166:	2301      	movs	r3, #1
- 8001168:	f44f 708a 	mov.w	r0, #276	; 0x114
- 800116c:	f7ff fdf0 	bl	8000d50 <SPI_W6100_WSOCK>
-	SPI_W6100_WSOCK(Sn_PORTR1, (port & 0xff), sck_nbr, REG);
- 8001170:	88bb      	ldrh	r3, [r7, #4]
- 8001172:	b2d9      	uxtb	r1, r3
- 8001174:	79fa      	ldrb	r2, [r7, #7]
- 8001176:	2301      	movs	r3, #1
- 8001178:	f240 1015 	movw	r0, #277	; 0x115
- 800117c:	f7ff fde8 	bl	8000d50 <SPI_W6100_WSOCK>
+ 8001168:	f240 1015 	movw	r0, #277	; 0x115
+ 800116c:	f7ff fde8 	bl	8000d40 <SPI_W6100_WSOCK>
 	SPI_W6100_WSOCK(Sn_CR, 0x01, sck_nbr, REG);				// Set OPEN command
- 8001180:	79fa      	ldrb	r2, [r7, #7]
- 8001182:	2301      	movs	r3, #1
- 8001184:	2101      	movs	r1, #1
- 8001186:	2010      	movs	r0, #16
- 8001188:	f7ff fde2 	bl	8000d50 <SPI_W6100_WSOCK>
+ 8001170:	79fa      	ldrb	r2, [r7, #7]
+ 8001172:	2301      	movs	r3, #1
+ 8001174:	2101      	movs	r1, #1
+ 8001176:	2010      	movs	r0, #16
+ 8001178:	f7ff fde2 	bl	8000d40 <SPI_W6100_WSOCK>
 	while ((SPI_W6100_RSOCK(Sn_CR, sck_nbr, REG)) != 0x00);	// Wait until OPEN command is cleared
- 800118c:	bf00      	nop
- 800118e:	79fb      	ldrb	r3, [r7, #7]
- 8001190:	2201      	movs	r2, #1
- 8001192:	4619      	mov	r1, r3
- 8001194:	2010      	movs	r0, #16
- 8001196:	f7ff fda0 	bl	8000cda <SPI_W6100_RSOCK>
- 800119a:	4603      	mov	r3, r0
- 800119c:	2b00      	cmp	r3, #0
- 800119e:	d1f6      	bne.n	800118e <W6100_OpenTCPSocket+0x4e>
+ 800117c:	bf00      	nop
+ 800117e:	79fb      	ldrb	r3, [r7, #7]
+ 8001180:	2201      	movs	r2, #1
+ 8001182:	4619      	mov	r1, r3
+ 8001184:	2010      	movs	r0, #16
+ 8001186:	f7ff fda0 	bl	8000cca <SPI_W6100_RSOCK>
+ 800118a:	4603      	mov	r3, r0
+ 800118c:	2b00      	cmp	r3, #0
+ 800118e:	d1f6      	bne.n	800117e <W6100_OpenTCPSocket+0x4e>
 
 
 	SPI_W6100_WSOCK(Sn_CR, 0x02, sck_nbr, REG);				// Set LISTEN command
- 80011a0:	79fa      	ldrb	r2, [r7, #7]
- 80011a2:	2301      	movs	r3, #1
- 80011a4:	2102      	movs	r1, #2
- 80011a6:	2010      	movs	r0, #16
- 80011a8:	f7ff fdd2 	bl	8000d50 <SPI_W6100_WSOCK>
+ 8001190:	79fa      	ldrb	r2, [r7, #7]
+ 8001192:	2301      	movs	r3, #1
+ 8001194:	2102      	movs	r1, #2
+ 8001196:	2010      	movs	r0, #16
+ 8001198:	f7ff fdd2 	bl	8000d40 <SPI_W6100_WSOCK>
 	while ((SPI_W6100_RSOCK(Sn_CR, sck_nbr, REG)) != 0x00);	// Wait until LISTEN command is cleared
- 80011ac:	bf00      	nop
- 80011ae:	79fb      	ldrb	r3, [r7, #7]
- 80011b0:	2201      	movs	r2, #1
- 80011b2:	4619      	mov	r1, r3
- 80011b4:	2010      	movs	r0, #16
- 80011b6:	f7ff fd90 	bl	8000cda <SPI_W6100_RSOCK>
- 80011ba:	4603      	mov	r3, r0
- 80011bc:	2b00      	cmp	r3, #0
- 80011be:	d1f6      	bne.n	80011ae <W6100_OpenTCPSocket+0x6e>
+ 800119c:	bf00      	nop
+ 800119e:	79fb      	ldrb	r3, [r7, #7]
+ 80011a0:	2201      	movs	r2, #1
+ 80011a2:	4619      	mov	r1, r3
+ 80011a4:	2010      	movs	r0, #16
+ 80011a6:	f7ff fd90 	bl	8000cca <SPI_W6100_RSOCK>
+ 80011aa:	4603      	mov	r3, r0
+ 80011ac:	2b00      	cmp	r3, #0
+ 80011ae:	d1f6      	bne.n	800119e <W6100_OpenTCPSocket+0x6e>
 
 	// CONNECT NOW
 	while ((SPI_W6100_RSOCK(Sn_SR, sck_nbr, REG)) != 0x17);	// Wait until SOCKET ESTABLISHED
- 80011c0:	bf00      	nop
- 80011c2:	79fb      	ldrb	r3, [r7, #7]
- 80011c4:	2201      	movs	r2, #1
- 80011c6:	4619      	mov	r1, r3
- 80011c8:	2030      	movs	r0, #48	; 0x30
- 80011ca:	f7ff fd86 	bl	8000cda <SPI_W6100_RSOCK>
- 80011ce:	4603      	mov	r3, r0
- 80011d0:	2b17      	cmp	r3, #23
- 80011d2:	d1f6      	bne.n	80011c2 <W6100_OpenTCPSocket+0x82>
+ 80011b0:	bf00      	nop
+ 80011b2:	79fb      	ldrb	r3, [r7, #7]
+ 80011b4:	2201      	movs	r2, #1
+ 80011b6:	4619      	mov	r1, r3
+ 80011b8:	2030      	movs	r0, #48	; 0x30
+ 80011ba:	f7ff fd86 	bl	8000cca <SPI_W6100_RSOCK>
+ 80011be:	4603      	mov	r3, r0
+ 80011c0:	2b17      	cmp	r3, #23
+ 80011c2:	d1f6      	bne.n	80011b2 <W6100_OpenTCPSocket+0x82>
 
 	/* HARDWARE RESPONSE ON THE SOCKET OPEN */
 	if(socketOpenCallback) socketOpenCallback(sck_nbr);
- 80011d4:	4b21      	ldr	r3, [pc, #132]	; (800125c <W6100_OpenTCPSocket+0x11c>)
- 80011d6:	681b      	ldr	r3, [r3, #0]
- 80011d8:	2b00      	cmp	r3, #0
- 80011da:	d004      	beq.n	80011e6 <W6100_OpenTCPSocket+0xa6>
- 80011dc:	4b1f      	ldr	r3, [pc, #124]	; (800125c <W6100_OpenTCPSocket+0x11c>)
- 80011de:	681b      	ldr	r3, [r3, #0]
- 80011e0:	79fa      	ldrb	r2, [r7, #7]
- 80011e2:	4610      	mov	r0, r2
- 80011e4:	4798      	blx	r3
+ 80011c4:	4b21      	ldr	r3, [pc, #132]	; (800124c <W6100_OpenTCPSocket+0x11c>)
+ 80011c6:	681b      	ldr	r3, [r3, #0]
+ 80011c8:	2b00      	cmp	r3, #0
+ 80011ca:	d004      	beq.n	80011d6 <W6100_OpenTCPSocket+0xa6>
+ 80011cc:	4b1f      	ldr	r3, [pc, #124]	; (800124c <W6100_OpenTCPSocket+0x11c>)
+ 80011ce:	681b      	ldr	r3, [r3, #0]
+ 80011d0:	79fa      	ldrb	r2, [r7, #7]
+ 80011d2:	4610      	mov	r0, r2
+ 80011d4:	4798      	blx	r3
 	/* END OF HARDWARE RESPONSE */							// Socket established
 
 	SPI_W6100_WSOCK(Sn_IRCLR, 0x01, sck_nbr, REG);			// Interrupt clear
- 80011e6:	79fa      	ldrb	r2, [r7, #7]
- 80011e8:	2301      	movs	r3, #1
- 80011ea:	2101      	movs	r1, #1
- 80011ec:	2028      	movs	r0, #40	; 0x28
- 80011ee:	f7ff fdaf 	bl	8000d50 <SPI_W6100_WSOCK>
+ 80011d6:	79fa      	ldrb	r2, [r7, #7]
+ 80011d8:	2301      	movs	r3, #1
+ 80011da:	2101      	movs	r1, #1
+ 80011dc:	2028      	movs	r0, #40	; 0x28
+ 80011de:	f7ff fdaf 	bl	8000d40 <SPI_W6100_WSOCK>
 
 	// Read destination address
 	dest_adr = (SPI_W6100_RSOCK(Sn_DIPR0, sck_nbr, REG) << 24);
- 80011f2:	79fb      	ldrb	r3, [r7, #7]
- 80011f4:	2201      	movs	r2, #1
- 80011f6:	4619      	mov	r1, r3
- 80011f8:	f44f 7090 	mov.w	r0, #288	; 0x120
- 80011fc:	f7ff fd6d 	bl	8000cda <SPI_W6100_RSOCK>
- 8001200:	4603      	mov	r3, r0
- 8001202:	061b      	lsls	r3, r3, #24
- 8001204:	60fb      	str	r3, [r7, #12]
+ 80011e2:	79fb      	ldrb	r3, [r7, #7]
+ 80011e4:	2201      	movs	r2, #1
+ 80011e6:	4619      	mov	r1, r3
+ 80011e8:	f44f 7090 	mov.w	r0, #288	; 0x120
+ 80011ec:	f7ff fd6d 	bl	8000cca <SPI_W6100_RSOCK>
+ 80011f0:	4603      	mov	r3, r0
+ 80011f2:	061b      	lsls	r3, r3, #24
+ 80011f4:	60fb      	str	r3, [r7, #12]
 	dest_adr |= (SPI_W6100_RSOCK(Sn_DIPR1, sck_nbr, REG) << 16);
- 8001206:	79fb      	ldrb	r3, [r7, #7]
- 8001208:	2201      	movs	r2, #1
- 800120a:	4619      	mov	r1, r3
- 800120c:	f240 1021 	movw	r0, #289	; 0x121
- 8001210:	f7ff fd63 	bl	8000cda <SPI_W6100_RSOCK>
- 8001214:	4603      	mov	r3, r0
- 8001216:	041b      	lsls	r3, r3, #16
- 8001218:	461a      	mov	r2, r3
- 800121a:	68fb      	ldr	r3, [r7, #12]
- 800121c:	4313      	orrs	r3, r2
- 800121e:	60fb      	str	r3, [r7, #12]
+ 80011f6:	79fb      	ldrb	r3, [r7, #7]
+ 80011f8:	2201      	movs	r2, #1
+ 80011fa:	4619      	mov	r1, r3
+ 80011fc:	f240 1021 	movw	r0, #289	; 0x121
+ 8001200:	f7ff fd63 	bl	8000cca <SPI_W6100_RSOCK>
+ 8001204:	4603      	mov	r3, r0
+ 8001206:	041b      	lsls	r3, r3, #16
+ 8001208:	461a      	mov	r2, r3
+ 800120a:	68fb      	ldr	r3, [r7, #12]
+ 800120c:	4313      	orrs	r3, r2
+ 800120e:	60fb      	str	r3, [r7, #12]
 	dest_adr |= (SPI_W6100_RSOCK(Sn_DIPR2, sck_nbr, REG) << 8);
- 8001220:	79fb      	ldrb	r3, [r7, #7]
- 8001222:	2201      	movs	r2, #1
- 8001224:	4619      	mov	r1, r3
- 8001226:	f44f 7091 	mov.w	r0, #290	; 0x122
- 800122a:	f7ff fd56 	bl	8000cda <SPI_W6100_RSOCK>
- 800122e:	4603      	mov	r3, r0
- 8001230:	021b      	lsls	r3, r3, #8
- 8001232:	461a      	mov	r2, r3
- 8001234:	68fb      	ldr	r3, [r7, #12]
- 8001236:	4313      	orrs	r3, r2
- 8001238:	60fb      	str	r3, [r7, #12]
+ 8001210:	79fb      	ldrb	r3, [r7, #7]
+ 8001212:	2201      	movs	r2, #1
+ 8001214:	4619      	mov	r1, r3
+ 8001216:	f44f 7091 	mov.w	r0, #290	; 0x122
+ 800121a:	f7ff fd56 	bl	8000cca <SPI_W6100_RSOCK>
+ 800121e:	4603      	mov	r3, r0
+ 8001220:	021b      	lsls	r3, r3, #8
+ 8001222:	461a      	mov	r2, r3
+ 8001224:	68fb      	ldr	r3, [r7, #12]
+ 8001226:	4313      	orrs	r3, r2
+ 8001228:	60fb      	str	r3, [r7, #12]
 	dest_adr |= SPI_W6100_RSOCK(Sn_DIPR3, sck_nbr, REG);
- 800123a:	79fb      	ldrb	r3, [r7, #7]
- 800123c:	2201      	movs	r2, #1
- 800123e:	4619      	mov	r1, r3
- 8001240:	f240 1023 	movw	r0, #291	; 0x123
- 8001244:	f7ff fd49 	bl	8000cda <SPI_W6100_RSOCK>
- 8001248:	4603      	mov	r3, r0
- 800124a:	461a      	mov	r2, r3
- 800124c:	68fb      	ldr	r3, [r7, #12]
- 800124e:	4313      	orrs	r3, r2
- 8001250:	60fb      	str	r3, [r7, #12]
+ 800122a:	79fb      	ldrb	r3, [r7, #7]
+ 800122c:	2201      	movs	r2, #1
+ 800122e:	4619      	mov	r1, r3
+ 8001230:	f240 1023 	movw	r0, #291	; 0x123
+ 8001234:	f7ff fd49 	bl	8000cca <SPI_W6100_RSOCK>
+ 8001238:	4603      	mov	r3, r0
+ 800123a:	461a      	mov	r2, r3
+ 800123c:	68fb      	ldr	r3, [r7, #12]
+ 800123e:	4313      	orrs	r3, r2
+ 8001240:	60fb      	str	r3, [r7, #12]
 
 	return dest_adr;	// Return destination address
- 8001252:	68fb      	ldr	r3, [r7, #12]
+ 8001242:	68fb      	ldr	r3, [r7, #12]
 }
- 8001254:	4618      	mov	r0, r3
- 8001256:	3710      	adds	r7, #16
- 8001258:	46bd      	mov	sp, r7
- 800125a:	bd80      	pop	{r7, pc}
- 800125c:	2000002c 	.word	0x2000002c
+ 8001244:	4618      	mov	r0, r3
+ 8001246:	3710      	adds	r7, #16
+ 8001248:	46bd      	mov	sp, r7
+ 800124a:	bd80      	pop	{r7, pc}
+ 800124c:	2000002c 	.word	0x2000002c
 
-08001260 <W6100_ReceiveData>:
+08001250 <W6100_ReceiveData>:
 
 
 
 
 uint8_t W6100_ReceiveData(uint8_t sck_nbr, uint32_t dest_adr, uint8_t * tab, uint8_t size) {
- 8001260:	b590      	push	{r4, r7, lr}
- 8001262:	b08b      	sub	sp, #44	; 0x2c
- 8001264:	af00      	add	r7, sp, #0
- 8001266:	60b9      	str	r1, [r7, #8]
- 8001268:	607a      	str	r2, [r7, #4]
- 800126a:	461a      	mov	r2, r3
- 800126c:	4603      	mov	r3, r0
- 800126e:	73fb      	strb	r3, [r7, #15]
- 8001270:	4613      	mov	r3, r2
- 8001272:	73bb      	strb	r3, [r7, #14]
+ 8001250:	b590      	push	{r4, r7, lr}
+ 8001252:	b08b      	sub	sp, #44	; 0x2c
+ 8001254:	af00      	add	r7, sp, #0
+ 8001256:	60b9      	str	r1, [r7, #8]
+ 8001258:	607a      	str	r2, [r7, #4]
+ 800125a:	461a      	mov	r2, r3
+ 800125c:	4603      	mov	r3, r0
+ 800125e:	73fb      	strb	r3, [r7, #15]
+ 8001260:	4613      	mov	r3, r2
+ 8001262:	73bb      	strb	r3, [r7, #14]
 	uint8_t i;
 	uint32_t get_size, gSn_RX_MAX, get_start_address, Sn_RX_RD_temp;
 
 	if ((SPI_W6100_RSOCK(Sn_SR, sck_nbr, REG)) == 0x1c) {								// Check if socket close request pending
- 8001274:	7bfb      	ldrb	r3, [r7, #15]
- 8001276:	2201      	movs	r2, #1
- 8001278:	4619      	mov	r1, r3
- 800127a:	2030      	movs	r0, #48	; 0x30
- 800127c:	f7ff fd2d 	bl	8000cda <SPI_W6100_RSOCK>
- 8001280:	4603      	mov	r3, r0
- 8001282:	2b1c      	cmp	r3, #28
- 8001284:	d103      	bne.n	800128e <W6100_ReceiveData+0x2e>
+ 8001264:	7bfb      	ldrb	r3, [r7, #15]
+ 8001266:	2201      	movs	r2, #1
+ 8001268:	4619      	mov	r1, r3
+ 800126a:	2030      	movs	r0, #48	; 0x30
+ 800126c:	f7ff fd2d 	bl	8000cca <SPI_W6100_RSOCK>
+ 8001270:	4603      	mov	r3, r0
+ 8001272:	2b1c      	cmp	r3, #28
+ 8001274:	d103      	bne.n	800127e <W6100_ReceiveData+0x2e>
 		W6100_PassiveCloseSocket(sck_nbr);
- 8001286:	7bfb      	ldrb	r3, [r7, #15]
- 8001288:	4618      	mov	r0, r3
- 800128a:	f000 f9c1 	bl	8001610 <W6100_PassiveCloseSocket>
+ 8001276:	7bfb      	ldrb	r3, [r7, #15]
+ 8001278:	4618      	mov	r0, r3
+ 800127a:	f000 f9c1 	bl	8001600 <W6100_PassiveCloseSocket>
 	}
 
 	if ((SPI_W6100_RSOCK(Sn_IR, sck_nbr, REG) & 0b00000100) == 0x04) {					// Check if data received
- 800128e:	7bfb      	ldrb	r3, [r7, #15]
- 8001290:	2201      	movs	r2, #1
- 8001292:	4619      	mov	r1, r3
- 8001294:	2020      	movs	r0, #32
- 8001296:	f7ff fd20 	bl	8000cda <SPI_W6100_RSOCK>
- 800129a:	4603      	mov	r3, r0
- 800129c:	f003 0304 	and.w	r3, r3, #4
- 80012a0:	2b04      	cmp	r3, #4
- 80012a2:	f040 80a1 	bne.w	80013e8 <W6100_ReceiveData+0x188>
+ 800127e:	7bfb      	ldrb	r3, [r7, #15]
+ 8001280:	2201      	movs	r2, #1
+ 8001282:	4619      	mov	r1, r3
+ 8001284:	2020      	movs	r0, #32
+ 8001286:	f7ff fd20 	bl	8000cca <SPI_W6100_RSOCK>
+ 800128a:	4603      	mov	r3, r0
+ 800128c:	f003 0304 	and.w	r3, r3, #4
+ 8001290:	2b04      	cmp	r3, #4
+ 8001292:	f040 80a1 	bne.w	80013d8 <W6100_ReceiveData+0x188>
 
 
 			// Read data from the buffer
 			get_size = (SPI_W6100_RSOCK(Sn_RX_RSR0, sck_nbr, REG) << 8);
- 80012a6:	7bfb      	ldrb	r3, [r7, #15]
- 80012a8:	2201      	movs	r2, #1
- 80012aa:	4619      	mov	r1, r3
- 80012ac:	f44f 7009 	mov.w	r0, #548	; 0x224
- 80012b0:	f7ff fd13 	bl	8000cda <SPI_W6100_RSOCK>
- 80012b4:	4603      	mov	r3, r0
- 80012b6:	021b      	lsls	r3, r3, #8
- 80012b8:	623b      	str	r3, [r7, #32]
+ 8001296:	7bfb      	ldrb	r3, [r7, #15]
+ 8001298:	2201      	movs	r2, #1
+ 800129a:	4619      	mov	r1, r3
+ 800129c:	f44f 7009 	mov.w	r0, #548	; 0x224
+ 80012a0:	f7ff fd13 	bl	8000cca <SPI_W6100_RSOCK>
+ 80012a4:	4603      	mov	r3, r0
+ 80012a6:	021b      	lsls	r3, r3, #8
+ 80012a8:	623b      	str	r3, [r7, #32]
 			get_size |= SPI_W6100_RSOCK(Sn_RX_RSR1, sck_nbr, REG);
- 80012ba:	7bfb      	ldrb	r3, [r7, #15]
- 80012bc:	2201      	movs	r2, #1
- 80012be:	4619      	mov	r1, r3
- 80012c0:	f240 2025 	movw	r0, #549	; 0x225
- 80012c4:	f7ff fd09 	bl	8000cda <SPI_W6100_RSOCK>
- 80012c8:	4603      	mov	r3, r0
- 80012ca:	461a      	mov	r2, r3
- 80012cc:	6a3b      	ldr	r3, [r7, #32]
- 80012ce:	4313      	orrs	r3, r2
- 80012d0:	623b      	str	r3, [r7, #32]
+ 80012aa:	7bfb      	ldrb	r3, [r7, #15]
+ 80012ac:	2201      	movs	r2, #1
+ 80012ae:	4619      	mov	r1, r3
+ 80012b0:	f240 2025 	movw	r0, #549	; 0x225
+ 80012b4:	f7ff fd09 	bl	8000cca <SPI_W6100_RSOCK>
+ 80012b8:	4603      	mov	r3, r0
+ 80012ba:	461a      	mov	r2, r3
+ 80012bc:	6a3b      	ldr	r3, [r7, #32]
+ 80012be:	4313      	orrs	r3, r2
+ 80012c0:	623b      	str	r3, [r7, #32]
 			gSn_RX_MAX = (SPI_W6100_RSOCK(Sn_RX_BSR, sck_nbr, REG) * 1024);
- 80012d2:	7bfb      	ldrb	r3, [r7, #15]
- 80012d4:	2201      	movs	r2, #1
- 80012d6:	4619      	mov	r1, r3
- 80012d8:	f44f 7008 	mov.w	r0, #544	; 0x220
- 80012dc:	f7ff fcfd 	bl	8000cda <SPI_W6100_RSOCK>
- 80012e0:	4603      	mov	r3, r0
- 80012e2:	029b      	lsls	r3, r3, #10
- 80012e4:	61fb      	str	r3, [r7, #28]
+ 80012c2:	7bfb      	ldrb	r3, [r7, #15]
+ 80012c4:	2201      	movs	r2, #1
+ 80012c6:	4619      	mov	r1, r3
+ 80012c8:	f44f 7008 	mov.w	r0, #544	; 0x220
+ 80012cc:	f7ff fcfd 	bl	8000cca <SPI_W6100_RSOCK>
+ 80012d0:	4603      	mov	r3, r0
+ 80012d2:	029b      	lsls	r3, r3, #10
+ 80012d4:	61fb      	str	r3, [r7, #28]
 			get_start_address = (SPI_W6100_RSOCK(Sn_RX_RD0, sck_nbr, REG) << 8);
- 80012e6:	7bfb      	ldrb	r3, [r7, #15]
- 80012e8:	2201      	movs	r2, #1
- 80012ea:	4619      	mov	r1, r3
- 80012ec:	f44f 700a 	mov.w	r0, #552	; 0x228
- 80012f0:	f7ff fcf3 	bl	8000cda <SPI_W6100_RSOCK>
- 80012f4:	4603      	mov	r3, r0
- 80012f6:	021b      	lsls	r3, r3, #8
- 80012f8:	617b      	str	r3, [r7, #20]
+ 80012d6:	7bfb      	ldrb	r3, [r7, #15]
+ 80012d8:	2201      	movs	r2, #1
+ 80012da:	4619      	mov	r1, r3
+ 80012dc:	f44f 700a 	mov.w	r0, #552	; 0x228
+ 80012e0:	f7ff fcf3 	bl	8000cca <SPI_W6100_RSOCK>
+ 80012e4:	4603      	mov	r3, r0
+ 80012e6:	021b      	lsls	r3, r3, #8
+ 80012e8:	617b      	str	r3, [r7, #20]
 			get_start_address |= SPI_W6100_RSOCK(Sn_RX_RD1, sck_nbr, REG);
- 80012fa:	7bfb      	ldrb	r3, [r7, #15]
- 80012fc:	2201      	movs	r2, #1
- 80012fe:	4619      	mov	r1, r3
- 8001300:	f240 2029 	movw	r0, #553	; 0x229
- 8001304:	f7ff fce9 	bl	8000cda <SPI_W6100_RSOCK>
- 8001308:	4603      	mov	r3, r0
- 800130a:	461a      	mov	r2, r3
- 800130c:	697b      	ldr	r3, [r7, #20]
- 800130e:	4313      	orrs	r3, r2
- 8001310:	617b      	str	r3, [r7, #20]
+ 80012ea:	7bfb      	ldrb	r3, [r7, #15]
+ 80012ec:	2201      	movs	r2, #1
+ 80012ee:	4619      	mov	r1, r3
+ 80012f0:	f240 2029 	movw	r0, #553	; 0x229
+ 80012f4:	f7ff fce9 	bl	8000cca <SPI_W6100_RSOCK>
+ 80012f8:	4603      	mov	r3, r0
+ 80012fa:	461a      	mov	r2, r3
+ 80012fc:	697b      	ldr	r3, [r7, #20]
+ 80012fe:	4313      	orrs	r3, r2
+ 8001300:	617b      	str	r3, [r7, #20]
 
 			// Move data to the array
 			memset(tab, '\0', size);
- 8001312:	7bbb      	ldrb	r3, [r7, #14]
- 8001314:	461a      	mov	r2, r3
- 8001316:	2100      	movs	r1, #0
- 8001318:	6878      	ldr	r0, [r7, #4]
- 800131a:	f000 fa5e 	bl	80017da <memset>
+ 8001302:	7bbb      	ldrb	r3, [r7, #14]
+ 8001304:	461a      	mov	r2, r3
+ 8001306:	2100      	movs	r1, #0
+ 8001308:	6878      	ldr	r0, [r7, #4]
+ 800130a:	f000 fa6e 	bl	80017ea <memset>
 			for (i=0; i<get_size; i++) {
- 800131e:	2300      	movs	r3, #0
- 8001320:	f887 3027 	strb.w	r3, [r7, #39]	; 0x27
- 8001324:	e016      	b.n	8001354 <W6100_ReceiveData+0xf4>
+ 800130e:	2300      	movs	r3, #0
+ 8001310:	f887 3027 	strb.w	r3, [r7, #39]	; 0x27
+ 8001314:	e016      	b.n	8001344 <W6100_ReceiveData+0xf4>
 				tab[i] = SPI_W6100_RSOCK((get_start_address+i), sck_nbr, RX_BUF);
- 8001326:	f897 3027 	ldrb.w	r3, [r7, #39]	; 0x27
- 800132a:	b29a      	uxth	r2, r3
- 800132c:	697b      	ldr	r3, [r7, #20]
- 800132e:	b29b      	uxth	r3, r3
- 8001330:	4413      	add	r3, r2
- 8001332:	b298      	uxth	r0, r3
- 8001334:	f897 3027 	ldrb.w	r3, [r7, #39]	; 0x27
- 8001338:	687a      	ldr	r2, [r7, #4]
- 800133a:	18d4      	adds	r4, r2, r3
- 800133c:	7bfb      	ldrb	r3, [r7, #15]
- 800133e:	2203      	movs	r2, #3
- 8001340:	4619      	mov	r1, r3
- 8001342:	f7ff fcca 	bl	8000cda <SPI_W6100_RSOCK>
- 8001346:	4603      	mov	r3, r0
- 8001348:	7023      	strb	r3, [r4, #0]
+ 8001316:	f897 3027 	ldrb.w	r3, [r7, #39]	; 0x27
+ 800131a:	b29a      	uxth	r2, r3
+ 800131c:	697b      	ldr	r3, [r7, #20]
+ 800131e:	b29b      	uxth	r3, r3
+ 8001320:	4413      	add	r3, r2
+ 8001322:	b298      	uxth	r0, r3
+ 8001324:	f897 3027 	ldrb.w	r3, [r7, #39]	; 0x27
+ 8001328:	687a      	ldr	r2, [r7, #4]
+ 800132a:	18d4      	adds	r4, r2, r3
+ 800132c:	7bfb      	ldrb	r3, [r7, #15]
+ 800132e:	2203      	movs	r2, #3
+ 8001330:	4619      	mov	r1, r3
+ 8001332:	f7ff fcca 	bl	8000cca <SPI_W6100_RSOCK>
+ 8001336:	4603      	mov	r3, r0
+ 8001338:	7023      	strb	r3, [r4, #0]
 			for (i=0; i<get_size; i++) {
- 800134a:	f897 3027 	ldrb.w	r3, [r7, #39]	; 0x27
- 800134e:	3301      	adds	r3, #1
- 8001350:	f887 3027 	strb.w	r3, [r7, #39]	; 0x27
- 8001354:	f897 3027 	ldrb.w	r3, [r7, #39]	; 0x27
- 8001358:	6a3a      	ldr	r2, [r7, #32]
- 800135a:	429a      	cmp	r2, r3
- 800135c:	d8e3      	bhi.n	8001326 <W6100_ReceiveData+0xc6>
+ 800133a:	f897 3027 	ldrb.w	r3, [r7, #39]	; 0x27
+ 800133e:	3301      	adds	r3, #1
+ 8001340:	f887 3027 	strb.w	r3, [r7, #39]	; 0x27
+ 8001344:	f897 3027 	ldrb.w	r3, [r7, #39]	; 0x27
+ 8001348:	6a3a      	ldr	r2, [r7, #32]
+ 800134a:	429a      	cmp	r2, r3
+ 800134c:	d8e3      	bhi.n	8001316 <W6100_ReceiveData+0xc6>
 			}
 
 			memcpy(&get_start_address, &dest_adr, get_size);
- 800135e:	f107 0108 	add.w	r1, r7, #8
- 8001362:	f107 0314 	add.w	r3, r7, #20
- 8001366:	6a3a      	ldr	r2, [r7, #32]
- 8001368:	4618      	mov	r0, r3
- 800136a:	f000 fa2b 	bl	80017c4 <memcpy>
+ 800134e:	f107 0108 	add.w	r1, r7, #8
+ 8001352:	f107 0314 	add.w	r3, r7, #20
+ 8001356:	6a3a      	ldr	r2, [r7, #32]
+ 8001358:	4618      	mov	r0, r3
+ 800135a:	f000 fa3b 	bl	80017d4 <memcpy>
 
 			Sn_RX_RD_temp = (SPI_W6100_RSOCK(Sn_RX_RD0, sck_nbr, REG) << 8);
- 800136e:	7bfb      	ldrb	r3, [r7, #15]
- 8001370:	2201      	movs	r2, #1
- 8001372:	4619      	mov	r1, r3
- 8001374:	f44f 700a 	mov.w	r0, #552	; 0x228
- 8001378:	f7ff fcaf 	bl	8000cda <SPI_W6100_RSOCK>
- 800137c:	4603      	mov	r3, r0
- 800137e:	021b      	lsls	r3, r3, #8
- 8001380:	61bb      	str	r3, [r7, #24]
+ 800135e:	7bfb      	ldrb	r3, [r7, #15]
+ 8001360:	2201      	movs	r2, #1
+ 8001362:	4619      	mov	r1, r3
+ 8001364:	f44f 700a 	mov.w	r0, #552	; 0x228
+ 8001368:	f7ff fcaf 	bl	8000cca <SPI_W6100_RSOCK>
+ 800136c:	4603      	mov	r3, r0
+ 800136e:	021b      	lsls	r3, r3, #8
+ 8001370:	61bb      	str	r3, [r7, #24]
 			Sn_RX_RD_temp |= SPI_W6100_RSOCK(Sn_RX_RD1, sck_nbr, REG);
- 8001382:	7bfb      	ldrb	r3, [r7, #15]
- 8001384:	2201      	movs	r2, #1
- 8001386:	4619      	mov	r1, r3
- 8001388:	f240 2029 	movw	r0, #553	; 0x229
- 800138c:	f7ff fca5 	bl	8000cda <SPI_W6100_RSOCK>
- 8001390:	4603      	mov	r3, r0
- 8001392:	461a      	mov	r2, r3
- 8001394:	69bb      	ldr	r3, [r7, #24]
- 8001396:	4313      	orrs	r3, r2
- 8001398:	61bb      	str	r3, [r7, #24]
+ 8001372:	7bfb      	ldrb	r3, [r7, #15]
+ 8001374:	2201      	movs	r2, #1
+ 8001376:	4619      	mov	r1, r3
+ 8001378:	f240 2029 	movw	r0, #553	; 0x229
+ 800137c:	f7ff fca5 	bl	8000cca <SPI_W6100_RSOCK>
+ 8001380:	4603      	mov	r3, r0
+ 8001382:	461a      	mov	r2, r3
+ 8001384:	69bb      	ldr	r3, [r7, #24]
+ 8001386:	4313      	orrs	r3, r2
+ 8001388:	61bb      	str	r3, [r7, #24]
 			Sn_RX_RD_temp += get_size;
- 800139a:	69ba      	ldr	r2, [r7, #24]
- 800139c:	6a3b      	ldr	r3, [r7, #32]
- 800139e:	4413      	add	r3, r2
- 80013a0:	61bb      	str	r3, [r7, #24]
+ 800138a:	69ba      	ldr	r2, [r7, #24]
+ 800138c:	6a3b      	ldr	r3, [r7, #32]
+ 800138e:	4413      	add	r3, r2
+ 8001390:	61bb      	str	r3, [r7, #24]
 			SPI_W6100_WSOCK(Sn_RX_RD0, (Sn_RX_RD_temp>>8), sck_nbr, REG);
- 80013a2:	69bb      	ldr	r3, [r7, #24]
- 80013a4:	0a1b      	lsrs	r3, r3, #8
+ 8001392:	69bb      	ldr	r3, [r7, #24]
+ 8001394:	0a1b      	lsrs	r3, r3, #8
+ 8001396:	b2d9      	uxtb	r1, r3
+ 8001398:	7bfa      	ldrb	r2, [r7, #15]
+ 800139a:	2301      	movs	r3, #1
+ 800139c:	f44f 700a 	mov.w	r0, #552	; 0x228
+ 80013a0:	f7ff fcce 	bl	8000d40 <SPI_W6100_WSOCK>
+			SPI_W6100_WSOCK(Sn_RX_RD1, (Sn_RX_RD_temp), sck_nbr, REG);
+ 80013a4:	69bb      	ldr	r3, [r7, #24]
  80013a6:	b2d9      	uxtb	r1, r3
  80013a8:	7bfa      	ldrb	r2, [r7, #15]
  80013aa:	2301      	movs	r3, #1
- 80013ac:	f44f 700a 	mov.w	r0, #552	; 0x228
- 80013b0:	f7ff fcce 	bl	8000d50 <SPI_W6100_WSOCK>
-			SPI_W6100_WSOCK(Sn_RX_RD1, (Sn_RX_RD_temp), sck_nbr, REG);
- 80013b4:	69bb      	ldr	r3, [r7, #24]
- 80013b6:	b2d9      	uxtb	r1, r3
- 80013b8:	7bfa      	ldrb	r2, [r7, #15]
- 80013ba:	2301      	movs	r3, #1
- 80013bc:	f240 2029 	movw	r0, #553	; 0x229
- 80013c0:	f7ff fcc6 	bl	8000d50 <SPI_W6100_WSOCK>
+ 80013ac:	f240 2029 	movw	r0, #553	; 0x229
+ 80013b0:	f7ff fcc6 	bl	8000d40 <SPI_W6100_WSOCK>
 			SPI_W6100_WSOCK(Sn_CR, 0x40, sck_nbr, REG);
- 80013c4:	7bfa      	ldrb	r2, [r7, #15]
- 80013c6:	2301      	movs	r3, #1
- 80013c8:	2140      	movs	r1, #64	; 0x40
- 80013ca:	2010      	movs	r0, #16
- 80013cc:	f7ff fcc0 	bl	8000d50 <SPI_W6100_WSOCK>
+ 80013b4:	7bfa      	ldrb	r2, [r7, #15]
+ 80013b6:	2301      	movs	r3, #1
+ 80013b8:	2140      	movs	r1, #64	; 0x40
+ 80013ba:	2010      	movs	r0, #16
+ 80013bc:	f7ff fcc0 	bl	8000d40 <SPI_W6100_WSOCK>
 			while((SPI_W6100_RSOCK(Sn_CR, sck_nbr, REG)) != 0x00);
- 80013d0:	bf00      	nop
- 80013d2:	7bfb      	ldrb	r3, [r7, #15]
- 80013d4:	2201      	movs	r2, #1
- 80013d6:	4619      	mov	r1, r3
- 80013d8:	2010      	movs	r0, #16
- 80013da:	f7ff fc7e 	bl	8000cda <SPI_W6100_RSOCK>
- 80013de:	4603      	mov	r3, r0
- 80013e0:	2b00      	cmp	r3, #0
- 80013e2:	d1f6      	bne.n	80013d2 <W6100_ReceiveData+0x172>
+ 80013c0:	bf00      	nop
+ 80013c2:	7bfb      	ldrb	r3, [r7, #15]
+ 80013c4:	2201      	movs	r2, #1
+ 80013c6:	4619      	mov	r1, r3
+ 80013c8:	2010      	movs	r0, #16
+ 80013ca:	f7ff fc7e 	bl	8000cca <SPI_W6100_RSOCK>
+ 80013ce:	4603      	mov	r3, r0
+ 80013d0:	2b00      	cmp	r3, #0
+ 80013d2:	d1f6      	bne.n	80013c2 <W6100_ReceiveData+0x172>
 
 			return 1;	// Return 1 if data was received
- 80013e4:	2301      	movs	r3, #1
- 80013e6:	e000      	b.n	80013ea <W6100_ReceiveData+0x18a>
+ 80013d4:	2301      	movs	r3, #1
+ 80013d6:	e000      	b.n	80013da <W6100_ReceiveData+0x18a>
 	}
 	else 	return 0;	// Return 0 of no data was received
- 80013e8:	2300      	movs	r3, #0
+ 80013d8:	2300      	movs	r3, #0
 }
- 80013ea:	4618      	mov	r0, r3
- 80013ec:	372c      	adds	r7, #44	; 0x2c
- 80013ee:	46bd      	mov	sp, r7
- 80013f0:	bd90      	pop	{r4, r7, pc}
+ 80013da:	4618      	mov	r0, r3
+ 80013dc:	372c      	adds	r7, #44	; 0x2c
+ 80013de:	46bd      	mov	sp, r7
+ 80013e0:	bd90      	pop	{r4, r7, pc}
 
-080013f2 <W6100_TransmitData>:
+080013e2 <W6100_TransmitData>:
 
 void W6100_TransmitData(uint8_t sck_nbr, uint32_t dest_adr, uint8_t * tab, uint8_t size) {
- 80013f2:	b580      	push	{r7, lr}
- 80013f4:	b08a      	sub	sp, #40	; 0x28
- 80013f6:	af00      	add	r7, sp, #0
- 80013f8:	60b9      	str	r1, [r7, #8]
- 80013fa:	607a      	str	r2, [r7, #4]
- 80013fc:	461a      	mov	r2, r3
- 80013fe:	4603      	mov	r3, r0
- 8001400:	73fb      	strb	r3, [r7, #15]
- 8001402:	4613      	mov	r3, r2
- 8001404:	73bb      	strb	r3, [r7, #14]
+ 80013e2:	b580      	push	{r7, lr}
+ 80013e4:	b08a      	sub	sp, #40	; 0x28
+ 80013e6:	af00      	add	r7, sp, #0
+ 80013e8:	60b9      	str	r1, [r7, #8]
+ 80013ea:	607a      	str	r2, [r7, #4]
+ 80013ec:	461a      	mov	r2, r3
+ 80013ee:	4603      	mov	r3, r0
+ 80013f0:	73fb      	strb	r3, [r7, #15]
+ 80013f2:	4613      	mov	r3, r2
+ 80013f4:	73bb      	strb	r3, [r7, #14]
 	uint8_t i;
 	uint8_t send_size = size;
- 8001406:	7bbb      	ldrb	r3, [r7, #14]
- 8001408:	f887 3026 	strb.w	r3, [r7, #38]	; 0x26
+ 80013f6:	7bbb      	ldrb	r3, [r7, #14]
+ 80013f8:	f887 3026 	strb.w	r3, [r7, #38]	; 0x26
 	uint32_t gSn_TX_MAX, get_start_address, Sn_TX_WR_temp, Sn_TX_FSR_temp;
 
 	gSn_TX_MAX = (SPI_W6100_RSOCK(Sn_TX_BSR, sck_nbr, REG) * 1024);						// Socket TX buffer size
- 800140c:	7bfb      	ldrb	r3, [r7, #15]
- 800140e:	2201      	movs	r2, #1
- 8001410:	4619      	mov	r1, r3
- 8001412:	f44f 7000 	mov.w	r0, #512	; 0x200
- 8001416:	f7ff fc60 	bl	8000cda <SPI_W6100_RSOCK>
- 800141a:	4603      	mov	r3, r0
- 800141c:	029b      	lsls	r3, r3, #10
- 800141e:	61fb      	str	r3, [r7, #28]
+ 80013fc:	7bfb      	ldrb	r3, [r7, #15]
+ 80013fe:	2201      	movs	r2, #1
+ 8001400:	4619      	mov	r1, r3
+ 8001402:	f44f 7000 	mov.w	r0, #512	; 0x200
+ 8001406:	f7ff fc60 	bl	8000cca <SPI_W6100_RSOCK>
+ 800140a:	4603      	mov	r3, r0
+ 800140c:	029b      	lsls	r3, r3, #10
+ 800140e:	61fb      	str	r3, [r7, #28]
 
 	if(send_size > gSn_TX_MAX) send_size = gSn_TX_MAX;
- 8001420:	f897 3026 	ldrb.w	r3, [r7, #38]	; 0x26
- 8001424:	69fa      	ldr	r2, [r7, #28]
- 8001426:	429a      	cmp	r2, r3
- 8001428:	d219      	bcs.n	800145e <W6100_TransmitData+0x6c>
- 800142a:	69fb      	ldr	r3, [r7, #28]
- 800142c:	f887 3026 	strb.w	r3, [r7, #38]	; 0x26
+ 8001410:	f897 3026 	ldrb.w	r3, [r7, #38]	; 0x26
+ 8001414:	69fa      	ldr	r2, [r7, #28]
+ 8001416:	429a      	cmp	r2, r3
+ 8001418:	d219      	bcs.n	800144e <W6100_TransmitData+0x6c>
+ 800141a:	69fb      	ldr	r3, [r7, #28]
+ 800141c:	f887 3026 	strb.w	r3, [r7, #38]	; 0x26
 
 
 	while(send_size > Sn_TX_FSR_temp) {													// wait until Socket Tx buffer is free
- 8001430:	e015      	b.n	800145e <W6100_TransmitData+0x6c>
+ 8001420:	e015      	b.n	800144e <W6100_TransmitData+0x6c>
 		Sn_TX_FSR_temp = (SPI_W6100_RSOCK(Sn_TX_FSR0, sck_nbr, REG) << 8);
- 8001432:	7bfb      	ldrb	r3, [r7, #15]
- 8001434:	2201      	movs	r2, #1
- 8001436:	4619      	mov	r1, r3
- 8001438:	f44f 7001 	mov.w	r0, #516	; 0x204
- 800143c:	f7ff fc4d 	bl	8000cda <SPI_W6100_RSOCK>
- 8001440:	4603      	mov	r3, r0
- 8001442:	021b      	lsls	r3, r3, #8
- 8001444:	623b      	str	r3, [r7, #32]
+ 8001422:	7bfb      	ldrb	r3, [r7, #15]
+ 8001424:	2201      	movs	r2, #1
+ 8001426:	4619      	mov	r1, r3
+ 8001428:	f44f 7001 	mov.w	r0, #516	; 0x204
+ 800142c:	f7ff fc4d 	bl	8000cca <SPI_W6100_RSOCK>
+ 8001430:	4603      	mov	r3, r0
+ 8001432:	021b      	lsls	r3, r3, #8
+ 8001434:	623b      	str	r3, [r7, #32]
 		Sn_TX_FSR_temp |= SPI_W6100_RSOCK(Sn_TX_FSR1, sck_nbr, REG);
- 8001446:	7bfb      	ldrb	r3, [r7, #15]
- 8001448:	2201      	movs	r2, #1
- 800144a:	4619      	mov	r1, r3
- 800144c:	f240 2005 	movw	r0, #517	; 0x205
- 8001450:	f7ff fc43 	bl	8000cda <SPI_W6100_RSOCK>
- 8001454:	4603      	mov	r3, r0
- 8001456:	461a      	mov	r2, r3
- 8001458:	6a3b      	ldr	r3, [r7, #32]
- 800145a:	4313      	orrs	r3, r2
- 800145c:	623b      	str	r3, [r7, #32]
+ 8001436:	7bfb      	ldrb	r3, [r7, #15]
+ 8001438:	2201      	movs	r2, #1
+ 800143a:	4619      	mov	r1, r3
+ 800143c:	f240 2005 	movw	r0, #517	; 0x205
+ 8001440:	f7ff fc43 	bl	8000cca <SPI_W6100_RSOCK>
+ 8001444:	4603      	mov	r3, r0
+ 8001446:	461a      	mov	r2, r3
+ 8001448:	6a3b      	ldr	r3, [r7, #32]
+ 800144a:	4313      	orrs	r3, r2
+ 800144c:	623b      	str	r3, [r7, #32]
 	while(send_size > Sn_TX_FSR_temp) {													// wait until Socket Tx buffer is free
- 800145e:	f897 3026 	ldrb.w	r3, [r7, #38]	; 0x26
- 8001462:	6a3a      	ldr	r2, [r7, #32]
- 8001464:	429a      	cmp	r2, r3
- 8001466:	d3e4      	bcc.n	8001432 <W6100_TransmitData+0x40>
+ 800144e:	f897 3026 	ldrb.w	r3, [r7, #38]	; 0x26
+ 8001452:	6a3a      	ldr	r2, [r7, #32]
+ 8001454:	429a      	cmp	r2, r3
+ 8001456:	d3e4      	bcc.n	8001422 <W6100_TransmitData+0x40>
 	}
 
 	get_start_address = (SPI_W6100_RSOCK(Sn_TX_WR0, sck_nbr, REG) << 8);
- 8001468:	7bfb      	ldrb	r3, [r7, #15]
- 800146a:	2201      	movs	r2, #1
- 800146c:	4619      	mov	r1, r3
- 800146e:	f44f 7003 	mov.w	r0, #524	; 0x20c
- 8001472:	f7ff fc32 	bl	8000cda <SPI_W6100_RSOCK>
- 8001476:	4603      	mov	r3, r0
- 8001478:	021b      	lsls	r3, r3, #8
- 800147a:	617b      	str	r3, [r7, #20]
+ 8001458:	7bfb      	ldrb	r3, [r7, #15]
+ 800145a:	2201      	movs	r2, #1
+ 800145c:	4619      	mov	r1, r3
+ 800145e:	f44f 7003 	mov.w	r0, #524	; 0x20c
+ 8001462:	f7ff fc32 	bl	8000cca <SPI_W6100_RSOCK>
+ 8001466:	4603      	mov	r3, r0
+ 8001468:	021b      	lsls	r3, r3, #8
+ 800146a:	617b      	str	r3, [r7, #20]
 	get_start_address |= SPI_W6100_RSOCK(Sn_TX_WR1, sck_nbr, REG);
- 800147c:	7bfb      	ldrb	r3, [r7, #15]
- 800147e:	2201      	movs	r2, #1
- 8001480:	4619      	mov	r1, r3
- 8001482:	f240 200d 	movw	r0, #525	; 0x20d
- 8001486:	f7ff fc28 	bl	8000cda <SPI_W6100_RSOCK>
- 800148a:	4603      	mov	r3, r0
- 800148c:	461a      	mov	r2, r3
- 800148e:	697b      	ldr	r3, [r7, #20]
- 8001490:	4313      	orrs	r3, r2
- 8001492:	617b      	str	r3, [r7, #20]
+ 800146c:	7bfb      	ldrb	r3, [r7, #15]
+ 800146e:	2201      	movs	r2, #1
+ 8001470:	4619      	mov	r1, r3
+ 8001472:	f240 200d 	movw	r0, #525	; 0x20d
+ 8001476:	f7ff fc28 	bl	8000cca <SPI_W6100_RSOCK>
+ 800147a:	4603      	mov	r3, r0
+ 800147c:	461a      	mov	r2, r3
+ 800147e:	697b      	ldr	r3, [r7, #20]
+ 8001480:	4313      	orrs	r3, r2
+ 8001482:	617b      	str	r3, [r7, #20]
 
 
 	Sn_TX_WR_temp = (SPI_W6100_RSOCK(Sn_TX_WR0, sck_nbr, REG) << 8);
- 8001494:	7bfb      	ldrb	r3, [r7, #15]
- 8001496:	2201      	movs	r2, #1
- 8001498:	4619      	mov	r1, r3
- 800149a:	f44f 7003 	mov.w	r0, #524	; 0x20c
- 800149e:	f7ff fc1c 	bl	8000cda <SPI_W6100_RSOCK>
- 80014a2:	4603      	mov	r3, r0
- 80014a4:	021b      	lsls	r3, r3, #8
- 80014a6:	61bb      	str	r3, [r7, #24]
+ 8001484:	7bfb      	ldrb	r3, [r7, #15]
+ 8001486:	2201      	movs	r2, #1
+ 8001488:	4619      	mov	r1, r3
+ 800148a:	f44f 7003 	mov.w	r0, #524	; 0x20c
+ 800148e:	f7ff fc1c 	bl	8000cca <SPI_W6100_RSOCK>
+ 8001492:	4603      	mov	r3, r0
+ 8001494:	021b      	lsls	r3, r3, #8
+ 8001496:	61bb      	str	r3, [r7, #24]
 	Sn_TX_WR_temp |= SPI_W6100_RSOCK(Sn_TX_WR1, sck_nbr, REG);
- 80014a8:	7bfb      	ldrb	r3, [r7, #15]
- 80014aa:	2201      	movs	r2, #1
- 80014ac:	4619      	mov	r1, r3
- 80014ae:	f240 200d 	movw	r0, #525	; 0x20d
- 80014b2:	f7ff fc12 	bl	8000cda <SPI_W6100_RSOCK>
- 80014b6:	4603      	mov	r3, r0
- 80014b8:	461a      	mov	r2, r3
- 80014ba:	69bb      	ldr	r3, [r7, #24]
- 80014bc:	4313      	orrs	r3, r2
- 80014be:	61bb      	str	r3, [r7, #24]
+ 8001498:	7bfb      	ldrb	r3, [r7, #15]
+ 800149a:	2201      	movs	r2, #1
+ 800149c:	4619      	mov	r1, r3
+ 800149e:	f240 200d 	movw	r0, #525	; 0x20d
+ 80014a2:	f7ff fc12 	bl	8000cca <SPI_W6100_RSOCK>
+ 80014a6:	4603      	mov	r3, r0
+ 80014a8:	461a      	mov	r2, r3
+ 80014aa:	69bb      	ldr	r3, [r7, #24]
+ 80014ac:	4313      	orrs	r3, r2
+ 80014ae:	61bb      	str	r3, [r7, #24]
 	Sn_TX_WR_temp += size;
- 80014c0:	7bbb      	ldrb	r3, [r7, #14]
- 80014c2:	69ba      	ldr	r2, [r7, #24]
- 80014c4:	4413      	add	r3, r2
- 80014c6:	61bb      	str	r3, [r7, #24]
+ 80014b0:	7bbb      	ldrb	r3, [r7, #14]
+ 80014b2:	69ba      	ldr	r2, [r7, #24]
+ 80014b4:	4413      	add	r3, r2
+ 80014b6:	61bb      	str	r3, [r7, #24]
 	SPI_W6100_WSOCK(Sn_TX_WR0, (Sn_TX_WR_temp>>8), sck_nbr, REG);
- 80014c8:	69bb      	ldr	r3, [r7, #24]
- 80014ca:	0a1b      	lsrs	r3, r3, #8
+ 80014b8:	69bb      	ldr	r3, [r7, #24]
+ 80014ba:	0a1b      	lsrs	r3, r3, #8
+ 80014bc:	b2d9      	uxtb	r1, r3
+ 80014be:	7bfa      	ldrb	r2, [r7, #15]
+ 80014c0:	2301      	movs	r3, #1
+ 80014c2:	f44f 7003 	mov.w	r0, #524	; 0x20c
+ 80014c6:	f7ff fc3b 	bl	8000d40 <SPI_W6100_WSOCK>
+	SPI_W6100_WSOCK(Sn_TX_WR1, (Sn_TX_WR_temp), sck_nbr, REG);
+ 80014ca:	69bb      	ldr	r3, [r7, #24]
  80014cc:	b2d9      	uxtb	r1, r3
  80014ce:	7bfa      	ldrb	r2, [r7, #15]
  80014d0:	2301      	movs	r3, #1
- 80014d2:	f44f 7003 	mov.w	r0, #524	; 0x20c
- 80014d6:	f7ff fc3b 	bl	8000d50 <SPI_W6100_WSOCK>
-	SPI_W6100_WSOCK(Sn_TX_WR1, (Sn_TX_WR_temp), sck_nbr, REG);
- 80014da:	69bb      	ldr	r3, [r7, #24]
- 80014dc:	b2d9      	uxtb	r1, r3
- 80014de:	7bfa      	ldrb	r2, [r7, #15]
- 80014e0:	2301      	movs	r3, #1
- 80014e2:	f240 200d 	movw	r0, #525	; 0x20d
- 80014e6:	f7ff fc33 	bl	8000d50 <SPI_W6100_WSOCK>
+ 80014d2:	f240 200d 	movw	r0, #525	; 0x20d
+ 80014d6:	f7ff fc33 	bl	8000d40 <SPI_W6100_WSOCK>
 
 	// Move data to the array
 	for (i=0; i<size; i++) {
- 80014ea:	2300      	movs	r3, #0
- 80014ec:	f887 3027 	strb.w	r3, [r7, #39]	; 0x27
- 80014f0:	e014      	b.n	800151c <W6100_TransmitData+0x12a>
+ 80014da:	2300      	movs	r3, #0
+ 80014dc:	f887 3027 	strb.w	r3, [r7, #39]	; 0x27
+ 80014e0:	e014      	b.n	800150c <W6100_TransmitData+0x12a>
 		SPI_W6100_WSOCK((get_start_address+i), tab[i], sck_nbr, TX_BUF);
- 80014f2:	f897 3027 	ldrb.w	r3, [r7, #39]	; 0x27
- 80014f6:	b29a      	uxth	r2, r3
- 80014f8:	697b      	ldr	r3, [r7, #20]
- 80014fa:	b29b      	uxth	r3, r3
- 80014fc:	4413      	add	r3, r2
- 80014fe:	b298      	uxth	r0, r3
- 8001500:	f897 3027 	ldrb.w	r3, [r7, #39]	; 0x27
- 8001504:	687a      	ldr	r2, [r7, #4]
- 8001506:	4413      	add	r3, r2
- 8001508:	7819      	ldrb	r1, [r3, #0]
- 800150a:	7bfa      	ldrb	r2, [r7, #15]
- 800150c:	2302      	movs	r3, #2
- 800150e:	f7ff fc1f 	bl	8000d50 <SPI_W6100_WSOCK>
+ 80014e2:	f897 3027 	ldrb.w	r3, [r7, #39]	; 0x27
+ 80014e6:	b29a      	uxth	r2, r3
+ 80014e8:	697b      	ldr	r3, [r7, #20]
+ 80014ea:	b29b      	uxth	r3, r3
+ 80014ec:	4413      	add	r3, r2
+ 80014ee:	b298      	uxth	r0, r3
+ 80014f0:	f897 3027 	ldrb.w	r3, [r7, #39]	; 0x27
+ 80014f4:	687a      	ldr	r2, [r7, #4]
+ 80014f6:	4413      	add	r3, r2
+ 80014f8:	7819      	ldrb	r1, [r3, #0]
+ 80014fa:	7bfa      	ldrb	r2, [r7, #15]
+ 80014fc:	2302      	movs	r3, #2
+ 80014fe:	f7ff fc1f 	bl	8000d40 <SPI_W6100_WSOCK>
 	for (i=0; i<size; i++) {
- 8001512:	f897 3027 	ldrb.w	r3, [r7, #39]	; 0x27
- 8001516:	3301      	adds	r3, #1
- 8001518:	f887 3027 	strb.w	r3, [r7, #39]	; 0x27
- 800151c:	f897 2027 	ldrb.w	r2, [r7, #39]	; 0x27
- 8001520:	7bbb      	ldrb	r3, [r7, #14]
- 8001522:	429a      	cmp	r2, r3
- 8001524:	d3e5      	bcc.n	80014f2 <W6100_TransmitData+0x100>
+ 8001502:	f897 3027 	ldrb.w	r3, [r7, #39]	; 0x27
+ 8001506:	3301      	adds	r3, #1
+ 8001508:	f887 3027 	strb.w	r3, [r7, #39]	; 0x27
+ 800150c:	f897 2027 	ldrb.w	r2, [r7, #39]	; 0x27
+ 8001510:	7bbb      	ldrb	r3, [r7, #14]
+ 8001512:	429a      	cmp	r2, r3
+ 8001514:	d3e5      	bcc.n	80014e2 <W6100_TransmitData+0x100>
 	}
 
 	memcpy(&get_start_address, &dest_adr, send_size);
- 8001526:	f897 2026 	ldrb.w	r2, [r7, #38]	; 0x26
- 800152a:	f107 0108 	add.w	r1, r7, #8
- 800152e:	f107 0314 	add.w	r3, r7, #20
- 8001532:	4618      	mov	r0, r3
- 8001534:	f000 f946 	bl	80017c4 <memcpy>
+ 8001516:	f897 2026 	ldrb.w	r2, [r7, #38]	; 0x26
+ 800151a:	f107 0108 	add.w	r1, r7, #8
+ 800151e:	f107 0314 	add.w	r3, r7, #20
+ 8001522:	4618      	mov	r0, r3
+ 8001524:	f000 f956 	bl	80017d4 <memcpy>
 
 	SPI_W6100_WSOCK(Sn_CR, 0x20, sck_nbr, REG);											// SEND command sent to TCP/TCP6 mode
- 8001538:	7bfa      	ldrb	r2, [r7, #15]
- 800153a:	2301      	movs	r3, #1
- 800153c:	2120      	movs	r1, #32
- 800153e:	2010      	movs	r0, #16
- 8001540:	f7ff fc06 	bl	8000d50 <SPI_W6100_WSOCK>
+ 8001528:	7bfa      	ldrb	r2, [r7, #15]
+ 800152a:	2301      	movs	r3, #1
+ 800152c:	2120      	movs	r1, #32
+ 800152e:	2010      	movs	r0, #16
+ 8001530:	f7ff fc06 	bl	8000d40 <SPI_W6100_WSOCK>
 	while(SPI_W6100_RSOCK(Sn_CR, sck_nbr, REG) != 0x00);								// Wait for SEND command clear
- 8001544:	bf00      	nop
- 8001546:	7bfb      	ldrb	r3, [r7, #15]
- 8001548:	2201      	movs	r2, #1
- 800154a:	4619      	mov	r1, r3
- 800154c:	2010      	movs	r0, #16
- 800154e:	f7ff fbc4 	bl	8000cda <SPI_W6100_RSOCK>
- 8001552:	4603      	mov	r3, r0
- 8001554:	2b00      	cmp	r3, #0
- 8001556:	d1f6      	bne.n	8001546 <W6100_TransmitData+0x154>
+ 8001534:	bf00      	nop
+ 8001536:	7bfb      	ldrb	r3, [r7, #15]
+ 8001538:	2201      	movs	r2, #1
+ 800153a:	4619      	mov	r1, r3
+ 800153c:	2010      	movs	r0, #16
+ 800153e:	f7ff fbc4 	bl	8000cca <SPI_W6100_RSOCK>
+ 8001542:	4603      	mov	r3, r0
+ 8001544:	2b00      	cmp	r3, #0
+ 8001546:	d1f6      	bne.n	8001536 <W6100_TransmitData+0x154>
 
 	while(((SPI_W6100_RSOCK(Sn_IR, sck_nbr, REG) & 0x10) == 0) && ((SPI_W6100_RSOCK(Sn_IR, sck_nbr, REG) & 0x08) == 0));
- 8001558:	bf00      	nop
- 800155a:	7bfb      	ldrb	r3, [r7, #15]
- 800155c:	2201      	movs	r2, #1
- 800155e:	4619      	mov	r1, r3
- 8001560:	2020      	movs	r0, #32
- 8001562:	f7ff fbba 	bl	8000cda <SPI_W6100_RSOCK>
- 8001566:	4603      	mov	r3, r0
- 8001568:	f003 0310 	and.w	r3, r3, #16
- 800156c:	2b00      	cmp	r3, #0
- 800156e:	d10a      	bne.n	8001586 <W6100_TransmitData+0x194>
- 8001570:	7bfb      	ldrb	r3, [r7, #15]
- 8001572:	2201      	movs	r2, #1
- 8001574:	4619      	mov	r1, r3
- 8001576:	2020      	movs	r0, #32
- 8001578:	f7ff fbaf 	bl	8000cda <SPI_W6100_RSOCK>
- 800157c:	4603      	mov	r3, r0
- 800157e:	f003 0308 	and.w	r3, r3, #8
- 8001582:	2b00      	cmp	r3, #0
- 8001584:	d0e9      	beq.n	800155a <W6100_TransmitData+0x168>
+ 8001548:	bf00      	nop
+ 800154a:	7bfb      	ldrb	r3, [r7, #15]
+ 800154c:	2201      	movs	r2, #1
+ 800154e:	4619      	mov	r1, r3
+ 8001550:	2020      	movs	r0, #32
+ 8001552:	f7ff fbba 	bl	8000cca <SPI_W6100_RSOCK>
+ 8001556:	4603      	mov	r3, r0
+ 8001558:	f003 0310 	and.w	r3, r3, #16
+ 800155c:	2b00      	cmp	r3, #0
+ 800155e:	d10a      	bne.n	8001576 <W6100_TransmitData+0x194>
+ 8001560:	7bfb      	ldrb	r3, [r7, #15]
+ 8001562:	2201      	movs	r2, #1
+ 8001564:	4619      	mov	r1, r3
+ 8001566:	2020      	movs	r0, #32
+ 8001568:	f7ff fbaf 	bl	8000cca <SPI_W6100_RSOCK>
+ 800156c:	4603      	mov	r3, r0
+ 800156e:	f003 0308 	and.w	r3, r3, #8
+ 8001572:	2b00      	cmp	r3, #0
+ 8001574:	d0e9      	beq.n	800154a <W6100_TransmitData+0x168>
 
 	if((SPI_W6100_RSOCK(Sn_IR, sck_nbr, REG) & 0x10) == 0x10) SPI_W6100_WSOCK(Sn_IRCLR, 0x10, sck_nbr, REG);	// Clear SENDOK interrupt
- 8001586:	7bfb      	ldrb	r3, [r7, #15]
- 8001588:	2201      	movs	r2, #1
- 800158a:	4619      	mov	r1, r3
- 800158c:	2020      	movs	r0, #32
- 800158e:	f7ff fba4 	bl	8000cda <SPI_W6100_RSOCK>
- 8001592:	4603      	mov	r3, r0
- 8001594:	f003 0310 	and.w	r3, r3, #16
- 8001598:	2b10      	cmp	r3, #16
- 800159a:	d105      	bne.n	80015a8 <W6100_TransmitData+0x1b6>
- 800159c:	7bfa      	ldrb	r2, [r7, #15]
- 800159e:	2301      	movs	r3, #1
- 80015a0:	2110      	movs	r1, #16
- 80015a2:	2028      	movs	r0, #40	; 0x28
- 80015a4:	f7ff fbd4 	bl	8000d50 <SPI_W6100_WSOCK>
+ 8001576:	7bfb      	ldrb	r3, [r7, #15]
+ 8001578:	2201      	movs	r2, #1
+ 800157a:	4619      	mov	r1, r3
+ 800157c:	2020      	movs	r0, #32
+ 800157e:	f7ff fba4 	bl	8000cca <SPI_W6100_RSOCK>
+ 8001582:	4603      	mov	r3, r0
+ 8001584:	f003 0310 	and.w	r3, r3, #16
+ 8001588:	2b10      	cmp	r3, #16
+ 800158a:	d105      	bne.n	8001598 <W6100_TransmitData+0x1b6>
+ 800158c:	7bfa      	ldrb	r2, [r7, #15]
+ 800158e:	2301      	movs	r3, #1
+ 8001590:	2110      	movs	r1, #16
+ 8001592:	2028      	movs	r0, #40	; 0x28
+ 8001594:	f7ff fbd4 	bl	8000d40 <SPI_W6100_WSOCK>
 
 }
- 80015a8:	bf00      	nop
- 80015aa:	3728      	adds	r7, #40	; 0x28
- 80015ac:	46bd      	mov	sp, r7
- 80015ae:	bd80      	pop	{r7, pc}
+ 8001598:	bf00      	nop
+ 800159a:	3728      	adds	r7, #40	; 0x28
+ 800159c:	46bd      	mov	sp, r7
+ 800159e:	bd80      	pop	{r7, pc}
 
-080015b0 <registerDataReceivedCallback>:
+080015a0 <registerDataReceivedCallback>:
 
-void registerDataReceivedCallback(void (*callback)(void)) {
- 80015b0:	b480      	push	{r7}
- 80015b2:	b083      	sub	sp, #12
- 80015b4:	af00      	add	r7, sp, #0
- 80015b6:	6078      	str	r0, [r7, #4]
+void registerDataReceivedCallback(void (*callback)(char * RxBuf)) {
+ 80015a0:	b480      	push	{r7}
+ 80015a2:	b083      	sub	sp, #12
+ 80015a4:	af00      	add	r7, sp, #0
+ 80015a6:	6078      	str	r0, [r7, #4]
 	dataReceivedCallback = callback;
- 80015b8:	4a04      	ldr	r2, [pc, #16]	; (80015cc <registerDataReceivedCallback+0x1c>)
- 80015ba:	687b      	ldr	r3, [r7, #4]
- 80015bc:	6013      	str	r3, [r2, #0]
+ 80015a8:	4a04      	ldr	r2, [pc, #16]	; (80015bc <registerDataReceivedCallback+0x1c>)
+ 80015aa:	687b      	ldr	r3, [r7, #4]
+ 80015ac:	6013      	str	r3, [r2, #0]
 }
- 80015be:	bf00      	nop
- 80015c0:	370c      	adds	r7, #12
- 80015c2:	46bd      	mov	sp, r7
- 80015c4:	f85d 7b04 	ldr.w	r7, [sp], #4
- 80015c8:	4770      	bx	lr
- 80015ca:	bf00      	nop
- 80015cc:	20000030 	.word	0x20000030
+ 80015ae:	bf00      	nop
+ 80015b0:	370c      	adds	r7, #12
+ 80015b2:	46bd      	mov	sp, r7
+ 80015b4:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 80015b8:	4770      	bx	lr
+ 80015ba:	bf00      	nop
+ 80015bc:	20000030 	.word	0x20000030
 
-080015d0 <registerSocketOpenCallback>:
+080015c0 <registerSocketOpenCallback>:
 
 
 void registerSocketOpenCallback(void (*callback)(uint8_t sck_nbr)) {
- 80015d0:	b480      	push	{r7}
- 80015d2:	b083      	sub	sp, #12
- 80015d4:	af00      	add	r7, sp, #0
- 80015d6:	6078      	str	r0, [r7, #4]
+ 80015c0:	b480      	push	{r7}
+ 80015c2:	b083      	sub	sp, #12
+ 80015c4:	af00      	add	r7, sp, #0
+ 80015c6:	6078      	str	r0, [r7, #4]
 	socketOpenCallback = callback;
- 80015d8:	4a04      	ldr	r2, [pc, #16]	; (80015ec <registerSocketOpenCallback+0x1c>)
- 80015da:	687b      	ldr	r3, [r7, #4]
- 80015dc:	6013      	str	r3, [r2, #0]
+ 80015c8:	4a04      	ldr	r2, [pc, #16]	; (80015dc <registerSocketOpenCallback+0x1c>)
+ 80015ca:	687b      	ldr	r3, [r7, #4]
+ 80015cc:	6013      	str	r3, [r2, #0]
 }
- 80015de:	bf00      	nop
- 80015e0:	370c      	adds	r7, #12
- 80015e2:	46bd      	mov	sp, r7
- 80015e4:	f85d 7b04 	ldr.w	r7, [sp], #4
- 80015e8:	4770      	bx	lr
- 80015ea:	bf00      	nop
- 80015ec:	2000002c 	.word	0x2000002c
+ 80015ce:	bf00      	nop
+ 80015d0:	370c      	adds	r7, #12
+ 80015d2:	46bd      	mov	sp, r7
+ 80015d4:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 80015d8:	4770      	bx	lr
+ 80015da:	bf00      	nop
+ 80015dc:	2000002c 	.word	0x2000002c
 
-080015f0 <registerSocketCloseCallback>:
+080015e0 <registerSocketCloseCallback>:
 
 void registerSocketCloseCallback(void (*callback)(uint8_t sck_nbr)) {
- 80015f0:	b480      	push	{r7}
- 80015f2:	b083      	sub	sp, #12
- 80015f4:	af00      	add	r7, sp, #0
- 80015f6:	6078      	str	r0, [r7, #4]
+ 80015e0:	b480      	push	{r7}
+ 80015e2:	b083      	sub	sp, #12
+ 80015e4:	af00      	add	r7, sp, #0
+ 80015e6:	6078      	str	r0, [r7, #4]
 	socketCloseCallback = callback;
- 80015f8:	4a04      	ldr	r2, [pc, #16]	; (800160c <registerSocketCloseCallback+0x1c>)
- 80015fa:	687b      	ldr	r3, [r7, #4]
- 80015fc:	6013      	str	r3, [r2, #0]
+ 80015e8:	4a04      	ldr	r2, [pc, #16]	; (80015fc <registerSocketCloseCallback+0x1c>)
+ 80015ea:	687b      	ldr	r3, [r7, #4]
+ 80015ec:	6013      	str	r3, [r2, #0]
 }
- 80015fe:	bf00      	nop
- 8001600:	370c      	adds	r7, #12
- 8001602:	46bd      	mov	sp, r7
- 8001604:	f85d 7b04 	ldr.w	r7, [sp], #4
- 8001608:	4770      	bx	lr
- 800160a:	bf00      	nop
- 800160c:	20000028 	.word	0x20000028
+ 80015ee:	bf00      	nop
+ 80015f0:	370c      	adds	r7, #12
+ 80015f2:	46bd      	mov	sp, r7
+ 80015f4:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 80015f8:	4770      	bx	lr
+ 80015fa:	bf00      	nop
+ 80015fc:	20000028 	.word	0x20000028
 
-08001610 <W6100_PassiveCloseSocket>:
+08001600 <W6100_PassiveCloseSocket>:
 
 
 void W6100_PassiveCloseSocket(uint8_t sck_nbr) {
- 8001610:	b580      	push	{r7, lr}
- 8001612:	b082      	sub	sp, #8
- 8001614:	af00      	add	r7, sp, #0
- 8001616:	4603      	mov	r3, r0
- 8001618:	71fb      	strb	r3, [r7, #7]
+ 8001600:	b580      	push	{r7, lr}
+ 8001602:	b082      	sub	sp, #8
+ 8001604:	af00      	add	r7, sp, #0
+ 8001606:	4603      	mov	r3, r0
+ 8001608:	71fb      	strb	r3, [r7, #7]
 	SPI_W6100_WSOCK(Sn_CR, 0x08, sck_nbr, REG);						// Send FIN packet (DISCON command)
- 800161a:	79fa      	ldrb	r2, [r7, #7]
- 800161c:	2301      	movs	r3, #1
- 800161e:	2108      	movs	r1, #8
- 8001620:	2010      	movs	r0, #16
- 8001622:	f7ff fb95 	bl	8000d50 <SPI_W6100_WSOCK>
+ 800160a:	79fa      	ldrb	r2, [r7, #7]
+ 800160c:	2301      	movs	r3, #1
+ 800160e:	2108      	movs	r1, #8
+ 8001610:	2010      	movs	r0, #16
+ 8001612:	f7ff fb95 	bl	8000d40 <SPI_W6100_WSOCK>
 	while((SPI_W6100_RSOCK(Sn_CR, sck_nbr, REG)) != 0x00);			// Wait for DISCON command clear
- 8001626:	bf00      	nop
- 8001628:	79fb      	ldrb	r3, [r7, #7]
- 800162a:	2201      	movs	r2, #1
- 800162c:	4619      	mov	r1, r3
- 800162e:	2010      	movs	r0, #16
- 8001630:	f7ff fb53 	bl	8000cda <SPI_W6100_RSOCK>
- 8001634:	4603      	mov	r3, r0
- 8001636:	2b00      	cmp	r3, #0
- 8001638:	d1f6      	bne.n	8001628 <W6100_PassiveCloseSocket+0x18>
+ 8001616:	bf00      	nop
+ 8001618:	79fb      	ldrb	r3, [r7, #7]
+ 800161a:	2201      	movs	r2, #1
+ 800161c:	4619      	mov	r1, r3
+ 800161e:	2010      	movs	r0, #16
+ 8001620:	f7ff fb53 	bl	8000cca <SPI_W6100_RSOCK>
+ 8001624:	4603      	mov	r3, r0
+ 8001626:	2b00      	cmp	r3, #0
+ 8001628:	d1f6      	bne.n	8001618 <W6100_PassiveCloseSocket+0x18>
 	// Wait for ACK packet
 	while((((SPI_W6100_RSOCK(Sn_IR, sck_nbr, REG)) & 0b10) == 0) && (((SPI_W6100_RSOCK(Sn_IR, sck_nbr, REG)) & 0b1000) == 0));
- 800163a:	bf00      	nop
- 800163c:	79fb      	ldrb	r3, [r7, #7]
- 800163e:	2201      	movs	r2, #1
- 8001640:	4619      	mov	r1, r3
- 8001642:	2020      	movs	r0, #32
- 8001644:	f7ff fb49 	bl	8000cda <SPI_W6100_RSOCK>
- 8001648:	4603      	mov	r3, r0
- 800164a:	f003 0302 	and.w	r3, r3, #2
- 800164e:	2b00      	cmp	r3, #0
- 8001650:	d10a      	bne.n	8001668 <W6100_PassiveCloseSocket+0x58>
- 8001652:	79fb      	ldrb	r3, [r7, #7]
- 8001654:	2201      	movs	r2, #1
- 8001656:	4619      	mov	r1, r3
- 8001658:	2020      	movs	r0, #32
- 800165a:	f7ff fb3e 	bl	8000cda <SPI_W6100_RSOCK>
- 800165e:	4603      	mov	r3, r0
- 8001660:	f003 0308 	and.w	r3, r3, #8
- 8001664:	2b00      	cmp	r3, #0
- 8001666:	d0e9      	beq.n	800163c <W6100_PassiveCloseSocket+0x2c>
+ 800162a:	bf00      	nop
+ 800162c:	79fb      	ldrb	r3, [r7, #7]
+ 800162e:	2201      	movs	r2, #1
+ 8001630:	4619      	mov	r1, r3
+ 8001632:	2020      	movs	r0, #32
+ 8001634:	f7ff fb49 	bl	8000cca <SPI_W6100_RSOCK>
+ 8001638:	4603      	mov	r3, r0
+ 800163a:	f003 0302 	and.w	r3, r3, #2
+ 800163e:	2b00      	cmp	r3, #0
+ 8001640:	d10a      	bne.n	8001658 <W6100_PassiveCloseSocket+0x58>
+ 8001642:	79fb      	ldrb	r3, [r7, #7]
+ 8001644:	2201      	movs	r2, #1
+ 8001646:	4619      	mov	r1, r3
+ 8001648:	2020      	movs	r0, #32
+ 800164a:	f7ff fb3e 	bl	8000cca <SPI_W6100_RSOCK>
+ 800164e:	4603      	mov	r3, r0
+ 8001650:	f003 0308 	and.w	r3, r3, #8
+ 8001654:	2b00      	cmp	r3, #0
+ 8001656:	d0e9      	beq.n	800162c <W6100_PassiveCloseSocket+0x2c>
 
 	if ((((SPI_W6100_RSOCK(Sn_IR, sck_nbr, REG)) & 0b10) == 0b10)) {
- 8001668:	79fb      	ldrb	r3, [r7, #7]
- 800166a:	2201      	movs	r2, #1
- 800166c:	4619      	mov	r1, r3
- 800166e:	2020      	movs	r0, #32
- 8001670:	f7ff fb33 	bl	8000cda <SPI_W6100_RSOCK>
- 8001674:	4603      	mov	r3, r0
- 8001676:	f003 0302 	and.w	r3, r3, #2
- 800167a:	2b02      	cmp	r3, #2
- 800167c:	d10f      	bne.n	800169e <W6100_PassiveCloseSocket+0x8e>
+ 8001658:	79fb      	ldrb	r3, [r7, #7]
+ 800165a:	2201      	movs	r2, #1
+ 800165c:	4619      	mov	r1, r3
+ 800165e:	2020      	movs	r0, #32
+ 8001660:	f7ff fb33 	bl	8000cca <SPI_W6100_RSOCK>
+ 8001664:	4603      	mov	r3, r0
+ 8001666:	f003 0302 	and.w	r3, r3, #2
+ 800166a:	2b02      	cmp	r3, #2
+ 800166c:	d10f      	bne.n	800168e <W6100_PassiveCloseSocket+0x8e>
 		SPI_W6100_WSOCK(Sn_IRCLR, 0x02, sck_nbr, REG);				// Clear DISCON interrupt
- 800167e:	79fa      	ldrb	r2, [r7, #7]
- 8001680:	2301      	movs	r3, #1
- 8001682:	2102      	movs	r1, #2
- 8001684:	2028      	movs	r0, #40	; 0x28
- 8001686:	f7ff fb63 	bl	8000d50 <SPI_W6100_WSOCK>
+ 800166e:	79fa      	ldrb	r2, [r7, #7]
+ 8001670:	2301      	movs	r3, #1
+ 8001672:	2102      	movs	r1, #2
+ 8001674:	2028      	movs	r0, #40	; 0x28
+ 8001676:	f7ff fb63 	bl	8000d40 <SPI_W6100_WSOCK>
 		while((SPI_W6100_RSOCK(Sn_SR, sck_nbr, REG)) != 0x00);		// Wait until socket is CLOSED
- 800168a:	bf00      	nop
- 800168c:	79fb      	ldrb	r3, [r7, #7]
- 800168e:	2201      	movs	r2, #1
- 8001690:	4619      	mov	r1, r3
- 8001692:	2030      	movs	r0, #48	; 0x30
- 8001694:	f7ff fb21 	bl	8000cda <SPI_W6100_RSOCK>
- 8001698:	4603      	mov	r3, r0
- 800169a:	2b00      	cmp	r3, #0
- 800169c:	d1f6      	bne.n	800168c <W6100_PassiveCloseSocket+0x7c>
+ 800167a:	bf00      	nop
+ 800167c:	79fb      	ldrb	r3, [r7, #7]
+ 800167e:	2201      	movs	r2, #1
+ 8001680:	4619      	mov	r1, r3
+ 8001682:	2030      	movs	r0, #48	; 0x30
+ 8001684:	f7ff fb21 	bl	8000cca <SPI_W6100_RSOCK>
+ 8001688:	4603      	mov	r3, r0
+ 800168a:	2b00      	cmp	r3, #0
+ 800168c:	d1f6      	bne.n	800167c <W6100_PassiveCloseSocket+0x7c>
 	}
-
+	/* HARDWARE RESPONSE ON THE SOCKET CLOSE */
 	if(socketCloseCallback) socketCloseCallback(sck_nbr);			// Response for a socket close
- 800169e:	4b06      	ldr	r3, [pc, #24]	; (80016b8 <W6100_PassiveCloseSocket+0xa8>)
- 80016a0:	681b      	ldr	r3, [r3, #0]
- 80016a2:	2b00      	cmp	r3, #0
- 80016a4:	d004      	beq.n	80016b0 <W6100_PassiveCloseSocket+0xa0>
- 80016a6:	4b04      	ldr	r3, [pc, #16]	; (80016b8 <W6100_PassiveCloseSocket+0xa8>)
- 80016a8:	681b      	ldr	r3, [r3, #0]
- 80016aa:	79fa      	ldrb	r2, [r7, #7]
- 80016ac:	4610      	mov	r0, r2
- 80016ae:	4798      	blx	r3
+ 800168e:	4b06      	ldr	r3, [pc, #24]	; (80016a8 <W6100_PassiveCloseSocket+0xa8>)
+ 8001690:	681b      	ldr	r3, [r3, #0]
+ 8001692:	2b00      	cmp	r3, #0
+ 8001694:	d004      	beq.n	80016a0 <W6100_PassiveCloseSocket+0xa0>
+ 8001696:	4b04      	ldr	r3, [pc, #16]	; (80016a8 <W6100_PassiveCloseSocket+0xa8>)
+ 8001698:	681b      	ldr	r3, [r3, #0]
+ 800169a:	79fa      	ldrb	r2, [r7, #7]
+ 800169c:	4610      	mov	r0, r2
+ 800169e:	4798      	blx	r3
+	/* END OF HARDWARE RESPONSE */
 }
- 80016b0:	bf00      	nop
- 80016b2:	3708      	adds	r7, #8
- 80016b4:	46bd      	mov	sp, r7
- 80016b6:	bd80      	pop	{r7, pc}
- 80016b8:	20000028 	.word	0x20000028
+ 80016a0:	bf00      	nop
+ 80016a2:	3708      	adds	r7, #8
+ 80016a4:	46bd      	mov	sp, r7
+ 80016a6:	bd80      	pop	{r7, pc}
+ 80016a8:	20000028 	.word	0x20000028
 
-080016bc <EXTI9_5_IRQHandler>:
+080016ac <EXTI9_5_IRQHandler>:
 
 
 // W6100 external interrupt handler (line PC5)
 // Fired when data is received by W6100 ETH
 __attribute__((interrupt)) void EXTI9_5_IRQHandler(void) {
- 80016bc:	4668      	mov	r0, sp
- 80016be:	f020 0107 	bic.w	r1, r0, #7
- 80016c2:	468d      	mov	sp, r1
- 80016c4:	b589      	push	{r0, r3, r7, lr}
- 80016c6:	af00      	add	r7, sp, #0
+ 80016ac:	4668      	mov	r0, sp
+ 80016ae:	f020 0107 	bic.w	r1, r0, #7
+ 80016b2:	468d      	mov	sp, r1
+ 80016b4:	b581      	push	{r0, r7, lr}
+ 80016b6:	b08b      	sub	sp, #44	; 0x2c
+ 80016b8:	af00      	add	r7, sp, #0
+
+	char rx_buf[40];
+
 	if(EXTI->PR & EXTI_PR_PR5) {
- 80016c8:	4b15      	ldr	r3, [pc, #84]	; (8001720 <EXTI9_5_IRQHandler+0x64>)
- 80016ca:	695b      	ldr	r3, [r3, #20]
- 80016cc:	f003 0320 	and.w	r3, r3, #32
- 80016d0:	2b00      	cmp	r3, #0
- 80016d2:	d01e      	beq.n	8001712 <EXTI9_5_IRQHandler+0x56>
+ 80016ba:	4b1c      	ldr	r3, [pc, #112]	; (800172c <EXTI9_5_IRQHandler+0x80>)
+ 80016bc:	695b      	ldr	r3, [r3, #20]
+ 80016be:	f003 0320 	and.w	r3, r3, #32
+ 80016c2:	2b00      	cmp	r3, #0
+ 80016c4:	d02a      	beq.n	800171c <EXTI9_5_IRQHandler+0x70>
 		EXTI->PR = EXTI_PR_PR5;		// Clear ISR flag
- 80016d4:	4b12      	ldr	r3, [pc, #72]	; (8001720 <EXTI9_5_IRQHandler+0x64>)
- 80016d6:	2220      	movs	r2, #32
- 80016d8:	615a      	str	r2, [r3, #20]
+ 80016c6:	4b19      	ldr	r3, [pc, #100]	; (800172c <EXTI9_5_IRQHandler+0x80>)
+ 80016c8:	2220      	movs	r2, #32
+ 80016ca:	615a      	str	r2, [r3, #20]
 		/* W6100: Generic Interrupt fired */
-		// Check if RECEIVE ISR was fired
+		// Check if W6100 RECEIVE ISR was fired
 		if(SPI_W6100_RCR(SIR) && 0x01){
- 80016da:	f242 1001 	movw	r0, #8449	; 0x2101
- 80016de:	f7ff fab3 	bl	8000c48 <SPI_W6100_RCR>
- 80016e2:	4603      	mov	r3, r0
- 80016e4:	2b00      	cmp	r3, #0
- 80016e6:	d014      	beq.n	8001712 <EXTI9_5_IRQHandler+0x56>
-			// Check if SOCKET 1 data was received
+ 80016cc:	f242 1001 	movw	r0, #8449	; 0x2101
+ 80016d0:	f7ff fab2 	bl	8000c38 <SPI_W6100_RCR>
+ 80016d4:	4603      	mov	r3, r0
+ 80016d6:	2b00      	cmp	r3, #0
+ 80016d8:	d020      	beq.n	800171c <EXTI9_5_IRQHandler+0x70>
+			/* Check if SOCKET 0 data was received */
 			if(SPI_W6100_RSOCK(Sn_IR, 0, REG) && 0x04) {
- 80016e8:	2201      	movs	r2, #1
- 80016ea:	2100      	movs	r1, #0
- 80016ec:	2020      	movs	r0, #32
- 80016ee:	f7ff faf4 	bl	8000cda <SPI_W6100_RSOCK>
- 80016f2:	4603      	mov	r3, r0
- 80016f4:	2b00      	cmp	r3, #0
- 80016f6:	d00c      	beq.n	8001712 <EXTI9_5_IRQHandler+0x56>
-				if(dataReceivedCallback) dataReceivedCallback();	// Callback function
- 80016f8:	4b0a      	ldr	r3, [pc, #40]	; (8001724 <EXTI9_5_IRQHandler+0x68>)
- 80016fa:	681b      	ldr	r3, [r3, #0]
- 80016fc:	2b00      	cmp	r3, #0
- 80016fe:	d002      	beq.n	8001706 <EXTI9_5_IRQHandler+0x4a>
- 8001700:	4b08      	ldr	r3, [pc, #32]	; (8001724 <EXTI9_5_IRQHandler+0x68>)
- 8001702:	681b      	ldr	r3, [r3, #0]
- 8001704:	4798      	blx	r3
-				SPI_W6100_WSOCK(Sn_IRCLR, 0x04, 0, REG);			// Clear data interrupt (must be after callback!)
- 8001706:	2301      	movs	r3, #1
- 8001708:	2200      	movs	r2, #0
- 800170a:	2104      	movs	r1, #4
- 800170c:	2028      	movs	r0, #40	; 0x28
- 800170e:	f7ff fb1f 	bl	8000d50 <SPI_W6100_WSOCK>
+ 80016da:	2201      	movs	r2, #1
+ 80016dc:	2100      	movs	r1, #0
+ 80016de:	2020      	movs	r0, #32
+ 80016e0:	f7ff faf3 	bl	8000cca <SPI_W6100_RSOCK>
+ 80016e4:	4603      	mov	r3, r0
+ 80016e6:	2b00      	cmp	r3, #0
+ 80016e8:	d018      	beq.n	800171c <EXTI9_5_IRQHandler+0x70>
+				if (W6100_ReceiveData(0, socket_dest_adr[0], (uint8_t*)rx_buf, sizeof(rx_buf))) {		// Check if data arrived
+ 80016ea:	4b11      	ldr	r3, [pc, #68]	; (8001730 <EXTI9_5_IRQHandler+0x84>)
+ 80016ec:	6819      	ldr	r1, [r3, #0]
+ 80016ee:	463a      	mov	r2, r7
+ 80016f0:	2328      	movs	r3, #40	; 0x28
+ 80016f2:	2000      	movs	r0, #0
+ 80016f4:	f7ff fdac 	bl	8001250 <W6100_ReceiveData>
+ 80016f8:	4603      	mov	r3, r0
+ 80016fa:	2b00      	cmp	r3, #0
+ 80016fc:	d008      	beq.n	8001710 <EXTI9_5_IRQHandler+0x64>
+					/* HARDWARE RESPONSE ON DATA RECEIVED FROM SOCKET[0] */
+					if(dataReceivedCallback) dataReceivedCallback(rx_buf);	// Callback function
+ 80016fe:	4b0d      	ldr	r3, [pc, #52]	; (8001734 <EXTI9_5_IRQHandler+0x88>)
+ 8001700:	681b      	ldr	r3, [r3, #0]
+ 8001702:	2b00      	cmp	r3, #0
+ 8001704:	d004      	beq.n	8001710 <EXTI9_5_IRQHandler+0x64>
+ 8001706:	4b0b      	ldr	r3, [pc, #44]	; (8001734 <EXTI9_5_IRQHandler+0x88>)
+ 8001708:	681b      	ldr	r3, [r3, #0]
+ 800170a:	463a      	mov	r2, r7
+ 800170c:	4610      	mov	r0, r2
+ 800170e:	4798      	blx	r3
+					/* END OF HARDWARE RESPONSE */
+				}
+				SPI_W6100_WSOCK(Sn_IRCLR, 0x04, 0, REG);					// Clear data interrupt (must be after callback!)
+ 8001710:	2301      	movs	r3, #1
+ 8001712:	2200      	movs	r2, #0
+ 8001714:	2104      	movs	r1, #4
+ 8001716:	2028      	movs	r0, #40	; 0x28
+ 8001718:	f7ff fb12 	bl	8000d40 <SPI_W6100_WSOCK>
 			}
 
 		}
 	}
 }
- 8001712:	bf00      	nop
- 8001714:	46bd      	mov	sp, r7
- 8001716:	e8bd 4089 	ldmia.w	sp!, {r0, r3, r7, lr}
- 800171a:	4685      	mov	sp, r0
- 800171c:	4770      	bx	lr
- 800171e:	bf00      	nop
- 8001720:	40013c00 	.word	0x40013c00
- 8001724:	20000030 	.word	0x20000030
+ 800171c:	bf00      	nop
+ 800171e:	372c      	adds	r7, #44	; 0x2c
+ 8001720:	46bd      	mov	sp, r7
+ 8001722:	e8bd 4081 	ldmia.w	sp!, {r0, r7, lr}
+ 8001726:	4685      	mov	sp, r0
+ 8001728:	4770      	bx	lr
+ 800172a:	bf00      	nop
+ 800172c:	40013c00 	.word	0x40013c00
+ 8001730:	20000068 	.word	0x20000068
+ 8001734:	20000030 	.word	0x20000030
 
-08001728 <Reset_Handler>:
+08001738 <Reset_Handler>:
 
     .section  .text.Reset_Handler
   .weak  Reset_Handler
   .type  Reset_Handler, %function
 Reset_Handler:  
   ldr   sp, =_estack     /* set stack pointer */
- 8001728:	f8df d034 	ldr.w	sp, [pc, #52]	; 8001760 <LoopFillZerobss+0x14>
+ 8001738:	f8df d034 	ldr.w	sp, [pc, #52]	; 8001770 <LoopFillZerobss+0x14>
 
 /* Copy the data segment initializers from flash to SRAM */  
   movs  r1, #0
- 800172c:	2100      	movs	r1, #0
+ 800173c:	2100      	movs	r1, #0
   b  LoopCopyDataInit
- 800172e:	e003      	b.n	8001738 <LoopCopyDataInit>
+ 800173e:	e003      	b.n	8001748 <LoopCopyDataInit>
 
-08001730 <CopyDataInit>:
+08001740 <CopyDataInit>:
 
 CopyDataInit:
   ldr  r3, =_sidata
- 8001730:	4b0c      	ldr	r3, [pc, #48]	; (8001764 <LoopFillZerobss+0x18>)
+ 8001740:	4b0c      	ldr	r3, [pc, #48]	; (8001774 <LoopFillZerobss+0x18>)
   ldr  r3, [r3, r1]
- 8001732:	585b      	ldr	r3, [r3, r1]
+ 8001742:	585b      	ldr	r3, [r3, r1]
   str  r3, [r0, r1]
- 8001734:	5043      	str	r3, [r0, r1]
+ 8001744:	5043      	str	r3, [r0, r1]
   adds  r1, r1, #4
- 8001736:	3104      	adds	r1, #4
+ 8001746:	3104      	adds	r1, #4
 
-08001738 <LoopCopyDataInit>:
+08001748 <LoopCopyDataInit>:
     
 LoopCopyDataInit:
   ldr  r0, =_sdata
- 8001738:	480b      	ldr	r0, [pc, #44]	; (8001768 <LoopFillZerobss+0x1c>)
+ 8001748:	480b      	ldr	r0, [pc, #44]	; (8001778 <LoopFillZerobss+0x1c>)
   ldr  r3, =_edata
- 800173a:	4b0c      	ldr	r3, [pc, #48]	; (800176c <LoopFillZerobss+0x20>)
+ 800174a:	4b0c      	ldr	r3, [pc, #48]	; (800177c <LoopFillZerobss+0x20>)
   adds  r2, r0, r1
- 800173c:	1842      	adds	r2, r0, r1
+ 800174c:	1842      	adds	r2, r0, r1
   cmp  r2, r3
- 800173e:	429a      	cmp	r2, r3
+ 800174e:	429a      	cmp	r2, r3
   bcc  CopyDataInit
- 8001740:	d3f6      	bcc.n	8001730 <CopyDataInit>
+ 8001750:	d3f6      	bcc.n	8001740 <CopyDataInit>
   ldr  r2, =_sbss
- 8001742:	4a0b      	ldr	r2, [pc, #44]	; (8001770 <LoopFillZerobss+0x24>)
+ 8001752:	4a0b      	ldr	r2, [pc, #44]	; (8001780 <LoopFillZerobss+0x24>)
   b  LoopFillZerobss
- 8001744:	e002      	b.n	800174c <LoopFillZerobss>
+ 8001754:	e002      	b.n	800175c <LoopFillZerobss>
 
-08001746 <FillZerobss>:
+08001756 <FillZerobss>:
 /* Zero fill the bss segment. */  
 FillZerobss:
   movs  r3, #0
- 8001746:	2300      	movs	r3, #0
+ 8001756:	2300      	movs	r3, #0
   str  r3, [r2], #4
- 8001748:	f842 3b04 	str.w	r3, [r2], #4
+ 8001758:	f842 3b04 	str.w	r3, [r2], #4
 
-0800174c <LoopFillZerobss>:
+0800175c <LoopFillZerobss>:
     
 LoopFillZerobss:
   ldr  r3, = _ebss
- 800174c:	4b09      	ldr	r3, [pc, #36]	; (8001774 <LoopFillZerobss+0x28>)
+ 800175c:	4b09      	ldr	r3, [pc, #36]	; (8001784 <LoopFillZerobss+0x28>)
   cmp  r2, r3
- 800174e:	429a      	cmp	r2, r3
+ 800175e:	429a      	cmp	r2, r3
   bcc  FillZerobss
- 8001750:	d3f9      	bcc.n	8001746 <FillZerobss>
+ 8001760:	d3f9      	bcc.n	8001756 <FillZerobss>
 
 /* Call the clock system intitialization function.*/
   bl  SystemInit   
- 8001752:	f7ff fa21 	bl	8000b98 <SystemInit>
+ 8001762:	f7ff fa11 	bl	8000b88 <SystemInit>
 /* Call static constructors */
     bl __libc_init_array
- 8001756:	f000 f811 	bl	800177c <__libc_init_array>
+ 8001766:	f000 f811 	bl	800178c <__libc_init_array>
 /* Call the application's entry point.*/
   bl  main
- 800175a:	f7ff f9bf 	bl	8000adc <main>
+ 800176a:	f7ff f9af 	bl	8000acc <main>
   bx  lr    
- 800175e:	4770      	bx	lr
+ 800176e:	4770      	bx	lr
   ldr   sp, =_estack     /* set stack pointer */
- 8001760:	20020000 	.word	0x20020000
+ 8001770:	20020000 	.word	0x20020000
   ldr  r3, =_sidata
- 8001764:	08001890 	.word	0x08001890
+ 8001774:	080018a4 	.word	0x080018a4
   ldr  r0, =_sdata
- 8001768:	20000000 	.word	0x20000000
+ 8001778:	20000000 	.word	0x20000000
   ldr  r3, =_edata
- 800176c:	20000000 	.word	0x20000000
+ 800177c:	20000000 	.word	0x20000000
   ldr  r2, =_sbss
- 8001770:	20000000 	.word	0x20000000
+ 8001780:	20000000 	.word	0x20000000
   ldr  r3, = _ebss
- 8001774:	20000094 	.word	0x20000094
+ 8001784:	20000070 	.word	0x20000070
 
-08001778 <ADC_IRQHandler>:
+08001788 <ADC_IRQHandler>:
  * @retval None       
 */
     .section  .text.Default_Handler,"ax",%progbits
 Default_Handler:
 Infinite_Loop:
   b  Infinite_Loop
- 8001778:	e7fe      	b.n	8001778 <ADC_IRQHandler>
+ 8001788:	e7fe      	b.n	8001788 <ADC_IRQHandler>
 	...
 
-0800177c <__libc_init_array>:
- 800177c:	b570      	push	{r4, r5, r6, lr}
- 800177e:	4e0d      	ldr	r6, [pc, #52]	; (80017b4 <__libc_init_array+0x38>)
- 8001780:	4c0d      	ldr	r4, [pc, #52]	; (80017b8 <__libc_init_array+0x3c>)
- 8001782:	1ba4      	subs	r4, r4, r6
- 8001784:	10a4      	asrs	r4, r4, #2
- 8001786:	2500      	movs	r5, #0
- 8001788:	42a5      	cmp	r5, r4
- 800178a:	d109      	bne.n	80017a0 <__libc_init_array+0x24>
- 800178c:	4e0b      	ldr	r6, [pc, #44]	; (80017bc <__libc_init_array+0x40>)
- 800178e:	4c0c      	ldr	r4, [pc, #48]	; (80017c0 <__libc_init_array+0x44>)
- 8001790:	f000 f82c 	bl	80017ec <_init>
- 8001794:	1ba4      	subs	r4, r4, r6
- 8001796:	10a4      	asrs	r4, r4, #2
- 8001798:	2500      	movs	r5, #0
- 800179a:	42a5      	cmp	r5, r4
- 800179c:	d105      	bne.n	80017aa <__libc_init_array+0x2e>
- 800179e:	bd70      	pop	{r4, r5, r6, pc}
- 80017a0:	f856 3025 	ldr.w	r3, [r6, r5, lsl #2]
- 80017a4:	4798      	blx	r3
- 80017a6:	3501      	adds	r5, #1
- 80017a8:	e7ee      	b.n	8001788 <__libc_init_array+0xc>
- 80017aa:	f856 3025 	ldr.w	r3, [r6, r5, lsl #2]
- 80017ae:	4798      	blx	r3
- 80017b0:	3501      	adds	r5, #1
- 80017b2:	e7f2      	b.n	800179a <__libc_init_array+0x1e>
- 80017b4:	08001888 	.word	0x08001888
- 80017b8:	08001888 	.word	0x08001888
- 80017bc:	08001888 	.word	0x08001888
- 80017c0:	0800188c 	.word	0x0800188c
+0800178c <__libc_init_array>:
+ 800178c:	b570      	push	{r4, r5, r6, lr}
+ 800178e:	4e0d      	ldr	r6, [pc, #52]	; (80017c4 <__libc_init_array+0x38>)
+ 8001790:	4c0d      	ldr	r4, [pc, #52]	; (80017c8 <__libc_init_array+0x3c>)
+ 8001792:	1ba4      	subs	r4, r4, r6
+ 8001794:	10a4      	asrs	r4, r4, #2
+ 8001796:	2500      	movs	r5, #0
+ 8001798:	42a5      	cmp	r5, r4
+ 800179a:	d109      	bne.n	80017b0 <__libc_init_array+0x24>
+ 800179c:	4e0b      	ldr	r6, [pc, #44]	; (80017cc <__libc_init_array+0x40>)
+ 800179e:	4c0c      	ldr	r4, [pc, #48]	; (80017d0 <__libc_init_array+0x44>)
+ 80017a0:	f000 f82c 	bl	80017fc <_init>
+ 80017a4:	1ba4      	subs	r4, r4, r6
+ 80017a6:	10a4      	asrs	r4, r4, #2
+ 80017a8:	2500      	movs	r5, #0
+ 80017aa:	42a5      	cmp	r5, r4
+ 80017ac:	d105      	bne.n	80017ba <__libc_init_array+0x2e>
+ 80017ae:	bd70      	pop	{r4, r5, r6, pc}
+ 80017b0:	f856 3025 	ldr.w	r3, [r6, r5, lsl #2]
+ 80017b4:	4798      	blx	r3
+ 80017b6:	3501      	adds	r5, #1
+ 80017b8:	e7ee      	b.n	8001798 <__libc_init_array+0xc>
+ 80017ba:	f856 3025 	ldr.w	r3, [r6, r5, lsl #2]
+ 80017be:	4798      	blx	r3
+ 80017c0:	3501      	adds	r5, #1
+ 80017c2:	e7f2      	b.n	80017aa <__libc_init_array+0x1e>
+ 80017c4:	0800189c 	.word	0x0800189c
+ 80017c8:	0800189c 	.word	0x0800189c
+ 80017cc:	0800189c 	.word	0x0800189c
+ 80017d0:	080018a0 	.word	0x080018a0
 
-080017c4 <memcpy>:
- 80017c4:	b510      	push	{r4, lr}
- 80017c6:	1e43      	subs	r3, r0, #1
- 80017c8:	440a      	add	r2, r1
- 80017ca:	4291      	cmp	r1, r2
- 80017cc:	d100      	bne.n	80017d0 <memcpy+0xc>
- 80017ce:	bd10      	pop	{r4, pc}
- 80017d0:	f811 4b01 	ldrb.w	r4, [r1], #1
- 80017d4:	f803 4f01 	strb.w	r4, [r3, #1]!
- 80017d8:	e7f7      	b.n	80017ca <memcpy+0x6>
+080017d4 <memcpy>:
+ 80017d4:	b510      	push	{r4, lr}
+ 80017d6:	1e43      	subs	r3, r0, #1
+ 80017d8:	440a      	add	r2, r1
+ 80017da:	4291      	cmp	r1, r2
+ 80017dc:	d100      	bne.n	80017e0 <memcpy+0xc>
+ 80017de:	bd10      	pop	{r4, pc}
+ 80017e0:	f811 4b01 	ldrb.w	r4, [r1], #1
+ 80017e4:	f803 4f01 	strb.w	r4, [r3, #1]!
+ 80017e8:	e7f7      	b.n	80017da <memcpy+0x6>
 
-080017da <memset>:
- 80017da:	4402      	add	r2, r0
- 80017dc:	4603      	mov	r3, r0
- 80017de:	4293      	cmp	r3, r2
- 80017e0:	d100      	bne.n	80017e4 <memset+0xa>
- 80017e2:	4770      	bx	lr
- 80017e4:	f803 1b01 	strb.w	r1, [r3], #1
- 80017e8:	e7f9      	b.n	80017de <memset+0x4>
+080017ea <memset>:
+ 80017ea:	4402      	add	r2, r0
+ 80017ec:	4603      	mov	r3, r0
+ 80017ee:	4293      	cmp	r3, r2
+ 80017f0:	d100      	bne.n	80017f4 <memset+0xa>
+ 80017f2:	4770      	bx	lr
+ 80017f4:	f803 1b01 	strb.w	r1, [r3], #1
+ 80017f8:	e7f9      	b.n	80017ee <memset+0x4>
 	...
 
-080017ec <_init>:
- 80017ec:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
- 80017ee:	bf00      	nop
- 80017f0:	bcf8      	pop	{r3, r4, r5, r6, r7}
- 80017f2:	bc08      	pop	{r3}
- 80017f4:	469e      	mov	lr, r3
- 80017f6:	4770      	bx	lr
+080017fc <_init>:
+ 80017fc:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+ 80017fe:	bf00      	nop
+ 8001800:	bcf8      	pop	{r3, r4, r5, r6, r7}
+ 8001802:	bc08      	pop	{r3}
+ 8001804:	469e      	mov	lr, r3
+ 8001806:	4770      	bx	lr
 
-080017f8 <_fini>:
- 80017f8:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
- 80017fa:	bf00      	nop
- 80017fc:	bcf8      	pop	{r3, r4, r5, r6, r7}
- 80017fe:	bc08      	pop	{r3}
- 8001800:	469e      	mov	lr, r3
- 8001802:	4770      	bx	lr
+08001808 <_fini>:
+ 8001808:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+ 800180a:	bf00      	nop
+ 800180c:	bcf8      	pop	{r3, r4, r5, r6, r7}
+ 800180e:	bc08      	pop	{r3}
+ 8001810:	469e      	mov	lr, r3
+ 8001812:	4770      	bx	lr
