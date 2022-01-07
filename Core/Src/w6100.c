@@ -340,7 +340,7 @@ __attribute__((interrupt)) void EXTI9_5_IRQHandler(void) {
 	if(EXTI->PR & EXTI_PR_PR5) {
 		EXTI->PR = EXTI_PR_PR5;		// Clear ISR flag
 		/* W6100: Generic Interrupt fired */
-		// Check if W6100 RECEIVE ISR was fired
+		// Check if W6100 RECEIVE ISR for Socket 0 was fired
 		if(SPI_W6100_RCR(SIR) && 0x01){
 			/* Check if SOCKET 0 data was received */
 			if(SPI_W6100_RSOCK(Sn_IR, 0, REG) && 0x04) {

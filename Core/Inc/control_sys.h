@@ -9,6 +9,7 @@
 #define INC_CONTROL_SYS_H_
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include "stm32f405xx.h"
 #include "config.h"
@@ -18,9 +19,6 @@
 // *** Update this variable with a number of CAN message types which can be TRANSMITTED ***
 #define CAN_MSG_CNT 2
 
-
-// Ethernet TCP/IP auxiliary variables
-//char rx_dat[40];				// Ethernet socket buffer
 
 
 CAN_MESSAGE canMessages[CAN_MSG_CNT];

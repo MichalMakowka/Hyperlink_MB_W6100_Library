@@ -66,6 +66,7 @@ void SystemRegisterCFG(void) {
 
 	// IO-Link Config
 	GPIOB->MODER |= GPIO_MODER_MODER14_0;		// EN_L+ pin: output
+	GPIOB->PUPDR |= GPIO_PUPDR_PUPD14_1;		// EN_L+ pin: pull down
 
 	SysTick_Config(32000000 / 1000);
 	// Reset the SysTick counter value.

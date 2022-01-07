@@ -41,13 +41,14 @@ int main(void)
 	uint8_t rxTotalSize = 0;
 
 	for (uint8_t i=0; i<7; i++) {
-		SPI_W6100_WSOCK(Sn_TX_BSR, 0x08, i, REG);		// assign 4 Kbytes TX buffer per SOCKET
-		SPI_W6100_WSOCK(Sn_RX_BSR, 0x08, i, REG);		// assign 4 Kbytes RX buffer per SOCKET
-		txTotalSize += 0x08;
-		rxTotalSize += 0x08;
+		SPI_W6100_WSOCK(Sn_TX_BSR, 0x04, i, REG);		// assign 4 Kbytes TX buffer per SOCKET
+		SPI_W6100_WSOCK(Sn_RX_BSR, 0x04, i, REG);		// assign 4 Kbytes RX buffer per SOCKET
+		txTotalSize += 0x04;
+		rxTotalSize += 0x04;
 	}
 
 	socket_dest_adr[0] = W6100_OpenTCPSocket(0, 5000);		// Open TCP socket 0 on port 5000 and return its destination address
+	socket_dest_adr[1] = W6100_OpenTCPSocket(1, 5010);		// Open TCP socket 1 on port 5000 and return its destination address
 
 
 	CanInit();
@@ -55,10 +56,21 @@ int main(void)
 	Can_Set_Filter(0x03, STANDARD_FORMAT);
 	Can_Set_Filter(0x04, STANDARD_FORMAT);
 
-
+	int idxx = 0;
+	char buf[15] = "";
 	/* MAIN Loop */
 	while (1) {
 
+		if (!(GPIOA->IDR & GPIO_IDR_ID3)) {
+			GPIOC->ODR &= ~GPIO_ODR_OD11;
+			idxx++;
+			sprintf(buf, "cnt: %i\n", idxx);
+			W6100_TransmitData(1, socket_dest_adr[1], (uint8_t*)buf, sizeof(buf));
+			while(!(GPIOA->IDR & GPIO_IDR_ID3));
+
+		} else {
+			GPIOC->ODR |= GPIO_ODR_OD11;
+		}
 
 
   }

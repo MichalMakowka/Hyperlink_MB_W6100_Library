@@ -29,37 +29,38 @@ void canVariables(CAN_MESSAGE * cmg) {
 
 void dataPacketReceived(char * RxBuf) {
 	/* Reaction on Data Received */
-	// Check Ethernet
 
+	// Check Ethernet
 		if (!strcmp(RxBuf, "systems_on\n")) {
-			GPIOC->ODR &= ~GPIO_ODR_OD12;
+			GPIOB->ODR |= GPIO_ODR_OD14;
 			// Send msg to the client
-			W6100_TransmitData(0, socket_dest_adr[0], (uint8_t*)"Systems Enabled\n", sizeof("Systems Enabled\n"));
+			W6100_TransmitData(1, socket_dest_adr[1], (uint8_t*)"Systems Enabled\n", sizeof("Systems Enabled\n"));
 			Can_Tx_Msg(&canMessages[can_on_msg]);
 
 		}
 		else if (!strcmp(RxBuf, "systems_off\n"))	{
-			GPIOC->ODR |= GPIO_ODR_OD12;
+			GPIOB->ODR &= ~GPIO_ODR_OD14;
 			// Send msg to the client
-			W6100_TransmitData(0, socket_dest_adr[0], (uint8_t*)"Systems Disabled\n", sizeof("Systems Disabled\n"));
+			W6100_TransmitData(1, socket_dest_adr[1], (uint8_t*)"Systems Disabled\n", sizeof("Systems Disabled\n"));
 			// Send CAN frame
 			Can_Tx_Msg(&canMessages[can_off_msg]);
 		}
 		else if (!strcmp(RxBuf, "systems_st\n"))	{
-			GPIOC->ODR ^= GPIO_ODR_OD12;
+
 			// Send msg to the client
-			W6100_TransmitData(0, socket_dest_adr[0], (uint8_t*)"Checking status...\n", sizeof("Checking status...\n"));
+			W6100_TransmitData(1, socket_dest_adr[1], (uint8_t*)"System active\n", sizeof("System active\n"));
+
 		}
 		else {
 			// Send msg to the client
-			W6100_TransmitData(0, socket_dest_adr[0], (uint8_t*)"Command unknown...\n", sizeof("Command unknown...\n"));
+			W6100_TransmitData(1, socket_dest_adr[1], (uint8_t*)"Command unknown...\n", sizeof("Command unknown...\n"));
 		}
 
 
 }
 
 void canMessageReceived(CAN_MESSAGE msg) {
-	GPIOC->ODR ^= GPIO_ODR_OD11;
+
 }
 
 void serverOffResponse(uint8_t sck_nbr) {
