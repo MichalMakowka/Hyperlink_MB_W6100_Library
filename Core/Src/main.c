@@ -53,8 +53,8 @@ int main(void)
 
 	CanInit();
 
-	Can_Set_Filter(0x03, STANDARD_FORMAT);
-	Can_Set_Filter(0x04, STANDARD_FORMAT);
+	Can_Set_Filter(0x00, STANDARD_FORMAT);
+	Can_Set_Filter(0x01, STANDARD_FORMAT);
 
 	int idxx = 0;
 	char buf[15] = "";

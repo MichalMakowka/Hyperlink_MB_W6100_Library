@@ -16,8 +16,15 @@
 #include "w6100.h"
 #include "can.h"
 
+#define ALL_NODES 0x00
+#define MOTHERBOARD 0x01
+#define BRAKING 0x02
+#define PROPULSION 0x01
+
+
+
 // *** Update this variable with a number of CAN message types which can be TRANSMITTED ***
-#define CAN_MSG_CNT 2
+#define CAN_MSG_CNT 4
 
 
 
