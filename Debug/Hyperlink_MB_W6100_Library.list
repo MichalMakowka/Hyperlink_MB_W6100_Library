@@ -1727,7 +1727,7 @@ int main(void)
  8000d18:	4602      	mov	r2, r0
  8000d1a:	4b2a      	ldr	r3, [pc, #168]	; (8000dc4 <main+0x130>)
  8000d1c:	601a      	str	r2, [r3, #0]
-	socket_dest_adr[1] = W6100_OpenTCPSocket(1, 5010);		// Open TCP socket 1 on port 5000 and return its destination address
+	socket_dest_adr[1] = W6100_OpenTCPSocket(1, 5010);		// Open TCP socket 1 on port 5010 and return its destination address
  8000d1e:	f241 3192 	movw	r1, #5010	; 0x1392
  8000d22:	2001      	movs	r0, #1
  8000d24:	f000 fb5e 	bl	80013e4 <W6100_OpenTCPSocket>

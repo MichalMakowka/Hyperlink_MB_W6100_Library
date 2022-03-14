@@ -48,7 +48,7 @@ int main(void)
 	}
 
 	socket_dest_adr[0] = W6100_OpenTCPSocket(0, 5000);		// Open TCP socket 0 on port 5000 and return its destination address
-	socket_dest_adr[1] = W6100_OpenTCPSocket(1, 5010);		// Open TCP socket 1 on port 5000 and return its destination address
+	socket_dest_adr[1] = W6100_OpenTCPSocket(1, 5010);		// Open TCP socket 1 on port 5010 and return its destination address
 
 
 	CanInit();
