@@ -19,13 +19,15 @@
 #define ALL_NODES 0x00
 #define MOTHERBOARD 0x01
 #define BRAKING 0x02
-#define PROPULSION 0x01
+#define PROPULSION 0x03
 
 
 
 // *** Update this variable with a number of CAN message types which can be TRANSMITTED ***
-#define CAN_MSG_CNT 4
+#define CAN_MSG_CNT 7
 
+uint8_t brake_val;
+void setBrakeVal(uint8_t value);
 
 
 CAN_MESSAGE canMessages[CAN_MSG_CNT];

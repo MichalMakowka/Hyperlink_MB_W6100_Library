@@ -6,35 +6,56 @@
  */
 #include "control_sys.h"
 
+char brake_val_tab[2];
+
 // CAN variables: array enum references
-enum can_msg {can_on_msg, can_off_msg, can_brk_eng, can_brk_dsng};
+enum can_msg {can_systems_on, can_systems_off, can_status_request, can_status_ok, can_status_fault, can_brake_ctrl, can_propulsion_ctrl};
 
 // Define CAN variable structures below
 void canVariables(CAN_MESSAGE * cmg) {
 
-	strcpy(cmg[can_on_msg].data, "mb_0000");
-	cmg[can_on_msg].format = STANDARD_FORMAT;
-	cmg[can_on_msg].type = DATA_FRAME;
-	cmg[can_on_msg].len = sizeof(cmg[can_on_msg]);
-	cmg[can_on_msg].id = ALL_NODES;
+	strcpy(cmg[can_systems_on].data, "mb_0001");
+	cmg[can_systems_on].format = STANDARD_FORMAT;
+	cmg[can_systems_on].type = DATA_FRAME;
+	cmg[can_systems_on].len = sizeof(cmg[can_systems_on]);
+	cmg[can_systems_on].id = ALL_NODES;
 
-	strcpy(cmg[can_off_msg].data, "mb_0001");
-	cmg[can_off_msg].format = STANDARD_FORMAT;
-	cmg[can_off_msg].type = DATA_FRAME;
-	cmg[can_off_msg].len = sizeof(cmg[can_off_msg]);
-	cmg[can_off_msg].id = ALL_NODES;
+	strcpy(cmg[can_systems_off].data, "mb_0002");
+	cmg[can_systems_off].format = STANDARD_FORMAT;
+	cmg[can_systems_off].type = DATA_FRAME;
+	cmg[can_systems_off].len = sizeof(cmg[can_systems_off]);
+	cmg[can_systems_off].id = ALL_NODES;
 
-	strcpy(cmg[can_brk_eng].data, "mb_b_50");
-	cmg[can_brk_eng].format = STANDARD_FORMAT;
-	cmg[can_brk_eng].type = DATA_FRAME;
-	cmg[can_brk_eng].len = sizeof(cmg[can_brk_eng]);
-	cmg[can_brk_eng].id = BRAKING;
+	strcpy(cmg[can_status_request].data, "mb_1010");
+	cmg[can_status_request].format = STANDARD_FORMAT;
+	cmg[can_status_request].type = DATA_FRAME;
+	cmg[can_status_request].len = sizeof(cmg[can_status_request]);
+	cmg[can_status_request].id = ALL_NODES;
 
-	strcpy(cmg[can_brk_dsng].data, "mb_b_00");
-	cmg[can_brk_dsng].format = STANDARD_FORMAT;
-	cmg[can_brk_dsng].type = DATA_FRAME;
-	cmg[can_brk_dsng].len = sizeof(cmg[can_brk_dsng]);
-	cmg[can_brk_dsng].id = BRAKING;
+	strcpy(cmg[can_status_ok].data, "mb_0000");
+	cmg[can_status_ok].format = STANDARD_FORMAT;
+	cmg[can_status_ok].type = DATA_FRAME;
+	cmg[can_status_ok].len = sizeof(cmg[can_status_ok]);
+	cmg[can_status_ok].id = ALL_NODES;
+
+	strcpy(cmg[can_status_fault].data, "mb_1111");
+	cmg[can_status_fault].format = STANDARD_FORMAT;
+	cmg[can_status_fault].type = DATA_FRAME;
+	cmg[can_status_fault].len = sizeof(cmg[can_status_fault]);
+	cmg[can_status_fault].id = ALL_NODES;
+
+	strcpy(cmg[can_brake_ctrl].data, "mb_b_xx");		// "xx" value to be substituted before transmission
+	cmg[can_brake_ctrl].format = STANDARD_FORMAT;
+	cmg[can_brake_ctrl].type = DATA_FRAME;
+	cmg[can_brake_ctrl].len = sizeof(cmg[can_brake_ctrl]);
+	cmg[can_brake_ctrl].id = BRAKING;
+
+	strcpy(cmg[can_propulsion_ctrl].data, "mb_p_xx");		// "xx" value to be substituted before transmission
+	cmg[can_propulsion_ctrl].format = STANDARD_FORMAT;
+	cmg[can_propulsion_ctrl].type = DATA_FRAME;
+	cmg[can_propulsion_ctrl].len = sizeof(cmg[can_propulsion_ctrl]);
+	cmg[can_propulsion_ctrl].id = PROPULSION;
+
 
 }
 
@@ -43,39 +64,37 @@ void dataPacketReceived(char * RxBuf) {
 	/* Reaction on Data Received */
 
 	// Check Ethernet
-		if (!strcmp(RxBuf, "systems_on\n")) {
+		if (!strcmp(RxBuf, "AT+st?\n")) {
+			// Send msg to the client
+			W6100_TransmitData(1, socket_dest_adr[1], (uint8_t*)"Checking status...\n", sizeof("Checking status...\n"));
+			Can_Tx_Msg(&canMessages[can_status_request]);
+			W6100_TransmitData(1, socket_dest_adr[1], (uint8_t*)"MBR: OK\n", sizeof("MBR: OK\n"));
+		}
+		else if (!strcmp(RxBuf, "AT+on\n"))	{
 			GPIOB->ODR |= GPIO_ODR_OD14;
 			// Send msg to the client
-			W6100_TransmitData(1, socket_dest_adr[1], (uint8_t*)"Systems Enabled\n", sizeof("Systems Enabled\n"));
-			Can_Tx_Msg(&canMessages[can_on_msg]);
-
+			W6100_TransmitData(1, socket_dest_adr[1], (uint8_t*)"Enabling systems...\n", sizeof("Enabling systems...\n"));
+			// Send CAN frame
+			Can_Tx_Msg(&canMessages[can_systems_on]);
 		}
-		else if (!strcmp(RxBuf, "systems_off\n"))	{
+		else if (!strcmp(RxBuf, "AT+off\n"))	{
 			GPIOB->ODR &= ~GPIO_ODR_OD14;
 			// Send msg to the client
-			W6100_TransmitData(1, socket_dest_adr[1], (uint8_t*)"Systems Disabled\n", sizeof("Systems Disabled\n"));
+			W6100_TransmitData(1, socket_dest_adr[1], (uint8_t*)"Disabling systems...\n", sizeof("Disabling systems...\n"));
 			// Send CAN frame
-			Can_Tx_Msg(&canMessages[can_off_msg]);
+			Can_Tx_Msg(&canMessages[can_systems_off]);
 		}
-		else if (!strcmp(RxBuf, "systems_st\n"))	{
-
+		else if (!strncmp(RxBuf, "AT+B+xx\n", 5))	{
+			brake_val_tab[0] = RxBuf[5];
+			brake_val_tab[1] = RxBuf[6];
 			// Send msg to the client
-			W6100_TransmitData(1, socket_dest_adr[1], (uint8_t*)"System active\n", sizeof("System active\n"));
-
-		}
-		else if (!strcmp(RxBuf, "brake_on\n"))	{
-
-			// Send msg to the client
-			W6100_TransmitData(1, socket_dest_adr[1], (uint8_t*)"Brk on requested\n", sizeof("Brk on requested\n"));
+			W6100_TransmitData(1, socket_dest_adr[1], (uint8_t*)"BRK SET:", sizeof("BRK SET:"));
+			W6100_TransmitData(1, socket_dest_adr[1], (uint8_t*)brake_val_tab, sizeof(brake_val_tab));
+			W6100_TransmitData(1, socket_dest_adr[1], (uint8_t*)"\n", sizeof("\n"));
 			// Send CAN frame
-			Can_Tx_Msg(&canMessages[can_brk_eng]);
-		}
-		else if (!strcmp(RxBuf, "brake_off\n"))	{
-
-			// Send msg to the client
-			W6100_TransmitData(1, socket_dest_adr[1], (uint8_t*)"Brk off requested\n", sizeof("Brk off requested\n"));
-			// Send CAN frame
-			Can_Tx_Msg(&canMessages[can_brk_dsng]);
+			canMessages[can_brake_ctrl].data[5] = brake_val_tab[0];
+			canMessages[can_brake_ctrl].data[6] = brake_val_tab[1];
+			Can_Tx_Msg(&canMessages[can_brake_ctrl]);
 		}
 		else {
 			// Send msg to the client
@@ -87,12 +106,32 @@ void dataPacketReceived(char * RxBuf) {
 
 void canMessageReceived(CAN_MESSAGE msg) {
 
-	if (!strcmp(msg.data,"br_b_50")) {
-		W6100_TransmitData(1, socket_dest_adr[1], (uint8_t*)"Brk on: success\n", sizeof("Brk on: success\n"));
+	// Status request Handler
+	if (!strcmp(msg.data,"br_1010")) {
+		W6100_TransmitData(1, socket_dest_adr[1], (uint8_t*)"BRK: OK\n", sizeof("BRK: OK\n"));
+		Can_Tx_Msg(&canMessages[can_status_ok]);
 	}
-	if (!strcmp(msg.data,"br_b_00")) {
-		W6100_TransmitData(1, socket_dest_adr[1], (uint8_t*)"Brk off: success\n", sizeof("Brk off: success\n"));
+	if (!strcmp(msg.data,"pr_1010")) {
+		W6100_TransmitData(1, socket_dest_adr[1], (uint8_t*)"PRP: OK\n", sizeof("PRP: OK\n"));
+		Can_Tx_Msg(&canMessages[can_status_ok]);
 	}
+	if (!strcmp(msg.data,"br_1111")) {
+			W6100_TransmitData(1, socket_dest_adr[1], (uint8_t*)"BRK: FAULT\n", sizeof("BRK: FAULT\n"));
+			Can_Tx_Msg(&canMessages[can_status_fault]);
+	}
+	if (!strcmp(msg.data,"pr_1111")) {
+			W6100_TransmitData(1, socket_dest_adr[1], (uint8_t*)"PRP: FAULT\n", sizeof("PRP: FAULT\n"));
+			Can_Tx_Msg(&canMessages[can_status_fault]);
+	}
+	if (!strncmp(msg.data,"br_b_xx", 5)) {
+			W6100_TransmitData(1, socket_dest_adr[1], (uint8_t*)"BRK: SUCCESS\n", sizeof("BRK: SUCCESS\n"));
+			Can_Tx_Msg(&canMessages[can_status_fault]);
+	}
+	if (!strncmp(msg.data,"br_p_xx", 5)) {
+				W6100_TransmitData(1, socket_dest_adr[1], (uint8_t*)"PRP: SUCCESS\n", sizeof("PRP: SUCCESS\n"));
+				Can_Tx_Msg(&canMessages[can_status_fault]);
+	}
+
 }
 
 void serverOffResponse(uint8_t sck_nbr) {
@@ -103,4 +142,8 @@ void serverOffResponse(uint8_t sck_nbr) {
 void serverStartResponse(uint8_t sck_nbr) {
 	GPIOC->ODR &= ~GPIO_ODR_OD8;
 	GPIOC->ODR |= GPIO_ODR_OD9;
+}
+
+void setBrakeVal(uint8_t value) {
+	itoa(value, brake_val_tab, 10);
 }
