@@ -3,7 +3,7 @@
  *
  *	Hyperlink W6100 Ethernet Library
  *
- *  Created on: 15 Jun 2021
+ *  Created on: 15 Jan 2022
  *  Author: Michal Makowka
  *
  *  v1.0
