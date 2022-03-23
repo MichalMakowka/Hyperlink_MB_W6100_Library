@@ -66,21 +66,21 @@ void dataPacketReceived(char * RxBuf) {
 	// Check Ethernet
 		if (!strcmp(RxBuf, "AT+st?\n")) {
 			// Send msg to the client
-			W6100_TransmitData(1, socket_dest_adr[1], (uint8_t*)"Checking status...\n", sizeof("Checking status...\n"));
-			Can_Tx_Msg(&canMessages[can_status_request]);
 			W6100_TransmitData(1, socket_dest_adr[1], (uint8_t*)"MBR: OK\n", sizeof("MBR: OK\n"));
+			Can_Tx_Msg(&canMessages[can_status_request]);
+
 		}
 		else if (!strcmp(RxBuf, "AT+on\n"))	{
 			GPIOB->ODR |= GPIO_ODR_OD14;
 			// Send msg to the client
-			W6100_TransmitData(1, socket_dest_adr[1], (uint8_t*)"Enabling systems...\n", sizeof("Enabling systems...\n"));
+			W6100_TransmitData(1, socket_dest_adr[1], (uint8_t*)"Systems EN...\n", sizeof("Systems EN...\n"));
 			// Send CAN frame
 			Can_Tx_Msg(&canMessages[can_systems_on]);
 		}
 		else if (!strcmp(RxBuf, "AT+off\n"))	{
 			GPIOB->ODR &= ~GPIO_ODR_OD14;
 			// Send msg to the client
-			W6100_TransmitData(1, socket_dest_adr[1], (uint8_t*)"Disabling systems...\n", sizeof("Disabling systems...\n"));
+			W6100_TransmitData(1, socket_dest_adr[1], (uint8_t*)"Systems DIS...\n", sizeof("Systems DIS...\n"));
 			// Send CAN frame
 			Can_Tx_Msg(&canMessages[can_systems_off]);
 		}
@@ -88,9 +88,9 @@ void dataPacketReceived(char * RxBuf) {
 			brake_val_tab[0] = RxBuf[5];
 			brake_val_tab[1] = RxBuf[6];
 			// Send msg to the client
-			W6100_TransmitData(1, socket_dest_adr[1], (uint8_t*)"BRK SET:", sizeof("BRK SET:"));
-			W6100_TransmitData(1, socket_dest_adr[1], (uint8_t*)brake_val_tab, sizeof(brake_val_tab));
-			W6100_TransmitData(1, socket_dest_adr[1], (uint8_t*)"\n", sizeof("\n"));
+			char strTemp[13];
+			sprintf(strTemp, "BRK SET: %c%c\n", brake_val_tab[0], brake_val_tab[1]);
+			W6100_TransmitData(1, socket_dest_adr[1], (uint8_t*)(strTemp), sizeof(strTemp));
 			// Send CAN frame
 			canMessages[can_brake_ctrl].data[5] = brake_val_tab[0];
 			canMessages[can_brake_ctrl].data[6] = brake_val_tab[1];
@@ -107,11 +107,11 @@ void dataPacketReceived(char * RxBuf) {
 void canMessageReceived(CAN_MESSAGE msg) {
 
 	// Status request Handler
-	if (!strcmp(msg.data,"br_1010")) {
+	if (!strcmp(msg.data,"br_0000")) {
 		W6100_TransmitData(1, socket_dest_adr[1], (uint8_t*)"BRK: OK\n", sizeof("BRK: OK\n"));
 		Can_Tx_Msg(&canMessages[can_status_ok]);
 	}
-	if (!strcmp(msg.data,"pr_1010")) {
+	if (!strcmp(msg.data,"pr_0000")) {
 		W6100_TransmitData(1, socket_dest_adr[1], (uint8_t*)"PRP: OK\n", sizeof("PRP: OK\n"));
 		Can_Tx_Msg(&canMessages[can_status_ok]);
 	}
