@@ -7,6 +7,7 @@
 #include "control_sys.h"
 
 char brake_val_tab[2];
+char propulsion_val_tab[2];
 
 // CAN variables: array enum references
 enum can_msg {can_systems_on, can_systems_off, can_status_request, can_status_ok, can_status_fault, can_brake_ctrl, can_propulsion_ctrl};
@@ -64,38 +65,50 @@ void dataPacketReceived(char * RxBuf) {
 	/* Reaction on Data Received */
 
 	// Check Ethernet
-		if (!strcmp(RxBuf, "AT+st?\n")) {
+		if (!strcmp(RxBuf, "AT+st?\023")) {
 			// Send msg to the client
 			W6100_TransmitData(1, socket_dest_adr[1], (uint8_t*)"MBR: OK\n", sizeof("MBR: OK\n"));
 			Can_Tx_Msg(&canMessages[can_status_request]);
 
 		}
-		else if (!strcmp(RxBuf, "AT+on\n"))	{
+		else if (!strcmp(RxBuf, "AT+on\023"))	{
 			GPIOB->ODR |= GPIO_ODR_OD14;
 			// Send msg to the client
 			W6100_TransmitData(1, socket_dest_adr[1], (uint8_t*)"Systems EN...\n", sizeof("Systems EN...\n"));
 			// Send CAN frame
 			Can_Tx_Msg(&canMessages[can_systems_on]);
 		}
-		else if (!strcmp(RxBuf, "AT+off\n"))	{
+		else if (!strcmp(RxBuf, "AT+off\023"))	{
 			GPIOB->ODR &= ~GPIO_ODR_OD14;
 			// Send msg to the client
 			W6100_TransmitData(1, socket_dest_adr[1], (uint8_t*)"Systems DIS...\n", sizeof("Systems DIS...\n"));
 			// Send CAN frame
 			Can_Tx_Msg(&canMessages[can_systems_off]);
 		}
-		else if (!strncmp(RxBuf, "AT+B+xx\n", 5))	{
+		else if (!strncmp(RxBuf, "AT+B+xx\023", 5))	{
 			brake_val_tab[0] = RxBuf[5];
 			brake_val_tab[1] = RxBuf[6];
 			// Send msg to the client
 			char strTemp[13];
-			sprintf(strTemp, "BRK SET: %c%c\n", brake_val_tab[0], brake_val_tab[1]);
+			sprintf(strTemp, "BRK SET: %c%c\023", brake_val_tab[0], brake_val_tab[1]);
 			W6100_TransmitData(1, socket_dest_adr[1], (uint8_t*)(strTemp), sizeof(strTemp));
 			// Send CAN frame
 			canMessages[can_brake_ctrl].data[5] = brake_val_tab[0];
 			canMessages[can_brake_ctrl].data[6] = brake_val_tab[1];
 			Can_Tx_Msg(&canMessages[can_brake_ctrl]);
 		}
+		else if (!strncmp(RxBuf, "AT+P+xx\023", 5))	{
+			propulsion_val_tab[0] = RxBuf[5];
+			propulsion_val_tab[1] = RxBuf[6];
+			// Send msg to the client
+			char strTemp[13];
+			sprintf(strTemp, "PRP SET: %c%c\023", propulsion_val_tab[0], propulsion_val_tab[1]);
+			W6100_TransmitData(1, socket_dest_adr[1], (uint8_t*)(strTemp), sizeof(strTemp));
+			// Send CAN frame
+			canMessages[can_propulsion_ctrl].data[5] = propulsion_val_tab[0];
+			canMessages[can_propulsion_ctrl].data[6] = propulsion_val_tab[1];
+			Can_Tx_Msg(&canMessages[can_propulsion_ctrl]);
+				}
 		else {
 			// Send msg to the client
 			W6100_TransmitData(1, socket_dest_adr[1], (uint8_t*)"Command unknown...\n", sizeof("Command unknown...\n"));
@@ -127,7 +140,7 @@ void canMessageReceived(CAN_MESSAGE msg) {
 			W6100_TransmitData(1, socket_dest_adr[1], (uint8_t*)"BRK: SUCCESS\n", sizeof("BRK: SUCCESS\n"));
 			Can_Tx_Msg(&canMessages[can_status_fault]);
 	}
-	if (!strncmp(msg.data,"br_p_xx", 5)) {
+	if (!strncmp(msg.data,"pr_p_xx", 5)) {
 				W6100_TransmitData(1, socket_dest_adr[1], (uint8_t*)"PRP: SUCCESS\n", sizeof("PRP: SUCCESS\n"));
 				Can_Tx_Msg(&canMessages[can_status_fault]);
 	}
