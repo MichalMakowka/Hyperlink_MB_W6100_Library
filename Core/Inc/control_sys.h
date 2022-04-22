@@ -26,6 +26,9 @@
 // *** Update this variable with a number of CAN message types which can be TRANSMITTED ***
 #define CAN_MSG_CNT 7
 
+void delay_ms(int ms);
+
+
 uint8_t brake_val;
 void setBrakeVal(uint8_t value);
 
@@ -35,5 +38,7 @@ CAN_MESSAGE canMessages[CAN_MSG_CNT];
 void canVariables(CAN_MESSAGE * cmg);
 void dataPacketReceived(char * RxBuf);	// Callback function executed when data packet is received
 void canMessageReceived(CAN_MESSAGE msg);	// Callback function executed when CAN message is received
+
+void OpenControl(char * command);
 
 #endif /* INC_CONTROL_SYS_H_ */

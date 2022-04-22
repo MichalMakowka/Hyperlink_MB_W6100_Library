@@ -38,6 +38,7 @@ void SystemRegisterCFG(void) {
 	RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN | RCC_AHB1ENR_GPIOBEN | RCC_AHB1ENR_GPIOCEN;	// GPIO Clock
 	RCC->APB2ENR |= RCC_APB2ENR_SPI1EN;		// SPI1 clock
 
+
 	// Standard GPIO Config (LEDs)
 	GPIOC->MODER |= GPIO_MODER_MODE8_0 | GPIO_MODER_MODE9_0 | GPIO_MODER_MODE11_0 | GPIO_MODER_MODE12_0;	// STM LEDs output
 	GPIOC->ODR |= GPIO_ODR_OD8 | GPIO_ODR_OD9 | GPIO_ODR_OD11 | GPIO_ODR_OD12;		// STM LEDs OFF
@@ -68,54 +69,24 @@ void SystemRegisterCFG(void) {
 	GPIOB->MODER |= GPIO_MODER_MODER14_0;		// EN_L+ pin: output
 	GPIOB->PUPDR |= GPIO_PUPDR_PUPD14_1;		// EN_L+ pin: pull down
 
+	// SysTick Enable and configuration
 	SysTick_Config(32000000 / 1000);
-	// Reset the SysTick counter value.
-	SysTick->VAL = 0UL;
-	// Set SysTick source and IRQ.
-	SysTick->CTRL = (SysTick_CTRL_CLKSOURCE_Msk | SysTick_CTRL_TICKINT_Msk);
+
+	// Interrupt Priority configuration
+	NVIC_SetPriorityGrouping(PRIGROUP_16G_0S);
+	uint32_t priority;
+	priority = NVIC_EncodePriority(PRIGROUP_16G_0S, 1, 0);
+	NVIC_SetPriority(SysTick_IRQn, priority);
+
+	priority = NVIC_EncodePriority(PRIGROUP_16G_0S, 2, 0);
+	NVIC_SetPriority(EXTI9_5_IRQn, priority);
+
+	priority = NVIC_EncodePriority(PRIGROUP_16G_0S, 3, 0);
+	NVIC_SetPriority(CAN1_RX0_IRQn, priority);
+
+	priority = NVIC_EncodePriority(PRIGROUP_16G_0S, 4, 0);
+	NVIC_SetPriority(CAN1_TX_IRQn, priority);
 
 
 }
-
-
-void delay_ms(uint16_t ms) {
-	// Enable the SysTick timer
-	SysTick->CTRL |= SysTick_CTRL_ENABLE_Msk;
-
-	// Wait for a specified number of milliseconds
-	delay = 0;
-	while (delay < ms);
-
-	// Disable the SysTick timer
-	SysTick->CTRL &= ~SysTick_CTRL_ENABLE_Msk;
-}
-
-
-__attribute__((interrupt)) void SysTick_Handler(void){
-	delay++;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

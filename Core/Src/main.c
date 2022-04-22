@@ -21,8 +21,10 @@
 #include "control_sys.h"
 
 
+
 int main(void)
 {
+
 
 	SystemRegisterCFG();			// Setup basic peripheral registers
 	canVariables(canMessages);		// Initialises CAN msg structures for the communication
@@ -64,7 +66,7 @@ int main(void)
 		if (!(GPIOA->IDR & GPIO_IDR_ID3)) {
 			GPIOC->ODR &= ~GPIO_ODR_OD11;
 			idxx++;
-			sprintf(buf, "cnt: %i\n", idxx);
+			sprintf(buf, "aux:%i", idxx);
 			W6100_TransmitData(1, socket_dest_adr[1], (uint8_t*)buf, sizeof(buf));
 			while(!(GPIOA->IDR & GPIO_IDR_ID3));
 
@@ -75,5 +77,8 @@ int main(void)
 
   }
 }
+
+
+
 
 

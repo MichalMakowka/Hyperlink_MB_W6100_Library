@@ -9,6 +9,8 @@
 char brake_val_tab[2];
 char propulsion_val_tab[2];
 
+volatile int sysTicks;
+
 // CAN variables: array enum references
 enum can_msg {can_systems_on, can_systems_off, can_status_request, can_status_ok, can_status_fault, can_brake_ctrl, can_propulsion_ctrl};
 
@@ -71,6 +73,9 @@ void dataPacketReceived(char * RxBuf) {
 			Can_Tx_Msg(&canMessages[can_status_request]);
 
 		}
+		else if (!strncmp(RxBuf, "CO+x+x+x+x\023", 3)) {
+			OpenControl(RxBuf);
+		}
 		else if (!strcmp(RxBuf, "AT+on\023"))	{
 			GPIOB->ODR |= GPIO_ODR_OD14;
 			// Send msg to the client
@@ -129,21 +134,82 @@ void canMessageReceived(CAN_MESSAGE msg) {
 		Can_Tx_Msg(&canMessages[can_status_ok]);
 	}
 	if (!strcmp(msg.data,"br_1111")) {
-			W6100_TransmitData(1, socket_dest_adr[1], (uint8_t*)"BRK: FAULT\n", sizeof("BRK: FAULT\n"));
-			Can_Tx_Msg(&canMessages[can_status_fault]);
+		W6100_TransmitData(1, socket_dest_adr[1], (uint8_t*)"BRK: FAULT\n", sizeof("BRK: FAULT\n"));
+		Can_Tx_Msg(&canMessages[can_status_fault]);
 	}
 	if (!strcmp(msg.data,"pr_1111")) {
-			W6100_TransmitData(1, socket_dest_adr[1], (uint8_t*)"PRP: FAULT\n", sizeof("PRP: FAULT\n"));
-			Can_Tx_Msg(&canMessages[can_status_fault]);
+		W6100_TransmitData(1, socket_dest_adr[1], (uint8_t*)"PRP: FAULT\n", sizeof("PRP: FAULT\n"));
+		Can_Tx_Msg(&canMessages[can_status_fault]);
 	}
 	if (!strncmp(msg.data,"br_b_xx", 5)) {
-			W6100_TransmitData(1, socket_dest_adr[1], (uint8_t*)"BRK: SUCCESS\n", sizeof("BRK: SUCCESS\n"));
-			Can_Tx_Msg(&canMessages[can_status_fault]);
+		W6100_TransmitData(1, socket_dest_adr[1], (uint8_t*)"BRK: SUCCESS\n", sizeof("BRK: SUCCESS\n"));
+		Can_Tx_Msg(&canMessages[can_status_fault]);
 	}
 	if (!strncmp(msg.data,"pr_p_xx", 5)) {
-				W6100_TransmitData(1, socket_dest_adr[1], (uint8_t*)"PRP: SUCCESS\n", sizeof("PRP: SUCCESS\n"));
-				Can_Tx_Msg(&canMessages[can_status_fault]);
+		W6100_TransmitData(1, socket_dest_adr[1], (uint8_t*)"PRP: SUCCESS\n", sizeof("PRP: SUCCESS\n"));
+		Can_Tx_Msg(&canMessages[can_status_fault]);
 	}
+
+}
+
+void OpenControl(char * command) {
+
+	char * token;
+	uint8_t AccelTime, DesiredSpeed, CruiseTime, BrakingTime;
+	token = strtok(command, "+");
+	token = strtok(NULL, "+");
+//	AccelTime = atoi(token);
+//	token = strtok(NULL, "+");
+	DesiredSpeed = atoi(token);
+	token = strtok(NULL, "+");
+	CruiseTime = atoi(token);
+	token = strtok(NULL, "+");
+	BrakingTime = atoi(token);
+
+	// Brake OFF
+	canMessages[can_brake_ctrl].data[5] = '1';
+	canMessages[can_brake_ctrl].data[6] = '0';
+	Can_Tx_Msg(&canMessages[can_brake_ctrl]);
+	// Acceleration process
+	unsigned int delSetAccel = ((30-DesiredSpeed)/AccelTime)*1000;
+	unsigned int delSetBrake = ((30-DesiredSpeed)/BrakingTime)*1000;
+	char pValDec, pValUni;
+	uint8_t i;
+	for (i = 30; i>DesiredSpeed; i--) {
+		if (i<10) {
+			pValDec = '0';
+			pValUni = ((i % 10)+'0');
+
+		} else {
+			pValDec = ((i/10) + '0');
+			pValUni = ((i % 10)+'0');
+		}
+		canMessages[can_propulsion_ctrl].data[5] = pValDec;
+		canMessages[can_propulsion_ctrl].data[6] = pValUni;
+		Can_Tx_Msg(&canMessages[can_propulsion_ctrl]);
+		delay_ms(delSetAccel);
+	}
+
+	// Cruise Time (no feedback signal)
+	delay_ms(CruiseTime * 1000);
+	// Braking Time
+
+	for (i = DesiredSpeed; i<30; i++) {
+		if (i<10) {
+			canMessages[can_propulsion_ctrl].data[5] = '0';
+			canMessages[can_propulsion_ctrl].data[6] = ((i % 10)+'0');
+		} else {
+			canMessages[can_propulsion_ctrl].data[5] = ((i/10)+'0');
+			canMessages[can_propulsion_ctrl].data[6] = ((i % 10)+'0');
+		}
+		Can_Tx_Msg(&canMessages[can_propulsion_ctrl]);
+
+		delay_ms(delSetBrake);
+	}
+	canMessages[can_propulsion_ctrl].data[5] = '0';
+	canMessages[can_propulsion_ctrl].data[6] = '0';
+	Can_Tx_Msg(&canMessages[can_propulsion_ctrl]);
+	W6100_TransmitData(1, socket_dest_adr[1], (uint8_t*)"Cruise Complete\n", sizeof("Cruise Complete\n"));
 
 }
 
@@ -160,3 +226,17 @@ void serverStartResponse(uint8_t sck_nbr) {
 void setBrakeVal(uint8_t value) {
 	itoa(value, brake_val_tab, 10);
 }
+
+
+void delay_ms(int ms) {
+	sysTicks = 0;
+	while(sysTicks < ms);
+}
+
+
+__attribute__((interrupt)) void SysTick_Handler(void){
+	sysTicks++;
+}
+
+
+
