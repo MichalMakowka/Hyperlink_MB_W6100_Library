@@ -40,5 +40,6 @@ void dataPacketReceived(char * RxBuf);	// Callback function executed when data p
 void canMessageReceived(CAN_MESSAGE msg);	// Callback function executed when CAN message is received
 
 void OpenControl(char * command);
+void ClosedControl(char * command);
 
 #endif /* INC_CONTROL_SYS_H_ */

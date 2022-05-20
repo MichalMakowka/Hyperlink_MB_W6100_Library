@@ -76,6 +76,9 @@ void dataPacketReceived(char * RxBuf) {
 		else if (!strncmp(RxBuf, "CO+x+x+x+x\023", 3)) {
 			OpenControl(RxBuf);
 		}
+		else if (!strncmp(RxBuf, "CC+x+x+x+x\023", 3)) {
+			ClosedControl(RxBuf);
+		}
 		else if (!strcmp(RxBuf, "AT+on\023"))	{
 			GPIOB->ODR |= GPIO_ODR_OD14;
 			// Send msg to the client
@@ -159,6 +162,7 @@ void OpenControl(char * command) {
 	token = strtok(command, "+");
 	token = strtok(NULL, "+");
 //	AccelTime = atoi(token);
+	AccelTime = 4;	// Default value
 //	token = strtok(NULL, "+");
 	DesiredSpeed = atoi(token);
 	token = strtok(NULL, "+");
@@ -170,6 +174,7 @@ void OpenControl(char * command) {
 	canMessages[can_brake_ctrl].data[5] = '1';
 	canMessages[can_brake_ctrl].data[6] = '0';
 	Can_Tx_Msg(&canMessages[can_brake_ctrl]);
+	delay_ms(4000);
 	// Acceleration process
 	unsigned int delSetAccel = ((30-DesiredSpeed)/AccelTime)*1000;
 	unsigned int delSetBrake = ((30-DesiredSpeed)/BrakingTime)*1000;
@@ -192,8 +197,8 @@ void OpenControl(char * command) {
 
 	// Cruise Time (no feedback signal)
 	delay_ms(CruiseTime * 1000);
-	// Braking Time
 
+	// Deceleration
 	for (i = DesiredSpeed; i<30; i++) {
 		if (i<10) {
 			canMessages[can_propulsion_ctrl].data[5] = '0';
@@ -209,8 +214,95 @@ void OpenControl(char * command) {
 	canMessages[can_propulsion_ctrl].data[5] = '0';
 	canMessages[can_propulsion_ctrl].data[6] = '0';
 	Can_Tx_Msg(&canMessages[can_propulsion_ctrl]);
-	W6100_TransmitData(1, socket_dest_adr[1], (uint8_t*)"Cruise Complete\n", sizeof("Cruise Complete\n"));
+	// Brake ON
+	canMessages[can_brake_ctrl].data[5] = '2';
+	canMessages[can_brake_ctrl].data[6] = '0';
+	Can_Tx_Msg(&canMessages[can_brake_ctrl]);
+	W6100_TransmitData(1, socket_dest_adr[1], (uint8_t*)"Cruise Complete", sizeof("Cruise Complete"));
 
+}
+
+
+void ClosedControl(char * command) {
+	char * token;
+	uint8_t AccelTime, DesiredSpeed, CruiseDistance, BrakingTime;
+	token = strtok(command, "+");
+	token = strtok(NULL, "+");
+//	AccelTime = atoi(token);
+	AccelTime = 4;		// Default value
+//	token = strtok(NULL, "+");
+	DesiredSpeed = atoi(token);
+	token = strtok(NULL, "+");
+	CruiseDistance = atoi(token);
+	token = strtok(NULL, "+");
+	BrakingTime = atoi(token);
+
+	// Brake OFF
+	canMessages[can_brake_ctrl].data[5] = '1';
+	canMessages[can_brake_ctrl].data[6] = '0';
+	Can_Tx_Msg(&canMessages[can_brake_ctrl]);
+	delay_ms(4000);
+	// Enable IO-Link sensor
+	GPIOB->ODR |= GPIO_ODR_OD14;
+	// Acceleration process
+	unsigned int delSetAccel = ((30-DesiredSpeed)/AccelTime)*1000;
+	unsigned int delSetBrake = ((30-DesiredSpeed)/BrakingTime)*1000;
+	char pValDec, pValUni;
+	uint8_t i;
+	for (i = 30; i>DesiredSpeed; i--) {
+		if (i<10) {
+			pValDec = '0';
+			pValUni = ((i % 10)+'0');
+
+		} else {
+			pValDec = ((i/10) + '0');
+			pValUni = ((i % 10)+'0');
+		}
+		canMessages[can_propulsion_ctrl].data[5] = pValDec;
+		canMessages[can_propulsion_ctrl].data[6] = pValUni;
+		Can_Tx_Msg(&canMessages[can_propulsion_ctrl]);
+		delay_ms(delSetAccel);
+	}
+
+	// Cruise Time with adjusted photoelectric feedback signal
+	for (uint8_t d = 0; d < CruiseDistance; d++) {
+		delay_ms(delSetAccel);
+		GPIOC->ODR &= ~GPIO_ODR_OD11;
+		if (!(GPIOA->IDR & GPIO_IDR_ID3)) {
+			GPIOC->ODR |= GPIO_ODR_OD11;
+
+		} else {
+			delay_ms(delSetAccel);
+			GPIOC->ODR |= GPIO_ODR_OD11;
+			GPIOC->ODR &= ~GPIO_ODR_OD12;
+			while(!(GPIOA->IDR & GPIO_IDR_ID3));	// Waiting for Navigation Aid pass
+			while((GPIOA->IDR & GPIO_IDR_ID3));
+		}
+		GPIOC->ODR |= GPIO_ODR_OD11 | GPIO_ODR_OD12;
+	}
+	// Disable IO-Link sensor
+	GPIOB->ODR &= ~GPIO_ODR_OD14;
+	// Deceleration process
+	for (i = DesiredSpeed; i<30; i++) {
+		if (i<10) {
+			canMessages[can_propulsion_ctrl].data[5] = '0';
+			canMessages[can_propulsion_ctrl].data[6] = ((i % 10)+'0');
+		} else {
+			canMessages[can_propulsion_ctrl].data[5] = ((i/10)+'0');
+			canMessages[can_propulsion_ctrl].data[6] = ((i % 10)+'0');
+		}
+		Can_Tx_Msg(&canMessages[can_propulsion_ctrl]);
+
+		delay_ms(delSetBrake);
+	}
+	canMessages[can_propulsion_ctrl].data[5] = '0';
+	canMessages[can_propulsion_ctrl].data[6] = '0';
+	Can_Tx_Msg(&canMessages[can_propulsion_ctrl]);
+	// Brake ON
+	canMessages[can_brake_ctrl].data[5] = '2';
+	canMessages[can_brake_ctrl].data[6] = '0';
+	Can_Tx_Msg(&canMessages[can_brake_ctrl]);
+	W6100_TransmitData(1, socket_dest_adr[1], (uint8_t*)"Cruise Complete", sizeof("Cruise Complete"));
 }
 
 void serverOffResponse(uint8_t sck_nbr) {

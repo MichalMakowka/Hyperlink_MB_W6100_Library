@@ -63,6 +63,7 @@ int main(void)
 	/* MAIN Loop */
 	while (1) {
 
+		// Navigation aid counter
 		if (!(GPIOA->IDR & GPIO_IDR_ID3)) {
 			GPIOC->ODR &= ~GPIO_ODR_OD11;
 			idxx++;
